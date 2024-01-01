@@ -12,14 +12,40 @@
 
 @backgroundColor4: #2d3036;
 
+@rainColor: #b5c9ff;
+@rainBackgroundColor: #37549d;
+@rainBorderColor: rgba(255, 255, 255, 0.3);
+
+@leafColor: #a4ff79;
+@leafBackgroundColor: #303d31;
+@leafBorderColor: rgba(255, 255, 255, 0.3);
+
+@windColor: #dab8df;
+@windBackgroundColor: #3b303d;
+@windBorderColor: rgba(255, 255, 255, 0.3);
+
+@sunColor: #ffd28d;
+@sunBackgroundColor: #3d3c30;
+@sunBorderColor: rgba(255, 255, 255, 0.3);
+
+@accentColorDark: rgb(66, 117, 140);
 @accentColor: rgb(182, 232, 255);
 @overlayColor: rgba(33, 42, 60, 0.67);
 
-.gradient3 {
+.gradient1 {
     background-color: @backgroundColor4;
     background: linear-gradient(
         90deg,
         rgba(62, 68, 80, 1) 0%,
         rgba(48, 53, 62, 1) 100%
+    );
+}
+
+.gradient2 {
+    background-color: @backgroundColor4;
+    background: linear-gradient(
+        90deg,
+        rgba(62, 68, 80, 1) 0vw,
+        rgba(48, 53, 62, 1) 100vw
     );
 }

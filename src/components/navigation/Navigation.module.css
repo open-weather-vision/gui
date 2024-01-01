@@ -1,6 +1,10 @@
-.gradient3 {
+.gradient1 {
   background-color: #2d3036;
   background: linear-gradient(90deg, #3e4450 0%, #30353e 100%);
+}
+.gradient2 {
+  background-color: #2d3036;
+  background: linear-gradient(90deg, #3e4450 0vw, #30353e 100vw);
 }
 .nav {
   background-color: #25272d;

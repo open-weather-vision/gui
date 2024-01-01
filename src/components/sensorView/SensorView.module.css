@@ -1,19 +1,102 @@
-.gradient3 {
+.gradient1 {
   background-color: #2d3036;
   background: linear-gradient(90deg, #3e4450 0%, #30353e 100%);
+}
+.gradient2 {
+  background-color: #2d3036;
+  background: linear-gradient(90deg, #3e4450 0vw, #30353e 100vw);
 }
 .sensorView {
   padding: 1.2rem;
   border: 1px solid #717377;
   border-radius: 0.5rem;
   background-color: #2d3036;
-  background: linear-gradient(90deg, #3e4450 0%, #30353e 100%);
+  background: linear-gradient(90deg, #3e4450 0vw, #30353e 100vw);
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.sensorView.precipation,
+.sensorView.precipation-rate,
+.sensorView.shower-precipation,
+.sensorView.precipation-probability {
+  background: #37549d;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+.sensorView.precipation .sensorData .value,
+.sensorView.precipation-rate .sensorData .value,
+.sensorView.shower-precipation .sensorData .value,
+.sensorView.precipation-probability .sensorData .value {
+  color: #b5c9ff;
+}
+.sensorView.leaf-temperature,
+.sensorView.leaf-wetness,
+.sensorView.soil-temperature,
+.sensorView.soil-moisture,
+.sensorView.soil-ph {
+  background: #303d31;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+.sensorView.leaf-temperature .sensorData .value,
+.sensorView.leaf-wetness .sensorData .value,
+.sensorView.soil-temperature .sensorData .value,
+.sensorView.soil-moisture .sensorData .value,
+.sensorView.soil-ph .sensorData .value {
+  color: #a4ff79;
+}
+.sensorView.wind-speed,
+.sensorView.wind-direction,
+.sensorView.wind-gust {
+  background: #3b303d;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+.sensorView.wind-speed .sensorData .value,
+.sensorView.wind-direction .sensorData .value,
+.sensorView.wind-gust .sensorData .value {
+  color: #dab8df;
+}
+.sensorView.wind-direction {
+  flex-grow: 9999;
+}
+.sensorView.solar-radiation,
+.sensorView.uv,
+.sensorView.sunshine {
+  background: #3d3c30;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+.sensorView.solar-radiation .sensorData .value,
+.sensorView.uv .sensorData .value,
+.sensorView.sunshine .sensorData .value {
+  color: #ffd28d;
+}
+@media screen and (min-width: 450px) {
+  .sensorView {
+    background-color: #2d3036;
+    background: linear-gradient(90deg, #3e4450 0%, #30353e 100%);
+  }
 }
 @media screen and (min-width: 1000px) {
   .sensorView {
     min-width: 15rem;
+    max-width: 30rem;
   }
+}
+.sensorView .windDirectionContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem 0.6rem 1.2rem 0.3rem;
+}
+.sensorView .windDirectionContainer svg.compass {
+  height: 9rem;
+  width: 9rem;
+}
+.sensorView .windDirectionContainer svg.arrow {
+  position: absolute;
+  width: 3rem;
+  transition: all 0.3s ease-in-out;
 }
 .sensorView .sensorData {
   font-weight: 600;
@@ -40,5 +123,7 @@
 }
 .sensorView .label svg {
   margin-right: 0.5rem;
+  width: 17px;
+  height: 17px;
 }
 /*# sourceMappingURL=SensorView.module.css.map */

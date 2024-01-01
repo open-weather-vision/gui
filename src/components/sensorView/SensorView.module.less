@@ -4,13 +4,92 @@
     padding: 1.2rem;
     border: 1px solid @borderColor2;
     border-radius: 0.5rem;
+    .gradient2();
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    &.precipation,
+    &.precipation-rate,
+    &.shower-precipation,
+    &.precipation-probability {
+        .sensorData .value {
+            color: @rainColor;
+        }
+
+        background: @rainBackgroundColor;
+        border-color: @rainBorderColor;
+    }
+
+    &.leaf-temperature,
+    &.leaf-wetness,
+    &.soil-temperature,
+    &.soil-moisture,
+    &.soil-ph {
+        .sensorData .value {
+            color: @leafColor;
+        }
+
+        background: @leafBackgroundColor;
+        border-color: @leafBorderColor;
+    }
+
+    &.wind-speed,
+    &.wind-direction,
+    &.wind-gust {
+        .sensorData .value {
+            color: @windColor;
+        }
+
+        background: @windBackgroundColor;
+        border-color: @windBorderColor;
+    }
+
+    &.wind-direction {
+        flex-grow: 9999;
+    }
+
+    &.solar-radiation,
+    &.uv,
+    &.sunshine {
+        .sensorData .value {
+            color: @sunColor;
+        }
+
+        background: @sunBackgroundColor;
+        border-color: @sunBorderColor;
+    }
+
+    @media screen and (min-width: 450px) {
+        .gradient1();
+    }
 
     @media screen and (min-width: 1000px) {
         min-width: 15rem;
+        max-width: 30rem;
     }
 
-    .gradient3();
-    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+    .windDirectionContainer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.6rem 0.6rem 1.2rem 0.3rem;
+
+        svg {
+            &.compass {
+                height: 9rem;
+                width: 9rem;
+            }
+
+            &.arrow {
+                position: absolute;
+                width: 3rem;
+                transition: all 0.3s ease-in-out;
+            }
+        }
+    }
 
     .sensorData {
         font-weight: 600;
@@ -21,7 +100,7 @@
         align-items: baseline;
 
         .value {
-            color: rgb(182, 232, 255);
+            color: @accentColor;
         }
 
         .unit {
@@ -40,6 +119,8 @@
 
         svg {
             margin-right: 0.5rem;
+            width: 17px;
+            height: 17px;
         }
     }
 }

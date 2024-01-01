@@ -1,32 +1,52 @@
 import styles from "./SensorView.module.css";
-import { ReactComponent as TemperatureIcon } from "../../img/temperature.svg";
+import WeatherElementType from "../../types/WeatherElementType";
+
+import useUtils, { Utils } from "../../utils/useUtils";
+import { ReactComponent as WindDirectionCompassSvg } from "../../img/wind-direction-compass.svg";
+import { ReactComponent as WindDirectionArrow } from "../../img/wind-direction-arrow.svg";
 
 type SensorViewProps = {
-    value?: number;
-    unit?: string;
+    value: number;
+    elementType?: WeatherElementType;
     label?: string;
-    icon?: JSX.Element;
-    hideUnit?: boolean;
 };
+
+function WindDirectionCompass({ direction }: { direction: number }) {
+    return (
+        <div className={styles.windDirectionContainer}>
+            <WindDirectionCompassSvg className={styles.compass} />
+            <WindDirectionArrow
+                style={{ transform: `rotate(${direction}deg)` }}
+                className={styles.arrow}
+            />
+        </div>
+    );
+}
 
 export default function SensorView({
     value,
-    unit,
+    elementType,
     label,
-    icon,
-    hideUnit,
 }: SensorViewProps) {
+    const utils: Utils = useUtils();
     return (
-        <div className={styles.sensorView}>
-            <div className={styles.sensorData}>
-                <div className={styles.value}>{value || 23.4}</div>
-                <div className={styles.unit}>
-                    {!hideUnit ? unit || "°C" : ""}
+        <div
+            className={`${styles.sensorView} ${
+                elementType && styles[elementType]
+            }`}
+        >
+            {elementType === "wind-direction" ? (
+                <WindDirectionCompass direction={value} />
+            ) : (
+                <div className={styles.sensorData}>
+                    <div className={styles.value}>{value}</div>
+                    <div className={styles.unit}>{utils.unit(elementType)}</div>
                 </div>
-            </div>
+            )}
+
             <div className={styles.label}>
-                {icon || <TemperatureIcon />}
-                {label || "Temperature"}
+                {utils.icon(elementType)}
+                {label}
             </div>
         </div>
     );
