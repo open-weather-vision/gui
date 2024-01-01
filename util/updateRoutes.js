@@ -6,29 +6,32 @@ function updateRoutes() {
 
     function addRoutesOfDir(dir, relativePath, fullRelativePath, layout) {
         const pageDirs = fs.readdirSync(dir);
+        if (pageDirs.includes('layout.tsx')) {
+            if (layout) {
+                const newLayout = {
+                    path: relativePath,
+                    element: `$require('./pages${fullRelativePath}layout').default()$`,
+                    children: []
+                };
+                layout.children.push(newLayout);
+                layout = newLayout;
+                relativePath = '';
+            } else {
+                layout = {
+                    path: relativePath,
+                    element: `$require('./pages${fullRelativePath}layout').default()$`,
+                    children: []
+                };
+                relativePath = '';
+                routes.push(layout);
+            }
+        }
         pageDirs.forEach((item) => {
+            if (item === 'layout.tsx') return;
+
             const isDir = fs.statSync(path.join(dir, item)).isDirectory();
             if (isDir) {
                 addRoutesOfDir(path.join(dir, item), item, fullRelativePath + item + '/', layout);
-            } else if (item === 'layout.tsx') {
-                if (layout) {
-                    const newLayout = {
-                        path: relativePath,
-                        element: `$require('./pages${fullRelativePath}layout').default()$`,
-                        children: []
-                    };
-                    layout.children.push(newLayout);
-                    layout = newLayout;
-                    relativePath = '';
-                } else {
-                    layout = {
-                        path: relativePath,
-                        element: `$require('./pages${fullRelativePath}layout').default()$`,
-                        children: []
-                    };
-                    relativePath = '';
-                    routes.push(layout);
-                }
             } else if (item === 'page.tsx') {
                 console.log(`Page: ${fullRelativePath}`)
                 const page = {

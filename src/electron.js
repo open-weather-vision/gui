@@ -6,13 +6,14 @@ function createWindow() {
     const mainWindow = new BrowserWindow({
         width: 800,
         height: 600,
-        resizable: false,
+        resizable: true,
         useContentSize: true,
         webPreferences: {
             nodeIntegration: true
         },
         show: false
     });
+
 
     mainWindow.removeMenu();
 
@@ -25,6 +26,7 @@ function createWindow() {
     // Open the DevTools.
     // mainWindow.webContents.openDevTools()
     mainWindow.once('ready-to-show', () => {
+        mainWindow.maximize();
         mainWindow.show()
     })
 }

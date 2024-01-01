@@ -1,0 +1,23 @@
+.gradient3 {
+  background-color: #2d3036;
+  background: linear-gradient(90deg, #3e4450 0%, #30353e 100%);
+}
+.main {
+  width: 100%;
+  min-height: 100%;
+  height: fit-content;
+  background-color: #343944;
+  color: #fff;
+  box-sizing: border-box;
+  padding: 1rem;
+  padding-bottom: 5rem;
+}
+@media screen and (min-width: 1000px) {
+  .main {
+    left: 20rem;
+    position: relative;
+    width: calc(100% - 20rem);
+    padding: 2.5rem;
+  }
+}
+/*# sourceMappingURL=UserMain.module.css.map */

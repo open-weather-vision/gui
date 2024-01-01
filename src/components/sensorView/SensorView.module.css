@@ -1,0 +1,44 @@
+.gradient3 {
+  background-color: #2d3036;
+  background: linear-gradient(90deg, #3e4450 0%, #30353e 100%);
+}
+.sensorView {
+  padding: 1.2rem;
+  border: 1px solid #717377;
+  border-radius: 0.5rem;
+  background-color: #2d3036;
+  background: linear-gradient(90deg, #3e4450 0%, #30353e 100%);
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+}
+@media screen and (min-width: 1000px) {
+  .sensorView {
+    min-width: 15rem;
+  }
+}
+.sensorView .sensorData {
+  font-weight: 600;
+  font-size: 2.8rem;
+  padding: 0.6rem 0.6rem 1.2rem 0.3rem;
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+}
+.sensorView .sensorData .value {
+  color: #b6e8ff;
+}
+.sensorView .sensorData .unit {
+  font-size: 1.5rem;
+  margin-left: 0.5rem;
+  margin-top: 0.5rem;
+  font-weight: 400;
+}
+.sensorView .label {
+  font-size: 0.8rem;
+  display: flex;
+  align-content: center;
+  font-weight: 600;
+}
+.sensorView .label svg {
+  margin-right: 0.5rem;
+}
+/*# sourceMappingURL=SensorView.module.css.map */

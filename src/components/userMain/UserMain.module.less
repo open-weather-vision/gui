@@ -1,0 +1,19 @@
+@import "../../variables.less";
+
+.main {
+    width: 100%;
+    min-height: 100%;
+    height: fit-content;
+    background-color: @backgroundColor3;
+    color: @color3;
+    box-sizing: border-box;
+    padding: 1rem;
+    padding-bottom: 5rem;
+
+    @media screen and (min-width: 1000px) {
+        left: 20rem;
+        position: relative;
+        width: calc(100% - 20rem);
+        padding: 2.5rem;
+    }
+}
