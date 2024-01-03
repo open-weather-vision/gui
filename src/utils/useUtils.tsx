@@ -24,7 +24,47 @@ import { ReactComponent as ConditionIcon } from "../img/condition.svg";
 import { ReactComponent as SoilPhIcon } from "../img/soil-ph.svg";
 import WeatherElementType from "../types/WeatherElementType";
 
+import {
+    WIWiCloud,
+    WIWiCloudyGusts,
+    WIWiCloudyWindy,
+    WIWiCloudy,
+    WIWiDayCloudyGusts,
+    WIWiDayCloudyWindy,
+    WIWiDayCloudy,
+    WIWiDayFog,
+    WIWiDayHail,
+    WIWiDayHaze,
+    WIWiDayLightWind,
+    WIWiDayLightning,
+    WIWiDayRainMix,
+    WIWiDayRainWind,
+    WIWiDayRain,
+    WIWiDayShowers,
+    WIWiDaySleetStorm,
+    WIWiDaySleet,
+    WIWiDaySnowThunderstorm,
+    WIWiDaySnowWind,
+    WIWiDaySnow,
+    WIWiDaySprinkle,
+    WIWiDayStormShowers,
+    WIWiDaySunnyOvercast,
+    WIWiDaySunny,
+    WIWiDayThunderstorm,
+    WIWiDayWindy,
+} from "@icongo/wi/lib";
+
+import RainImage from "../img/rain.jpg";
+
 export class Utils {
+    conditionIcon(condition: number): React.ReactElement {
+        return <WIWiDayShowers />;
+    }
+
+    conditionBackground(condition: number) {
+        return RainImage;
+    }
+
     icon(element?: WeatherElementType): React.ReactElement {
         switch (element) {
             case "temperature":

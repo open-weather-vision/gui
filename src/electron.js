@@ -20,7 +20,7 @@ function createWindow() {
     if (process.env.APP_DEV ? (process.env.APP_DEV.trim() === 'true') : false) {
         mainWindow.loadURL('http://localhost:3000');
     } else {
-        mainWindow.loadFile('build/index.html');
+        mainWindow.loadFile(__dirname + '../build/index.html');
     }
 
     // Open the DevTools.

@@ -8,10 +8,19 @@
     padding: 0;
     border: 0;
     display: block;
-    box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.75);
     position: fixed;
     bottom: 0;
     user-select: none;
+    z-index: 100;
+
+    &:before {
+        content: "";
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        box-shadow: inset 1px 1px 5px 0px rgba(0, 0, 0, 0.3);
+        pointer-events: none;
+    }
 
     @media screen and (min-width: 1000px) {
         display: none;
@@ -23,6 +32,7 @@
         list-style: none;
         display: grid;
         width: 100%;
+        box-sizing: border-box;
         grid-template-columns: repeat(5, 1fr);
 
         li {
@@ -37,6 +47,8 @@
             justify-items: center;
             font-weight: 600;
             padding: 0.75rem 0;
+            box-sizing: border-box;
+            text-overflow: ellipsis;
 
             .label {
                 font-size: 0.7rem;
@@ -101,7 +113,6 @@
     border: 0;
     display: flex;
     justify-content: center;
-    box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.75);
     position: fixed;
     top: 0;
     right: 0;

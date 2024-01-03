@@ -1,19 +1,20 @@
 import styles from "./Navigation.module.css";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { ReactComponent as MenuIcon } from "../../img/menu.svg";
 import { ReactComponent as LiveIcon } from "../../img/live.svg";
 import { ReactComponent as ForecastIcon } from "../../img/forecast.svg";
-import { ReactComponent as RecordsIcon } from "../../img/records.svg";
+import { ReactComponent as ExtremesIcon } from "../../img/extremes.svg";
 import { ReactComponent as GraphsIcon } from "../../img/graphs.svg";
 import { ReactComponent as SettingsIcon } from "../../img/settings.svg";
 import { ReactComponent as WeatherStationIcon } from "../../img/weather-station.svg";
 import { ReactComponent as SwitchIcon } from "../../img/switch.svg";
 import { ReactComponent as ClimateIcon } from "../../img/climate.svg";
 import { useState } from "react";
+import useSmoothNavigation from "../../utils/useSmoothNavigation";
 
 export default function Navigation() {
     const [sideMenuOpen, setSideMenuOpen] = useState(false);
-    const navigate = useNavigate();
+    const navigate = useSmoothNavigation();
     const path = useLocation().pathname;
     const items = [
         {
@@ -32,9 +33,9 @@ export default function Navigation() {
             link: "/user/graphs",
         },
         {
-            icon: <RecordsIcon />,
-            label: "Records",
-            link: "/user/records",
+            icon: <ExtremesIcon />,
+            label: "Extremes",
+            link: "/user/extremes",
         },
         {
             icon: <ClimateIcon />,
@@ -43,8 +44,9 @@ export default function Navigation() {
         },
     ];
 
-    function handleClick(link: string) {
+    async function handleClick(link: string) {
         setSideMenuOpen(false);
+        if (link === path) return;
         navigate(link);
     }
 

@@ -1,3 +1,19 @@
+.rainGradient {
+  background-color: #37549d;
+  background: linear-gradient(90deg, #37549d 0%, rgba(55, 84, 157, 0.5) 100%);
+}
+.leafGradient {
+  background-color: #303d31;
+  background: linear-gradient(90deg, #303d31 0%, rgba(48, 61, 49, 0.5) 100%);
+}
+.windGradient {
+  background-color: #3b303d;
+  background: linear-gradient(90deg, #3b303d 0%, rgba(59, 48, 61, 0.5) 100%);
+}
+.sunGradient {
+  background-color: #3d3c30;
+  background: linear-gradient(90deg, #3d3c30 0%, rgba(61, 60, 48, 0.5) 100%);
+}
 .gradient1 {
   background-color: #2d3036;
   background: linear-gradient(90deg, #3e4450 0%, #30353e 100%);

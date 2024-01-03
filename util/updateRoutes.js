@@ -10,7 +10,7 @@ function updateRoutes() {
             if (layout) {
                 const newLayout = {
                     path: relativePath,
-                    element: `$require('./pages${fullRelativePath}layout').default()$`,
+                    element: `$React.createElement(require('./pages${fullRelativePath}layout').default)$`,
                     children: []
                 };
                 layout.children.push(newLayout);
@@ -19,7 +19,7 @@ function updateRoutes() {
             } else {
                 layout = {
                     path: relativePath,
-                    element: `$require('./pages${fullRelativePath}layout').default()$`,
+                    element: `$React.createElement(require('./pages${fullRelativePath}layout').default)$`,
                     children: []
                 };
                 relativePath = '';
@@ -36,7 +36,7 @@ function updateRoutes() {
                 console.log(`Page: ${fullRelativePath}`)
                 const page = {
                     path: relativePath,
-                    element: `$require('./pages${fullRelativePath}page').default()$`
+                    element: `$React.createElement(require('./pages${fullRelativePath}page').default)$`
                 };
                 if (layout) {
                     layout.children.push(page);
@@ -49,7 +49,7 @@ function updateRoutes() {
 
     addRoutesOfDir(path.join(__dirname, '../src/pages'), '/', '/', null);
 
-    fs.writeFileSync(__dirname + '/../src/routes.tsx', "import { RouteObject } from 'react-router-dom';\n\nconst routes: RouteObject[] = " + JSON.stringify(routes, null, 4).replace(/"\$(.*)\$"/g, '$1') + ";\n\nexport default routes;");
+    fs.writeFileSync(__dirname + '/../src/routes.tsx', "import React from 'react';\nimport { RouteObject } from 'react-router-dom';\n\nconst routes: RouteObject[] = " + JSON.stringify(routes, null, 4).replace(/"\$(.*)\$"/g, '$1') + ";\n\nexport default routes;");
 }
 
 updateRoutes();

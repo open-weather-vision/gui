@@ -1,6 +1,8 @@
 @import "../../variables.less";
 
 .sensorView {
+    position: relative;
+    box-sizing: border-box;
     padding: 1.2rem;
     border: 1px solid @borderColor2;
     border-radius: 0.5rem;
@@ -10,6 +12,48 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    cursor: pointer;
+    transition: all 0.1s ease-in-out;
+    user-select: none;
+
+    &:active {
+        transform: scale(1.05);
+    }
+
+    &.condition {
+        flex-basis: 100%;
+        overflow: hidden;
+
+        .backgroundImage {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-radius: 0.5rem;
+            opacity: 1;
+            filter: brightness(0.6) contrast(0.8) saturate(1.2)
+                hue-rotate(15deg);
+        }
+
+        .sensorData {
+            display: flex;
+            justify-content: center;
+            fill: white;
+            position: relative;
+
+            svg {
+                width: 9rem;
+                height: 9rem;
+                padding: 1rem;
+            }
+        }
+
+        .label {
+            position: relative;
+        }
+    }
 
     &.precipation,
     &.precipation-rate,
@@ -21,6 +65,7 @@
 
         background: @rainBackgroundColor;
         border-color: @rainBorderColor;
+        .rainGradient();
     }
 
     &.leaf-temperature,
@@ -34,6 +79,8 @@
 
         background: @leafBackgroundColor;
         border-color: @leafBorderColor;
+
+        .leafGradient();
     }
 
     &.wind-speed,
@@ -45,10 +92,13 @@
 
         background: @windBackgroundColor;
         border-color: @windBorderColor;
+
+        .windGradient();
     }
 
     &.wind-direction {
         flex-grow: 9999;
+        flex-basis: 100%;
     }
 
     &.solar-radiation,
@@ -60,15 +110,60 @@
 
         background: @sunBackgroundColor;
         border-color: @sunBorderColor;
+
+        .sunGradient();
     }
 
-    @media screen and (min-width: 450px) {
-        .gradient1();
-    }
+    .details {
+        position: absolute;
+        z-index: 50;
+        top: 0px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        background: rgba(31, 36, 45, 0.777);
+        backdrop-filter: blur(5px);
+        border-radius: 0.5rem;
+        box-sizing: border-box;
+        padding: 1.5rem;
+        transition: all 0.15s ease-in-out;
+        font-size: 0.8rem;
+        display: flex;
+        flex-direction: column;
+        row-gap: 0.5rem;
 
-    @media screen and (min-width: 1000px) {
-        min-width: 15rem;
-        max-width: 30rem;
+        &.hidden {
+            visibility: none;
+            pointer-events: none;
+            opacity: 0;
+        }
+
+        .buttonArea {
+            margin-top: auto;
+
+            button {
+                background-color: @backgroundColor1;
+                padding: 0.6rem;
+                margin-right: 0.5rem;
+                border-radius: 0.4rem;
+                font-weight: 600;
+                border: 1px solid @accentColor;
+                color: @color1;
+                transition: all 0.1s ease-in-out;
+                cursor: pointer;
+
+                &:active {
+                    transform: scale(1.05);
+                }
+
+                @media (pointer: fine) {
+                    &:hover {
+                        background-color: @accentColor;
+                        color: @backgroundColor1;
+                    }
+                }
+            }
+        }
     }
 
     .windDirectionContainer {
@@ -108,6 +203,7 @@
             margin-left: 0.5rem;
             margin-top: 0.5rem;
             font-weight: 400;
+            transition: all 0.3s ease-in-out;
         }
     }
 
@@ -116,11 +212,46 @@
         display: flex;
         align-content: center;
         font-weight: 600;
+        align-items: center;
 
         svg {
             margin-right: 0.5rem;
             width: 17px;
             height: 17px;
+        }
+
+        .location {
+            padding: 0.3rem;
+            background: @accentColorDark;
+            color: @accentColor;
+            font-size: 0.6rem;
+            border-radius: 0.2rem;
+            margin-left: auto;
+            text-transform: uppercase;
+            font-weight: 800;
+        }
+    }
+
+    @media screen and (min-width: 450px) {
+        .gradient1();
+    }
+
+    @media screen and (min-width: 600px) {
+        min-width: 15rem;
+    }
+
+    @media screen and (min-width: 1000px) {
+        min-width: 18rem;
+
+        .windDirectionContainer {
+            svg.compass {
+                height: 12rem;
+                width: 12rem;
+            }
+
+            svg.arrow {
+                width: 4rem;
+            }
         }
     }
 }

@@ -8,7 +8,14 @@
     color: @color3;
     box-sizing: border-box;
     padding: 1rem;
-    padding-bottom: 5rem;
+    padding-bottom: 5.5rem;
+    opacity: 1;
+    transition: all 0.15s ease-in-out;
+
+    &.hidden {
+        opacity: 0;
+        transform: translateY(-1rem);
+    }
 
     @media screen and (min-width: 1000px) {
         left: 20rem;
