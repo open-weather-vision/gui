@@ -22,7 +22,7 @@ type WeatherElementType =
     | "sunshine"
     | "visibility"
     | "snow-height"
-    | "condition"
+    | "weather-state"
     | "soil-ph";
 
 export default WeatherElementType;

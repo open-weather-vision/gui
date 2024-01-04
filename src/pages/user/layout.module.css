@@ -15,17 +15,17 @@
   background: linear-gradient(90deg, #3d3c30 0%, rgba(61, 60, 48, 0.5) 100%);
 }
 .gradient1 {
-  background-color: #2d3036;
-  background: linear-gradient(90deg, #3e4450 0%, #30353e 100%);
+  background-color: #1f2124;
+  background: linear-gradient(90deg, #2d3138 0%, #1e2024 100%);
 }
 .gradient2 {
-  background-color: #2d3036;
-  background: linear-gradient(90deg, #3e4450 0vw, #30353e 100vw);
+  background-color: #1f2124;
+  background: linear-gradient(90deg, #2d3138 0vw, #1e2024 100vw);
 }
 .container {
   width: 100%;
   height: 100%;
-  background-color: #343944;
+  background-color: #1e2024;
   overflow-x: hidden;
 }
 /*# sourceMappingURL=layout.module.css.map */

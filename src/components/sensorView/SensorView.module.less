@@ -13,14 +13,11 @@
     flex-direction: column;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.1s ease-in-out;
+    transition: all 0.2s ease-in-out;
     user-select: none;
+    min-width: 18rem !important;
 
-    &:active {
-        transform: scale(1.05);
-    }
-
-    &.condition {
+    &.weather-state {
         flex-basis: 100%;
         overflow: hidden;
 
@@ -32,21 +29,138 @@
             top: 0;
             left: 0;
             border-radius: 0.5rem;
-            opacity: 1;
-            filter: brightness(0.6) contrast(0.8) saturate(1.2)
-                hue-rotate(15deg);
+            opacity: 0.3;
         }
 
         .sensorData {
             display: flex;
             justify-content: center;
+            align-items: center;
             fill: white;
             position: relative;
+            overflow: hidden;
+            height: 11rem;
 
             svg {
                 width: 9rem;
                 height: 9rem;
                 padding: 1rem;
+            }
+
+            .now {
+                .weatherIcon {
+                    width: 10rem;
+                    height: 10rem;
+                    background-position: center center;
+                    background-size: 100% 100%;
+                }
+
+                border-radius: 0.5rem;
+                box-sizing: border-box;
+                min-width: 100%;
+                margin-left: 0;
+                display: flex;
+                justify-content: center;
+                justify-items: center;
+                align-items: center;
+                opacity: 1;
+                transition: all 0.3s ease-in-out;
+
+                &.hidden {
+                    opacity: 0;
+                }
+            }
+
+            .scrollableForecast {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: nowrap;
+                column-gap: 0.5rem;
+                align-items: center;
+                align-content: center;
+                justify-content: flex-start;
+                margin-left: 0;
+                max-width: 100%;
+                padding: 0.5rem 0;
+
+                .forecastArrow {
+                    min-width: 3rem;
+                    height: 3rem;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    .gradient1();
+                    color: @color1;
+                    border: 1px solid @borderColor2;
+                    border-radius: 5rem;
+
+                    svg {
+                        width: 2rem;
+                        height: 2rem;
+
+                        margin: 0;
+                        padding: 0;
+                    }
+                }
+
+                position: absolute;
+                left: 5rem;
+                opacity: 0;
+                pointer-events: none;
+
+                &.open {
+                    left: 0;
+                    opacity: 1;
+                    pointer-events: initial;
+                }
+
+                transition: all 0.3s ease-in-out;
+
+                .forecastItem {
+                    font-size: 0.8rem;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    text-align: center;
+                    font-weight: 600;
+
+                    .gradient2();
+                    border-radius: 0.5rem;
+                    border: 1px solid @borderColor2;
+                    padding: 1rem 0rem;
+                    box-sizing: border-box;
+                    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+
+                    .time {
+                        opacity: 0.8;
+                        margin-bottom: 0.2rem;
+                    }
+
+                    .temperature {
+                        font-family: "Roboto Mono", monospace;
+                    }
+
+                    .precipation {
+                        color: lightblue;
+                        font-family: "Roboto Mono", monospace;
+                    }
+
+                    .unit {
+                        font-size: 0.6rem;
+                        padding: 0;
+                        margin-left: 0.1rem;
+                    }
+
+                    .weatherIcon {
+                        width: 2.5rem;
+                        height: 2.5rem;
+                        box-sizing: border-box;
+                        margin: 1rem 1.5rem;
+                        background-size: 100% 100%;
+                        background-position: center center;
+                    }
+                }
             }
         }
 
@@ -149,7 +263,7 @@
                 font-weight: 600;
                 border: 1px solid @accentColor;
                 color: @color1;
-                transition: all 0.1s ease-in-out;
+                transition: all 0.2s ease-in-out;
                 cursor: pointer;
 
                 &:active {
@@ -229,6 +343,7 @@
             margin-left: auto;
             text-transform: uppercase;
             font-weight: 800;
+            letter-spacing: 0.05rem;
         }
     }
 

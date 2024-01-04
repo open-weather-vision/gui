@@ -1,12 +1,23 @@
 import styles from "./SensorView.module.css";
 import WeatherElementType from "../../types/WeatherElementType";
 
-import useUtils, { Utils } from "../../utils/useUtils";
+import utils from "../../utils/utils";
 import { ReactComponent as WindDirectionCompassSvg } from "../../img/wind-direction-compass.svg";
 import { ReactComponent as WindDirectionArrow } from "../../img/wind-direction-arrow.svg";
+import { ReactComponent as ArrowLeft } from "../../img/arrow-left.svg";
 import AnimatedTextChange from "../animatedTextChange/AnimatedTextChange";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import useSmoothNavigation from "../../utils/useSmoothNavigation";
+// @ts-ignore
+import useScrollOnDrag from "react-scroll-ondrag";
+import useResponsiveBackgroundImage from "../../utils/useResponsiveBackgroundImage";
+
+type ForecastItem = {
+    time: string;
+    weatherState: number;
+    temperature: number;
+    precipation: number;
+};
 
 type SensorViewProps = {
     name?: string;
@@ -16,34 +27,8 @@ type SensorViewProps = {
     description?: string;
     precision: number;
     location?: "inside" | "outside";
+    forecast?: ForecastItem[];
 };
-
-function valueToColor(value: number, elementType?: WeatherElementType) {
-    if (
-        elementType === "temperature" ||
-        elementType === "perceived-temperature"
-    ) {
-        if (value < -40) return "rgb(239, 127, 255)";
-        if (value < -30) return "rgb(155, 127, 255)";
-        if (value < -20) return "rgb(127, 159, 255)";
-        if (value < -10) return "rgb(127, 189, 255)";
-        if (value < 0) return "rgb(127, 213, 255)";
-        if (value < 5) return "rgb(127, 255, 189)";
-        if (value < 10) return "rgb(131, 255, 127)";
-        if (value < 15) return "rgb(185, 255, 127)";
-        if (value < 20) return "rgb(255, 253, 127)";
-        if (value < 25) return "rgb(255, 187, 127)";
-        if (value < 30) return "rgb(255, 163, 127)";
-        if (value < 40) return "rgb(255, 127, 127)";
-        return "rgb(255, 127, 145)";
-    }
-    if (elementType === "pressure") {
-        if (value < 995) return "rgb(127, 213, 255)";
-        if (value < 1010) return "rgb(234, 234, 234)";
-        return "rgb(255, 145, 127)";
-    }
-    return undefined;
-}
 
 function WindDirectionCompass({ direction }: { direction: number }) {
     return (
@@ -57,6 +42,94 @@ function WindDirectionCompass({ direction }: { direction: number }) {
     );
 }
 
+function WeatherState({
+    weatherState,
+    forecast,
+}: {
+    weatherState: number;
+    forecast?: ForecastItem[];
+}) {
+    const ref = useRef();
+    const { events } = useScrollOnDrag(ref);
+    const [showForecast, setShowForecast] = useState(false);
+    const [scroll, setScroll] = useState(false);
+
+    return (
+        <div className={styles.sensorData}>
+            <div
+                className={`${styles.now} ${showForecast && styles.hidden}`}
+                onClick={() => {
+                    setShowForecast(true);
+                    setTimeout(() => setScroll(true), 300);
+                }}
+            >
+                <div
+                    style={{
+                        backgroundImage: `url(${utils.weatherStateIcon(
+                            weatherState,
+                            true
+                        )})`,
+                    }}
+                    className={styles.weatherIcon}
+                />
+            </div>
+            <div
+                className={`${styles.scrollableForecast} ${
+                    showForecast && styles.open
+                }`}
+                ref={ref}
+                {...events}
+                style={{ overflowX: scroll ? "scroll" : "hidden" }}
+            >
+                <div
+                    className={styles.forecastArrow}
+                    onClick={() => {
+                        setScroll(false);
+                        setShowForecast(false);
+                    }}
+                >
+                    <ArrowLeft className={styles.forecastArrowIcon} />
+                </div>
+                {forecast &&
+                    forecast.map((item, index) => (
+                        <div className={styles.forecastItem} key={index}>
+                            <div className={styles.time}>{item.time}</div>
+                            <div
+                                style={{
+                                    backgroundImage: `url(${utils.weatherStateIcon(
+                                        item.weatherState,
+                                        true
+                                    )})`,
+                                }}
+                                className={styles.weatherIcon}
+                            />
+                            <div
+                                className={styles.temperature}
+                                style={{
+                                    color: utils.valueToColor(
+                                        item.temperature,
+                                        "temperature"
+                                    ),
+                                }}
+                            >
+                                {item.temperature.toFixed(0)}
+                                <span className={styles.unit}>
+                                    {utils.unit("temperature")}
+                                </span>
+                            </div>
+                            <div className={styles.precipation}>
+                                {item.precipation.toFixed(1)}
+                                <span className={styles.unit}>
+                                    {utils.unit("precipation")}
+                                </span>
+                            </div>
+                        </div>
+                    ))}
+            </div>
+        </div>
+    );
+}
+
 export default function SensorView({
     name,
     value,
@@ -65,11 +138,11 @@ export default function SensorView({
     description,
     precision,
     location,
+    forecast,
 }: SensorViewProps) {
     const [showDetails, setShowDetails] = useState(false);
     const navigate = useSmoothNavigation();
-
-    const utils: Utils = useUtils();
+    const backgroundImage = useResponsiveBackgroundImage("rain");
 
     function goToGraph() {
         navigate(`/user/graphs?element=${name}`);
@@ -83,18 +156,18 @@ export default function SensorView({
         switch (elementType) {
             case "wind-direction":
                 return <WindDirectionCompass direction={value} />;
-            case "condition":
+            case "weather-state":
                 return (
-                    <div className={styles.sensorData}>
-                        {utils.conditionIcon(value)}
-                    </div>
+                    <WeatherState weatherState={value} forecast={forecast} />
                 );
             default:
                 return (
                     <div className={styles.sensorData}>
                         <div
                             className={styles.value}
-                            style={{ color: valueToColor(value, elementType) }}
+                            style={{
+                                color: utils.valueToColor(value, elementType),
+                            }}
                         >
                             <AnimatedTextChange
                                 text={value.toFixed(precision)}
@@ -116,15 +189,8 @@ export default function SensorView({
             }`}
             onClick={() => setShowDetails(!showDetails)}
         >
-            {elementType === "condition" && (
-                <div
-                    className={styles.backgroundImage}
-                    style={{
-                        backgroundImage: `url(${utils.conditionBackground(
-                            value
-                        )})`,
-                    }}
-                />
+            {elementType === "weather-state" && (
+                <div className={styles.backgroundImage} {...backgroundImage} />
             )}
             {description && (
                 <div

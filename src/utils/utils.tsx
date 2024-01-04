@@ -20,49 +20,39 @@ import { ReactComponent as CloudinessIcon } from "../img/cloudiness.svg";
 import { ReactComponent as SunshineIcon } from "../img/sunshine.svg";
 import { ReactComponent as VisibilityIcon } from "../img/visibility.svg";
 import { ReactComponent as SnowHeightIcon } from "../img/snow-height.svg";
-import { ReactComponent as ConditionIcon } from "../img/condition.svg";
+import { ReactComponent as ConditionIcon } from "../img/weather-state.svg";
 import { ReactComponent as SoilPhIcon } from "../img/soil-ph.svg";
 import WeatherElementType from "../types/WeatherElementType";
 
-import {
-    WIWiCloud,
-    WIWiCloudyGusts,
-    WIWiCloudyWindy,
-    WIWiCloudy,
-    WIWiDayCloudyGusts,
-    WIWiDayCloudyWindy,
-    WIWiDayCloudy,
-    WIWiDayFog,
-    WIWiDayHail,
-    WIWiDayHaze,
-    WIWiDayLightWind,
-    WIWiDayLightning,
-    WIWiDayRainMix,
-    WIWiDayRainWind,
-    WIWiDayRain,
-    WIWiDayShowers,
-    WIWiDaySleetStorm,
-    WIWiDaySleet,
-    WIWiDaySnowThunderstorm,
-    WIWiDaySnowWind,
-    WIWiDaySnow,
-    WIWiDaySprinkle,
-    WIWiDayStormShowers,
-    WIWiDaySunnyOvercast,
-    WIWiDaySunny,
-    WIWiDayThunderstorm,
-    WIWiDayWindy,
-} from "@icongo/wi/lib";
-
-import RainImage from "../img/rain.jpg";
-
 export class Utils {
-    conditionIcon(condition: number): React.ReactElement {
-        return <WIWiDayShowers />;
+    valueToColor(value: number, elementType?: WeatherElementType) {
+        if (
+            elementType === "temperature" ||
+            elementType === "perceived-temperature"
+        ) {
+            if (value < -40) return "rgb(239, 127, 255)";
+            if (value < -30) return "rgb(155, 127, 255)";
+            if (value < -20) return "rgb(127, 159, 255)";
+            if (value < -10) return "rgb(127, 189, 255)";
+            if (value < 0) return "rgb(127, 213, 255)";
+            if (value < 5) return "rgb(127, 255, 189)";
+            if (value < 10) return "rgb(131, 255, 127)";
+            if (value < 15) return "rgb(185, 255, 127)";
+            if (value < 20) return "rgb(255, 253, 127)";
+            if (value < 25) return "rgb(255, 187, 127)";
+            if (value < 30) return "rgb(255, 163, 127)";
+            if (value < 40) return "rgb(255, 127, 127)";
+            return "rgb(255, 127, 145)";
+        }
+        if (elementType === "pressure") {
+            if (value < 995) return "rgb(127, 213, 255)";
+            if (value < 1010) return "rgb(234, 234, 234)";
+            return "rgb(255, 145, 127)";
+        }
+        return undefined;
     }
-
-    conditionBackground(condition: number) {
-        return RainImage;
+    weatherStateIcon(weatherState: number, isDay: boolean): string {
+        return `/weather-state/${weatherState}-${isDay ? "day" : "night"}.svg`;
     }
 
     icon(element?: WeatherElementType): React.ReactElement {
@@ -112,7 +102,7 @@ export class Utils {
                 return <VisibilityIcon />;
             case "snow-height":
                 return <SnowHeightIcon />;
-            case "condition":
+            case "weather-state":
                 return <ConditionIcon />;
             case "soil-ph":
                 return <SoilPhIcon />;
@@ -160,7 +150,7 @@ export class Utils {
                 return "km";
             case "snow-height":
                 return "cm";
-            case "condition":
+            case "weather-state":
                 return "";
             case "soil-ph":
                 return "pH";
@@ -170,6 +160,4 @@ export class Utils {
     }
 }
 
-export default function useUtils() {
-    return new Utils();
-}
+export default new Utils();

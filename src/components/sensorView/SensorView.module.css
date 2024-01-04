@@ -15,12 +15,12 @@
   background: linear-gradient(90deg, #3d3c30 0%, rgba(61, 60, 48, 0.5) 100%);
 }
 .gradient1 {
-  background-color: #2d3036;
-  background: linear-gradient(90deg, #3e4450 0%, #30353e 100%);
+  background-color: #1f2124;
+  background: linear-gradient(90deg, #2d3138 0%, #1e2024 100%);
 }
 .gradient2 {
-  background-color: #2d3036;
-  background: linear-gradient(90deg, #3e4450 0vw, #30353e 100vw);
+  background-color: #1f2124;
+  background: linear-gradient(90deg, #2d3138 0vw, #1e2024 100vw);
 }
 .sensorView {
   position: relative;
@@ -28,25 +28,23 @@
   padding: 1.2rem;
   border: 1px solid #717377;
   border-radius: 0.5rem;
-  background-color: #2d3036;
-  background: linear-gradient(90deg, #3e4450 0vw, #30353e 100vw);
+  background-color: #1f2124;
+  background: linear-gradient(90deg, #2d3138 0vw, #1e2024 100vw);
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
   color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.1s ease-in-out;
+  transition: all 0.2s ease-in-out;
   user-select: none;
+  min-width: 18rem !important;
 }
-.sensorView:active {
-  transform: scale(1.05);
-}
-.sensorView.condition {
+.sensorView.weather-state {
   flex-basis: 100%;
   overflow: hidden;
 }
-.sensorView.condition .backgroundImage {
+.sensorView.weather-state .backgroundImage {
   width: 100%;
   height: 100%;
   background-size: cover;
@@ -54,21 +52,124 @@
   top: 0;
   left: 0;
   border-radius: 0.5rem;
-  opacity: 1;
-  filter: brightness(0.6) contrast(0.8) saturate(1.2) hue-rotate(15deg);
+  opacity: 0.3;
 }
-.sensorView.condition .sensorData {
+.sensorView.weather-state .sensorData {
   display: flex;
   justify-content: center;
+  align-items: center;
   fill: white;
   position: relative;
+  overflow: hidden;
+  height: 11rem;
 }
-.sensorView.condition .sensorData svg {
+.sensorView.weather-state .sensorData svg {
   width: 9rem;
   height: 9rem;
   padding: 1rem;
 }
-.sensorView.condition .label {
+.sensorView.weather-state .sensorData .now {
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+  min-width: 100%;
+  margin-left: 0;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  opacity: 1;
+  transition: all 0.3s ease-in-out;
+}
+.sensorView.weather-state .sensorData .now .weatherIcon {
+  width: 10rem;
+  height: 10rem;
+  background-position: center center;
+  background-size: 100% 100%;
+}
+.sensorView.weather-state .sensorData .now.hidden {
+  opacity: 0;
+}
+.sensorView.weather-state .sensorData .scrollableForecast {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  column-gap: 0.5rem;
+  align-items: center;
+  align-content: center;
+  justify-content: flex-start;
+  margin-left: 0;
+  max-width: 100%;
+  padding: 0.5rem 0;
+  position: absolute;
+  left: 5rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease-in-out;
+}
+.sensorView.weather-state .sensorData .scrollableForecast .forecastArrow {
+  min-width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #1f2124;
+  background: linear-gradient(90deg, #2d3138 0%, #1e2024 100%);
+  color: #fff;
+  border: 1px solid #717377;
+  border-radius: 5rem;
+}
+.sensorView.weather-state .sensorData .scrollableForecast .forecastArrow svg {
+  width: 2rem;
+  height: 2rem;
+  margin: 0;
+  padding: 0;
+}
+.sensorView.weather-state .sensorData .scrollableForecast.open {
+  left: 0;
+  opacity: 1;
+  pointer-events: initial;
+}
+.sensorView.weather-state .sensorData .scrollableForecast .forecastItem {
+  font-size: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-weight: 600;
+  background-color: #1f2124;
+  background: linear-gradient(90deg, #2d3138 0vw, #1e2024 100vw);
+  border-radius: 0.5rem;
+  border: 1px solid #717377;
+  padding: 1rem 0rem;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+}
+.sensorView.weather-state .sensorData .scrollableForecast .forecastItem .time {
+  opacity: 0.8;
+  margin-bottom: 0.2rem;
+}
+.sensorView.weather-state .sensorData .scrollableForecast .forecastItem .temperature {
+  font-family: "Roboto Mono", monospace;
+}
+.sensorView.weather-state .sensorData .scrollableForecast .forecastItem .precipation {
+  color: lightblue;
+  font-family: "Roboto Mono", monospace;
+}
+.sensorView.weather-state .sensorData .scrollableForecast .forecastItem .unit {
+  font-size: 0.6rem;
+  padding: 0;
+  margin-left: 0.1rem;
+}
+.sensorView.weather-state .sensorData .scrollableForecast .forecastItem .weatherIcon {
+  width: 2.5rem;
+  height: 2.5rem;
+  box-sizing: border-box;
+  margin: 1rem 1.5rem;
+  background-size: 100% 100%;
+  background-position: center center;
+}
+.sensorView.weather-state .label {
   position: relative;
 }
 .sensorView.precipation,
@@ -167,7 +268,7 @@
   font-weight: 600;
   border: 1px solid #b6e8ff;
   color: #fff;
-  transition: all 0.1s ease-in-out;
+  transition: all 0.2s ease-in-out;
   cursor: pointer;
 }
 .sensorView .details .buttonArea button:active {
@@ -233,11 +334,12 @@
   margin-left: auto;
   text-transform: uppercase;
   font-weight: 800;
+  letter-spacing: 0.05rem;
 }
 @media screen and (min-width: 450px) {
   .sensorView {
-    background-color: #2d3036;
-    background: linear-gradient(90deg, #3e4450 0%, #30353e 100%);
+    background-color: #1f2124;
+    background: linear-gradient(90deg, #2d3138 0%, #1e2024 100%);
   }
 }
 @media screen and (min-width: 600px) {

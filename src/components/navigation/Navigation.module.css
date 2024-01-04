@@ -15,12 +15,12 @@
   background: linear-gradient(90deg, #3d3c30 0%, rgba(61, 60, 48, 0.5) 100%);
 }
 .gradient1 {
-  background-color: #2d3036;
-  background: linear-gradient(90deg, #3e4450 0%, #30353e 100%);
+  background-color: #1f2124;
+  background: linear-gradient(90deg, #2d3138 0%, #1e2024 100%);
 }
 .gradient2 {
-  background-color: #2d3036;
-  background: linear-gradient(90deg, #3e4450 0vw, #30353e 100vw);
+  background-color: #1f2124;
+  background: linear-gradient(90deg, #2d3138 0vw, #1e2024 100vw);
 }
 .nav {
   background-color: #25272d;
@@ -34,14 +34,8 @@
   bottom: 0;
   user-select: none;
   z-index: 100;
-}
-.nav:before {
-  content: "";
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  box-shadow: inset 1px 1px 5px 0px rgba(0, 0, 0, 0.3);
-  pointer-events: none;
+  border-top: 1px solid #47484b;
+  box-shadow: 0px -1px 5px 0px rgba(0, 0, 0, 0.5);
 }
 @media screen and (min-width: 1000px) {
   .nav {
@@ -58,6 +52,7 @@
   grid-template-columns: repeat(5, 1fr);
 }
 .nav ul li {
+  background-color: #25272d;
   border: 1px solid #25272d;
   border-right: 1px solid #47484b;
   cursor: pointer;
@@ -135,6 +130,8 @@
   opacity: 1;
   transition: all 0.2s ease;
   user-select: none;
+  box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.3);
+  border-left: 1px solid #47484b;
 }
 @media screen and (min-width: 1000px) {
   .sideNav {
@@ -142,15 +139,8 @@
     transition: none;
     position: fixed;
     left: 0;
-    box-shadow: none;
-  }
-  .sideNav:before {
-    content: "";
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    box-shadow: inset 1px 1px 5px 0px rgba(0, 0, 0, 0.3);
-    pointer-events: none;
+    border-left: none;
+    border-right: 1px solid #47484b;
   }
 }
 .sideNav ul {
@@ -220,8 +210,8 @@
   color: #b6e8ff;
 }
 .sideNav ul li.active {
-  background-color: #2d3036;
-  background: linear-gradient(90deg, #3e4450 0%, #30353e 100%);
+  background-color: #1f2124;
+  background: linear-gradient(90deg, #2d3138 0%, #1e2024 100%);
 }
 .sideNav ul li.active svg {
   color: #b6e8ff;
