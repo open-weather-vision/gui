@@ -13,5 +13,6 @@ export const Limits = {
 	maxWithOffset: (offset: number, round?: boolean) => (values: number[]) =>
 		(round ? Math.round(Math.max(...values)) : Math.max(...values)) +
 		offset,
+	/** Sets the specified number as limit. */
 	value: (value: number) => (values: number[]) => value,
 };

@@ -7,8 +7,8 @@ import IntervalSelector, {
 } from "../../../components/intervalSelector/IntervalSelector";
 import utils from "../../../utils/utils";
 import { ReactComponent as Icon } from "../../../img/temperature.svg";
-import Graph from "../../../components/graphNew/Graph";
-import { Limits } from "../../../components/graphNew/Limits";
+import Graph from "../../../components/graph/Graph";
+import { Limits } from "../../../components/graph/Limits";
 
 function intervalToTimeSteps(interval: Interval) {
 	switch (interval.type) {

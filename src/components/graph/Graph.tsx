@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import styles from "./Graph.module.css";
 import { Limits } from "./Limits";
 
+/** The x grid of the graph. */
 function XGrid({
 	gridSize,
 	width,
@@ -35,6 +36,7 @@ function XGrid({
 	);
 }
 
+/** The y grid of the graph. */
 function YGrid({
 	gridSize,
 	width,
@@ -68,6 +70,7 @@ function YGrid({
 	);
 }
 
+/** The x axis of the graph. */
 function AxisX({
 	gridSize,
 	width,
@@ -118,6 +121,7 @@ function AxisX({
 	);
 }
 
+/** The y axis(es) of the graph. */
 function AxisY({
 	gridSize,
 	width,
@@ -178,7 +182,8 @@ function AxisY({
 	);
 }
 
-function Tooltips({
+/** The data point's including the tooltips. */
+function Points({
 	type,
 	processedPoints,
 	height,
@@ -507,6 +512,7 @@ export default function (props: GraphProps) {
 		min: 0,
 		max: 0,
 	};
+
 	computeLimits(props, limitsX, leftAxisLimitsY, rightAxisLimitsY);
 	const relativeGridSizeY = computeRelativeGridYSize(
 		props,
@@ -514,6 +520,7 @@ export default function (props: GraphProps) {
 		rightAxisLimitsY
 	);
 
+	// Configures resize observers to make the graph responsive
 	useEffect(() => {
 		if (graphBoundary?.current) {
 			new ResizeObserver((entries) => {
@@ -535,6 +542,7 @@ export default function (props: GraphProps) {
 		}
 	}, [axisXBoundary]);
 
+	// Sets the functions to calculate a point's position in the svg
 	props.leftAxis.yPos = (y: number) => {
 		const relativePos =
 			(y - leftAxisLimitsY.min) /
@@ -559,6 +567,7 @@ export default function (props: GraphProps) {
 		return relativePos * graphWidth;
 	};
 
+	/** Adds additional meta data to the graph points that is utilized at multiple spots. */
 	const processedPointsLeft = props.leftAxis.points.map((point, index) => ({
 		xPos: props.leftAxis.xPos!(point.x),
 		yPos: props.leftAxis.yPos!(point.y),
@@ -641,7 +650,7 @@ export default function (props: GraphProps) {
 						</>
 					)}
 
-					<Tooltips
+					<Points
 						processedPoints={processedPointsRight}
 						height={graphHeight}
 						width={graphWidth}
@@ -649,7 +658,7 @@ export default function (props: GraphProps) {
 						barWidth={props.rightAxis.barWidth}
 					/>
 
-					<Tooltips
+					<Points
 						processedPoints={processedPointsLeft}
 						height={graphHeight}
 						width={graphWidth}
@@ -697,6 +706,13 @@ export default function (props: GraphProps) {
 	);
 }
 
+/**
+ * Computes the left and right axis limits.
+ * @param props
+ * @param limitsX
+ * @param leftAxisLimitsY
+ * @param rightAxisLimitsY
+ */
 function computeLimits(
 	props: GraphProps,
 	limitsX: any,
@@ -741,6 +757,13 @@ function computeLimits(
 	}
 }
 
+/**
+ * Computes the grid y size to fit both distances specified in the left and right axis properties. This may overwrite the left and right axis y range.
+ * @param props
+ * @param leftAxisLimitsY
+ * @param rightAxisLimitsY
+ * @returns The computed relative grid size
+ */
 function computeRelativeGridYSize(
 	props: GraphProps,
 	leftAxisLimitsY: any,
