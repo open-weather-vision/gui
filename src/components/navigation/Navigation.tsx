@@ -11,109 +11,111 @@ import { ReactComponent as SwitchIcon } from "../../img/switch.svg";
 import { ReactComponent as ClimateIcon } from "../../img/climate.svg";
 import { useState } from "react";
 import useSmoothNavigation from "../../utils/useSmoothNavigation";
+import { useTranslation } from "react-multi-lang";
 
 export default function Navigation() {
-    const [sideMenuOpen, setSideMenuOpen] = useState(false);
-    const navigate = useSmoothNavigation();
-    const path = useLocation().pathname;
-    const items = [
-        {
-            icon: <LiveIcon />,
-            label: "Live",
-            link: "/user/live",
-        },
-        {
-            icon: <ForecastIcon />,
-            label: "Forecast",
-            link: "/user/forecast",
-        },
-        {
-            icon: <GraphsIcon />,
-            label: "Graphs",
-            link: "/user/graphs",
-        },
-        {
-            icon: <ExtremesIcon />,
-            label: "Extremes",
-            link: "/user/extremes",
-        },
-        {
-            icon: <ClimateIcon />,
-            label: "Climate",
-            link: "/user/climate",
-        },
-    ];
+	const [sideMenuOpen, setSideMenuOpen] = useState(false);
+	const t = useTranslation("menu");
+	const navigate = useSmoothNavigation();
+	const path = useLocation().pathname;
+	const items = [
+		{
+			icon: <LiveIcon />,
+			label: t("live"),
+			link: "/user/live",
+		},
+		{
+			icon: <ForecastIcon />,
+			label: t("forecast"),
+			link: "/user/forecast",
+		},
+		{
+			icon: <GraphsIcon />,
+			label: t("graphs"),
+			link: "/user/graphs",
+		},
+		{
+			icon: <ExtremesIcon />,
+			label: t("extremes"),
+			link: "/user/extremes",
+		},
+		{
+			icon: <ClimateIcon />,
+			label: t("climate"),
+			link: "/user/climate",
+		},
+	];
 
-    async function handleClick(link: string) {
-        setSideMenuOpen(false);
-        if (link === path) return;
-        navigate(link);
-    }
+	async function handleClick(link: string) {
+		setSideMenuOpen(false);
+		if (link === path) return;
+		navigate(link);
+	}
 
-    function openMenu() {
-        setSideMenuOpen(true);
-    }
+	function openMenu() {
+		setSideMenuOpen(true);
+	}
 
-    return (
-        <>
-            <div
-                className={`${styles.overlay} ${
-                    !sideMenuOpen ? styles.closed : ""
-                }`}
-                onClick={() => setSideMenuOpen(false)}
-            />
-            <nav
-                className={`${styles.sideNav} ${
-                    !sideMenuOpen ? styles.closed : ""
-                }`}
-            >
-                <ul>
-                    <li className={styles.weatherStation}>
-                        <WeatherStationIcon
-                            className={styles.weatherStationIcon}
-                        />
-                        <div className={styles.infoArea}>
-                            <div className={styles.name}>Hüffelsheim</div>
-                            <div className={styles.elevation}>230m</div>
-                        </div>
-                        <SwitchIcon />
-                    </li>
-                    {items.map((item) => (
-                        <li
-                            onClick={() => handleClick(item.link)}
-                            className={path === item.link ? styles.active : ""}
-                        >
-                            {item.icon}
-                            <div className={styles.label}>{item.label}</div>
-                        </li>
-                    ))}
-                    <li
-                        className={`${styles.settings} ${
-                            path === "/user/settings" ? styles.active : ""
-                        }`}
-                        onClick={() => handleClick("/user/settings")}
-                    >
-                        <SettingsIcon />
-                        <div className={styles.label}>Settings</div>
-                    </li>
-                </ul>
-            </nav>
-            <nav className={styles.nav}>
-                <ul>
-                    {items.slice(0, 4).map((item) => (
-                        <li
-                            onClick={() => handleClick(item.link)}
-                            className={path === item.link ? styles.active : ""}
-                        >
-                            {item.icon}
-                            <div className={styles.label}>{item.label}</div>
-                        </li>
-                    ))}
-                    <li className={styles.menuButton} onClick={openMenu}>
-                        <MenuIcon />
-                    </li>
-                </ul>
-            </nav>
-        </>
-    );
+	return (
+		<>
+			<div
+				className={`${styles.overlay} ${
+					!sideMenuOpen ? styles.closed : ""
+				}`}
+				onClick={() => setSideMenuOpen(false)}
+			/>
+			<nav
+				className={`${styles.sideNav} ${
+					!sideMenuOpen ? styles.closed : ""
+				}`}
+			>
+				<ul>
+					<li className={styles.weatherStation}>
+						<WeatherStationIcon
+							className={styles.weatherStationIcon}
+						/>
+						<div className={styles.infoArea}>
+							<div className={styles.name}>Hüffelsheim</div>
+							<div className={styles.elevation}>230m</div>
+						</div>
+						<SwitchIcon />
+					</li>
+					{items.map((item) => (
+						<li
+							onClick={() => handleClick(item.link)}
+							className={path === item.link ? styles.active : ""}
+						>
+							{item.icon}
+							<div className={styles.label}>{item.label}</div>
+						</li>
+					))}
+					<li
+						className={`${styles.settings} ${
+							path === "/user/settings" ? styles.active : ""
+						}`}
+						onClick={() => handleClick("/user/settings")}
+					>
+						<SettingsIcon />
+						<div className={styles.label}>{t("settings")}</div>
+					</li>
+				</ul>
+			</nav>
+			<nav className={styles.nav}>
+				<ul>
+					{items.slice(0, 4).map((item) => (
+						<li
+							onClick={() => handleClick(item.link)}
+							className={path === item.link ? styles.active : ""}
+						>
+							{item.icon}
+							<div className={styles.label}>{item.label}</div>
+						</li>
+					))}
+					<li className={styles.menuButton} onClick={openMenu}>
+						<MenuIcon />
+					</li>
+				</ul>
+			</nav>
+		</>
+	);
 }

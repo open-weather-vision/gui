@@ -1,0 +1,30 @@
+{
+	"interval": {
+		"day": "Day",
+		"week": "Week",
+		"month": "Month",
+		"year": "Year",
+		"today": "Today",
+		"weekPrefix": "CW",
+		"jan": "January",
+		"feb": "February",
+		"mar": "March",
+		"apr": "April",
+		"may": "May",
+		"jun": "June",
+		"jul": "July",
+		"aug": "August",
+		"sep": "September",
+		"oct": "October",
+		"nov": "November",
+		"dec": "December"
+	},
+	"menu": {
+		"live": "Live",
+		"forecast": "Forecast",
+		"graphs": "Graphs",
+		"extremes": "Extremes",
+		"climate": "Climate",
+		"settings": "Settings"
+	}
+}

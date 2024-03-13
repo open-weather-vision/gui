@@ -1,0 +1,61 @@
+@import "../../variables.less";
+
+.intervalSelector {
+	position: sticky;
+	top: 1rem;
+	left: 0;
+	display: flex;
+	flex-direction: row;
+	width: fit-content;
+	max-width: 100%;
+	border-radius: 0.5rem;
+	margin: auto;
+	align-items: center;
+	align-content: center;
+	justify-content: center;
+	background-color: #2e3d62;
+	border: 1px solid #3c4d77;
+	cursor: pointer;
+	box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.3);
+	filter: drop-shadow(0 0 10px @backgroundColor1);
+
+	font-weight: 600;
+
+	div {
+		padding: 0 2rem;
+		height: 3rem;
+		box-sizing: border-box;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		justify-items: center;
+		text-wrap: nowrap;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		overflow: hidden;
+	}
+
+	.leftArrowContainer,
+	.rightArrowContainer {
+		width: 3.5rem;
+		padding: 0;
+		overflow: visible;
+
+		&.disabled {
+			pointer-events: none;
+			opacity: 0.3;
+		}
+	}
+
+	.type {
+		background-color: rgba(0, 0, 0, 0.35);
+		color: #7aa7ff;
+		width: 8rem;
+	}
+
+	.date {
+		background-color: rgba(0, 0, 0, 0.2);
+		font-weight: 500;
+		width: 13rem;
+	}
+}

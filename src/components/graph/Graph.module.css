@@ -1,0 +1,43 @@
+.rainGradient {
+  background-color: #37549d;
+  background: linear-gradient(90deg, #37549d 0%, rgba(55, 84, 157, 0.5) 100%);
+}
+.leafGradient {
+  background-color: #303d31;
+  background: linear-gradient(90deg, #303d31 0%, rgba(48, 61, 49, 0.5) 100%);
+}
+.windGradient {
+  background-color: #3b303d;
+  background: linear-gradient(90deg, #3b303d 0%, rgba(59, 48, 61, 0.5) 100%);
+}
+.sunGradient {
+  background-color: #3d3c30;
+  background: linear-gradient(90deg, #3d3c30 0%, rgba(61, 60, 48, 0.5) 100%);
+}
+.gradient1 {
+  background-color: #1f2124;
+  background: linear-gradient(90deg, #2d3138 0%, #1e2024 100%);
+}
+.gradient2 {
+  background-color: #1f2124;
+  background: linear-gradient(90deg, #2d3138 0vw, #1e2024 100vw);
+}
+.graph {
+  margin: 2rem 0 0 0;
+  box-sizing: border-box;
+  background-color: #1f2124;
+  background: linear-gradient(90deg, #2d3138 0%, #1e2024 100%);
+  border: 1px solid #47484b;
+  padding: 0 0 2rem 0;
+  margin-top: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+.title {
+  filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.3));
+  stroke-width: 1px;
+  fill: #37549d;
+  stroke: rgba(255, 255, 255, 0.3);
+}
+/*# sourceMappingURL=Graph.module.css.map */

@@ -1,0 +1,79 @@
+.rainGradient {
+  background-color: #37549d;
+  background: linear-gradient(90deg, #37549d 0%, rgba(55, 84, 157, 0.5) 100%);
+}
+.leafGradient {
+  background-color: #303d31;
+  background: linear-gradient(90deg, #303d31 0%, rgba(48, 61, 49, 0.5) 100%);
+}
+.windGradient {
+  background-color: #3b303d;
+  background: linear-gradient(90deg, #3b303d 0%, rgba(59, 48, 61, 0.5) 100%);
+}
+.sunGradient {
+  background-color: #3d3c30;
+  background: linear-gradient(90deg, #3d3c30 0%, rgba(61, 60, 48, 0.5) 100%);
+}
+.gradient1 {
+  background-color: #1f2124;
+  background: linear-gradient(90deg, #2d3138 0%, #1e2024 100%);
+}
+.gradient2 {
+  background-color: #1f2124;
+  background: linear-gradient(90deg, #2d3138 0vw, #1e2024 100vw);
+}
+.intervalSelector {
+  position: sticky;
+  top: 1rem;
+  left: 0;
+  display: flex;
+  flex-direction: row;
+  width: fit-content;
+  max-width: 100%;
+  border-radius: 0.5rem;
+  margin: auto;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  background-color: #2e3d62;
+  border: 1px solid #3c4d77;
+  cursor: pointer;
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.3);
+  filter: drop-shadow(0 0 10px #1a1b1d);
+  font-weight: 600;
+}
+.intervalSelector div {
+  padding: 0 2rem;
+  height: 3rem;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+  text-wrap: nowrap;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.intervalSelector .leftArrowContainer,
+.intervalSelector .rightArrowContainer {
+  width: 3.5rem;
+  padding: 0;
+  overflow: visible;
+}
+.intervalSelector .leftArrowContainer.disabled,
+.intervalSelector .rightArrowContainer.disabled {
+  pointer-events: none;
+  opacity: 0.3;
+}
+.intervalSelector .type {
+  background-color: rgba(0, 0, 0, 0.35);
+  color: #7aa7ff;
+  width: 8rem;
+}
+.intervalSelector .date {
+  background-color: rgba(0, 0, 0, 0.2);
+  font-weight: 500;
+  width: 13rem;
+}
+/*# sourceMappingURL=IntervalSelector.module.css.map */
