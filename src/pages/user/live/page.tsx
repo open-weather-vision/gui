@@ -157,7 +157,7 @@ export default function Page() {
 				value={temperature - 15.48}
 				elementType="temperature"
 				precision={1}
-				name={"tempOut"}
+				sensorId={"tempOut"}
 				location="outside"
 			/>
 			<SensorView
@@ -166,7 +166,7 @@ export default function Page() {
 				value={temperature}
 				elementType="temperature"
 				precision={1}
-				name={"tempIn"}
+				sensorId={"tempIn"}
 				location="inside"
 			/>
 			<SensorView
@@ -175,7 +175,7 @@ export default function Page() {
 				value={1025.9}
 				elementType="pressure"
 				precision={1}
-				name={"press"}
+				sensorId={"press"}
 			/>
 			<SensorView
 				label={"Precipation 15min"}
@@ -183,7 +183,7 @@ export default function Page() {
 				value={15}
 				elementType="precipation"
 				precision={1}
-				name={"precip15min"}
+				sensorId={"precip15min"}
 			/>
 
 			<SensorView

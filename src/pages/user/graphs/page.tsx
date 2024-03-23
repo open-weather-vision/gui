@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import styles from "./page.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import IntervalSelector, {
 	Interval,
 	date,
@@ -44,30 +44,21 @@ function dateTimeToLabelX(dateTime: number, interval: Interval) {
 	}
 }
 
-function sampleData(interval: Interval) {
-	switch (interval.type) {
-		case "day":
-
-		case "week":
-			return new Date().toLocaleDateString(undefined, {
-				dateStyle: "short",
-			});
-		case "month":
-			return new Date().toLocaleDateString(undefined, {
-				dateStyle: "short",
-			});
-		case "year":
-			return new Date().toLocaleDateString(undefined, {
-				dateStyle: "short",
-			});
-	}
-}
-
 export default function Page() {
+	const { hash } = useLocation();
 	const [interval, setInterval] = useState<Interval>({
 		type: "day",
 		date: date(),
 	});
+
+	useEffect(() => {
+		const ref = document.getElementById(hash.substring(1, hash.length));
+		if (ref) {
+			ref.scrollIntoView({
+				behavior: "smooth",
+			});
+		}
+	}, [hash]);
 
 	const dataTemp = [
 		{ time: new Date("2002-04-12 00:00"), value: -0.5 + Math.random() * 2 },
@@ -95,9 +86,10 @@ export default function Page() {
 		<>
 			<IntervalSelector interval={interval} setInterval={setInterval} />
 			<Graph
-				title={<>Titleee</>}
 				leftAxis={{
-					title: <>{utils.icon("temperature")} Temperature</>,
+					label: "Inside temperature",
+					sensorId: "tempIn",
+					elementType: "temperature",
 					points: dataTemp.map((item) => ({
 						x: item.time.getTime(),
 						y: item.value,
@@ -110,7 +102,8 @@ export default function Page() {
 					labelY: (y) => y.toFixed(1),
 				}}
 				rightAxis={{
-					title: <>Wind {utils.icon("wind-speed")}</>,
+					label: "Wind",
+					elementType: "wind-speed",
 					type: "bar",
 					barWidth: 15,
 					points: dataWind.map((item) => ({
@@ -136,11 +129,9 @@ export default function Page() {
 				}
 			/>
 			<Graph
-				title={<></>}
 				leftAxis={{
-					title: (
-						<>{utils.icon("leaf-temperature")} Leaf temperature</>
-					),
+					label: "Leaf temperature",
+					elementType: "leaf-temperature",
 					points: dataTemp.map((item) => ({
 						x: item.time.getTime(),
 						y: item.value,
@@ -153,7 +144,9 @@ export default function Page() {
 					labelY: (y) => y.toFixed(1),
 				}}
 				rightAxis={{
-					title: <>Precipation {utils.icon("precipation")}</>,
+					label: "Precipation",
+					elementType: "precipation",
+					sensorId: "precip15min",
 					type: "line",
 					barWidth: 15,
 					points: dataWind.map((item) => ({

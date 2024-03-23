@@ -10,6 +10,20 @@
 	box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
 	overflow: hidden;
 
+	&.fullscreen {
+		position: fixed;
+		height: 100%;
+		margin-top: 0rem;
+		border-radius: 0;
+		top: 0;
+		left: 0;
+		z-index: 999999999999999;
+
+		.boundary {
+			height: calc(100% - 6rem);
+		}
+	}
+
 	.heading {
 		box-sizing: border-box;
 		width: 100%;

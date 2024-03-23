@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./Graph.module.css";
 import { Limits } from "./Limits";
+import WeatherElementType from "../../types/WeatherElementType";
+import utils from "../../utils/utils";
 
 /** The x grid of the graph. */
 function XGrid({
@@ -108,6 +110,7 @@ function AxisX({
 				}
 				return (
 					<text
+						key={index}
 						x={step.x}
 						y={height / 2 + 5}
 						fill="white"
@@ -158,7 +161,7 @@ function AxisY({
 	return (
 		<g className={styles.axisY}>
 			{lines.map((line, index) => (
-				<g>
+				<g key={index}>
 					<text
 						x={5}
 						y={line.y - 5}
@@ -219,6 +222,7 @@ function Points({
 
 						return (
 							<g
+								key={index}
 								onMouseLeave={() =>
 									index === tooltipActiveIndex &&
 									setTooltipActiveIndex(null)
@@ -283,6 +287,7 @@ function Points({
 						: Infinity;
 					return (
 						<g
+							key={index}
 							onMouseLeave={() =>
 								index === tooltipActiveIndex &&
 								setTooltipActiveIndex(null)
@@ -361,7 +366,7 @@ function Line({
 							: processedPoints[index - 1];
 
 						return (
-							<g>
+							<g key={index}>
 								{!point.last && (
 									<line
 										stroke="white"
@@ -410,7 +415,7 @@ function Line({
 						distanceXToRight / 2
 					);
 					return (
-						<g>
+						<g key={index}>
 							<rect
 								x={point.xPos - computedBarWidth / 2}
 								y={point.yPos}
@@ -428,8 +433,14 @@ function Line({
 }
 
 export type AxisProps = {
-	/** The axis title. Is displayed at the header's left or right. */
-	title: React.ReactElement;
+	/** The corresponding sensor's id */
+	sensorId?: string;
+
+	/** The corresponding sensor's element type */
+	elementType?: WeatherElementType;
+
+	/** Short description of the sensor */
+	label?: string;
 
 	/** The datapoints. */
 	points: { x: number; y: number }[];
@@ -460,9 +471,6 @@ export type AxisProps = {
 };
 
 export type GraphProps = {
-	/** The graph's title. Is displayed at the header's center. */
-	title: React.ReactElement;
-
 	/** The properties of the left axis. */
 	leftAxis: AxisProps;
 
@@ -489,6 +497,8 @@ export type GraphProps = {
 
 	/** Configures the presentation of the x-axis data.  */
 	labelX: (y: number) => string;
+
+	fullscreen?: boolean;
 };
 
 export default function (props: GraphProps) {
@@ -588,16 +598,24 @@ export default function (props: GraphProps) {
 	}));
 
 	return (
-		<div className={styles.graph}>
+		<div
+			className={`${styles.graph} ${
+				props.fullscreen ? styles.fullscreen : ""
+			}`}
+		>
 			<div className={styles.heading}>
 				<div className={styles.leftAxisTitle}>
-					{props.leftAxis.title}
+					{utils.icon(props.leftAxis.elementType)}{" "}
+					{props.leftAxis.label}
 				</div>
-				<div className={styles.title}>{props.title}</div>
+				<div className={styles.title}></div>
 				<div className={styles.rightAxisTitle}>
-					{props.rightAxis.title}
+					{props.rightAxis.label}{" "}
+					{utils.icon(props.rightAxis.elementType)}
 				</div>
 			</div>
+			<div id={props.leftAxis.sensorId}></div>
+			<div id={props.rightAxis.sensorId}></div>
 			<div className={styles.boundary} ref={graphBoundary}>
 				<svg width={graphWidth} height={graphHeight}>
 					<XGrid
