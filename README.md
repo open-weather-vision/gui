@@ -12,11 +12,11 @@ This package contains the open-weather-vision graphical user interface. It can b
 
 #### As web application
 - in development mode: `npm run web:dev`
-- in production mode: `npm run web:build && npm run web:prod`
+- in production mode: `npm run web:build && npm run web:start`
 
 #### As electron desktop application
 - in development mode: `npm run electron:dev`
-- in production mode: `npm run electron:build && npm run electron:prod`
+- in production mode: `npm run electron:build && npm run electron:start`
 
 ### Understanding the project structure
 
