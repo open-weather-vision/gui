@@ -88,15 +88,10 @@ function WeatherState({
 					setTimeout(() => setScroll(true), 300);
 				}}
 			>
-				<div
-					style={{
-						backgroundImage: `url(${utils.weatherStateIcon(
+				{utils.weatherStateIcon(
 							weatherState,
 							true
-						)})`,
-					}}
-					className={styles.weatherIcon}
-				/>
+						)}
 			</div>
 			<div
 				className={`${styles.scrollableForecast} ${

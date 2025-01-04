@@ -23,7 +23,7 @@ function createWindow() {
 	}
 
 	// Open the DevTools.
-	// mainWindow.webContents.openDevTools()
+	mainWindow.webContents.openDevTools()
 	mainWindow.once("ready-to-show", () => {
 		mainWindow.maximize();
 		mainWindow.show();

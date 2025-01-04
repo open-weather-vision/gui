@@ -6,7 +6,7 @@ This package contains the open-weather-vision graphical user interface. It can b
 
 *Prerequisites*:
 1. [NodeJS](https://nodejs.org/en)
-2. _env-cmd_ (install using `npm i -g env-cmd`)
+2. _env-cmd_ (install using `npm i -g env-cmd`) and _serve_ (install using `npm i -g serve`)
 
 ### Running the application
 

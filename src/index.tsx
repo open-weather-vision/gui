@@ -9,11 +9,12 @@ import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import ReactDOM from "react-dom/client";
 
 let router;
-if (process.env.REACT_APP_TYPE === "electron") {
-	console.log("hash rounter");
+const onWebserver = window.location.protocol == "https:" || window.location.protocol == "http:";
+if (!onWebserver) {
+	console.log("Not on webserver: hash router");
 	router = createHashRouter(require("./routes").default);
 } else {
-	console.log("browser rounter");
+	console.log("On webserver: browser router");
 	router = createBrowserRouter(require("./routes").default);
 }
 
