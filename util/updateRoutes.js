@@ -1,43 +1,58 @@
 const fs = require('fs');
 const path = require('path');
 
+/**
+ * Updates the _src/routes.tsx_ file that defines the website's hierarchical structure
+ * by looking inside _src/pages_.
+ */
 function updateRoutes() {
-    const routes = [];
+    const routes = []; // the website's hierarchical structure (RouteObject[] from react-router-dom)
 
-    function addRoutesOfDir(dir, relativePath, fullRelativePath, layout) {
-        const pageDirs = fs.readdirSync(dir);
+    function addRoutesOfDir(currentDirectory, relativePath, fullPath, layout) {
+        // Get all folders and files inside the current directory (dir)
+        const pageDirs = fs.readdirSync(currentDirectory);
+
+        // Handle layouts
         if (pageDirs.includes('layout.tsx')) {
             if (layout) {
+                // If there already is an active layout, nest the new layout in the current one (add it as children and set it as new active layout)
                 const newLayout = {
                     path: relativePath,
-                    element: `$React.createElement(require('./pages${fullRelativePath}layout').default)$`,
+                    element: `$React.createElement(require('./pages${fullPath}layout').default)$`,
                     children: []
                 };
                 layout.children.push(newLayout);
                 layout = newLayout;
                 relativePath = '';
             } else {
+                // If not create a new layout and add it to the routes definition
                 layout = {
                     path: relativePath,
-                    element: `$React.createElement(require('./pages${fullRelativePath}layout').default)$`,
+                    element: `$React.createElement(require('./pages${fullPath}layout').default)$`,
                     children: []
                 };
                 relativePath = '';
                 routes.push(layout);
             }
         }
-        pageDirs.forEach((item) => {
-            if (item === 'layout.tsx') return;
 
-            const isDir = fs.statSync(path.join(dir, item)).isDirectory();
+        // Handle pages and subdirectories
+        pageDirs.forEach((item) => {
+            if (item === 'layout.tsx') return; // We already treated the layout.tsx file
+
+            const isDir = fs.statSync(path.join(currentDirectory, item)).isDirectory();
             if (isDir) {
-                addRoutesOfDir(path.join(dir, item), item, fullRelativePath + item + '/', layout);
+                // If we have a subdirectory go on recursively
+                addRoutesOfDir(path.join(currentDirectory, item), item, fullPath + item + '/', layout);
             } else if (item === 'page.tsx') {
-                console.log(`Page: ${fullRelativePath}`)
+                // If we have a page.tsx file create a new page entry
+                console.log(`Page: ${fullPath}`)
                 const page = {
                     path: relativePath,
-                    element: `$React.createElement(require('./pages${fullRelativePath}page').default)$`
+                    element: `$React.createElement(require('./pages${fullPath}page').default)$`
                 };
+
+                // If we have a layout nest the page in the layout
                 if (layout) {
                     layout.children.push(page);
                 } else {
