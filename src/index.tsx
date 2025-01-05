@@ -9,7 +9,7 @@ import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import ReactDOM from "react-dom/client";
 
 let router;
-const onWebserver = window.location.protocol == "https:" || window.location.protocol == "http:";
+const onWebserver = window.location.protocol == "https:" || window.location.protocol == "http:"; // Environment variables are not available in electron production mode
 if (!onWebserver) {
 	console.log("Not on webserver: hash router");
 	router = createHashRouter(require("./routes").default);

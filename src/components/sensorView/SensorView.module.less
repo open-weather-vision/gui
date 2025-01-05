@@ -5,9 +5,10 @@
     box-sizing: border-box;
     padding: 1.2rem;
     border: 1px solid @borderColor2;
+    background-color: @backgroundColor2;
     border-radius: 0.5rem;
-    .gradient2();
-    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+    /*.gradient2();*/
+    /*box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);*/
     color: white;
     display: flex;
     flex-direction: column;
@@ -49,12 +50,9 @@
 
             .now {
                 .weatherIcon {
-                    width: 10rem;
-                    height: 10rem;
-                    background-position: center center;
-                    background-size: 100% 100%;
+                    width: 8rem;
+                    height: 8rem;
                 }
-
                 border-radius: 0.5rem;
                 box-sizing: border-box;
                 min-width: 100%;
@@ -89,7 +87,8 @@
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    .gradient1();
+                    background-color: @backgroundColor2;
+                    /*.gradient1();*/
                     color: @color1;
                     border: 1px solid @borderColor2;
                     border-radius: 5rem;
@@ -125,12 +124,13 @@
                     text-align: center;
                     font-weight: 600;
 
-                    .gradient2();
+                    background-color: @backgroundColor2;
+                    /*.gradient2();*/
                     border-radius: 0.5rem;
                     border: 1px solid @borderColor2;
                     padding: 1rem 0rem;
                     box-sizing: border-box;
-                    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+                    /*box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);*/
 
                     .time {
                         opacity: 0.8;
@@ -179,7 +179,7 @@
 
         background: @rainBackgroundColor;
         border-color: @rainBorderColor;
-        .rainGradient();
+        /*.rainGradient();*/
     }
 
     &.leaf-temperature,
@@ -194,7 +194,7 @@
         background: @leafBackgroundColor;
         border-color: @leafBorderColor;
 
-        .leafGradient();
+        /*.leafGradient();*/
     }
 
     &.wind-speed,
@@ -207,7 +207,7 @@
         background: @windBackgroundColor;
         border-color: @windBorderColor;
 
-        .windGradient();
+        /*.windGradient();*/
     }
 
     &.wind-direction {
@@ -225,7 +225,7 @@
         background: @sunBackgroundColor;
         border-color: @sunBorderColor;
 
-        .sunGradient();
+        /*.sunGradient();*/
     }
 
     .details {
@@ -348,7 +348,7 @@
     }
 
     @media screen and (min-width: 450px) {
-        .gradient1();
+        /*.gradient1();*/
     }
 
     @media screen and (min-width: 600px) {
