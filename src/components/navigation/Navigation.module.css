@@ -23,6 +23,7 @@
   background-color: #1f2124;
   background: linear-gradient(90deg, #2d3138 0vw, #1e2024 100vw);
 }
+/* The bottom or top navigation menu */
 .nav {
   background-color: #111214;
   color: #fff;
@@ -40,7 +41,14 @@
 }
 @media screen and (min-width: 1000px) {
   .nav {
-    display: none;
+    background-color: #111214;
+    bottom: initial;
+    position: fixed;
+    top: 0;
+    padding: 1rem;
+    box-sizing: border-box;
+    border-bottom: 1px solid #343c41;
+    box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.3);
   }
 }
 .nav ul {
@@ -51,6 +59,15 @@
   width: 100%;
   box-sizing: border-box;
   grid-template-columns: repeat(5, 1fr);
+}
+@media screen and (min-width: 1000px) {
+  .nav ul {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    gap: 1rem;
+  }
 }
 .nav ul li {
   background-color: #111214;
@@ -66,52 +83,109 @@
   padding: 0.75rem 0;
   box-sizing: border-box;
   text-overflow: ellipsis;
+  color: #fff;
+}
+.nav ul li.logo {
+  display: none;
+  padding: 0 2rem;
+  padding-left: 0;
+  border: unset;
+  border-radius: 0;
+  border-right: 1px solid #343c41;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  background-color: transparent;
+}
+@media screen and (min-width: 1000px) {
+  .nav ul li.logo {
+    display: flex;
+  }
+}
+.nav ul li.logo h1 {
+  margin: 0;
+  margin-left: 1.5rem;
+  display: none;
+}
+@media screen and (min-width: 1200px) {
+  .nav ul li.logo h1 {
+    display: inline-block;
+  }
+}
+.nav ul li.logo svg {
+  margin-right: 0;
+  width: 50px;
+  height: 50px;
+}
+.nav ul li.logo.active {
+  color: unset;
+}
+.nav ul li.logo:hover {
+  color: unset;
+  background-color: unset;
+}
+.nav ul li.active {
+  color: #96c7ff;
+}
+@media screen and (min-width: 1000px) {
+  .nav ul li {
+    background-color: #202225;
+    border-radius: 0.6rem;
+    flex-direction: row;
+    border: 1px solid #32353a;
+    color: #fff;
+    padding: 1rem 2rem;
+  }
+  .nav ul li.active {
+    background-color: #1d2a5e;
+    border-color: #2e4992;
+    color: #fff;
+  }
+  .nav ul li.active:hover {
+    background-color: #1d2a5e;
+    border-color: #2e4992;
+    color: #fff;
+  }
+  .nav ul li:hover {
+    background-color: #34363d;
+    color: #fff;
+  }
 }
 .nav ul li .label {
   font-size: 0.6rem;
   margin-top: 0.4rem;
 }
+@media screen and (min-width: 1000px) {
+  .nav ul li .label {
+    margin-top: 0;
+    font-size: 0.85rem;
+  }
+}
 .nav ul li svg {
   width: 23px;
   height: 23px;
 }
-.nav ul li.active {
-  color: #96c7ff;
+@media screen and (min-width: 1000px) {
+  .nav ul li svg {
+    margin-right: 1rem;
+    width: 20px;
+    height: 20spx;
+  }
 }
-.nav ul .menuButton {
+.nav ul li.menuButton {
   background-color: #162049;
   color: #fff;
 }
-.sideNav.closed {
-  transform: translate(100%);
-  opacity: 0;
-}
 @media screen and (min-width: 1000px) {
-  .sideNav.closed {
-    opacity: 1;
-    transform: none;
+  .nav ul li.menuButton {
+    margin-left: auto;
+    border-color: #23376d;
+    padding: 1.25rem;
   }
 }
-.overlay {
-  background-color: rgba(33, 42, 60, 0.67);
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  transition: all 0.2s ease;
-  z-index: 999;
-  backdrop-filter: blur(5px);
+.nav ul li.menuButton svg {
+  margin: 0;
 }
-@media screen and (min-width: 1000px) {
-  .overlay {
-    display: none;
-  }
-}
-.overlay.closed {
-  opacity: 0;
-  pointer-events: none;
-}
+/* The side navigation menu */
 .sideNav {
   background-color: #111214;
   color: #fff;
@@ -132,16 +206,6 @@
   user-select: none;
   /*box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.3);*/
   border-left: 1px solid #343c41;
-}
-@media screen and (min-width: 1000px) {
-  .sideNav {
-    width: 20rem;
-    transition: none;
-    position: fixed;
-    left: 0;
-    border-left: none;
-    border-right: 1px solid #343c41;
-  }
 }
 .sideNav ul {
   padding: 0;
@@ -250,5 +314,24 @@
 .sideNav ul .menuButton {
   background-color: #111214;
   color: #fff;
+}
+.sideNav.closed {
+  transform: translate(100%);
+  opacity: 0;
+}
+.overlay {
+  background-color: rgba(33, 42, 60, 0.67);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: all 0.2s ease;
+  z-index: 999;
+  backdrop-filter: blur(5px);
+}
+.overlay.closed {
+  opacity: 0;
+  pointer-events: none;
 }
 /*# sourceMappingURL=Navigation.module.css.map */

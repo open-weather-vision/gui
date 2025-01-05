@@ -197,6 +197,10 @@ export class Utils {
 		return React.createElement(iconComponents[element || "temperature"]);
 	}
 
+	getAppName(): string {
+		return "harrystation";
+	}
+
 	unit(element?: WeatherElementType): string {
 		switch (element) {
 			case "temperature":

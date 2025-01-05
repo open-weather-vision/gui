@@ -9,9 +9,11 @@ import { ReactComponent as SettingsIcon} from "../../img/icons/settings.svg";
 import { ReactComponent as WeatherStationIcon} from "../../img/icons/weather-station.svg";
 import { ReactComponent as SwitchIcon} from "../../img/icons/switch.svg";
 import { ReactComponent as ClimateIcon} from "../../img/icons/climate.svg";
+import { ReactComponent as Logo} from "../../img/icons/logo.svg";
 import { useState } from "react";
 import useSmoothNavigation from "../../utils/useSmoothNavigation";
 import { useTranslation } from "react-multi-lang";
+import utils from "../../utils/utils";
 
 export default function Navigation() {
 	const [sideMenuOpen, setSideMenuOpen] = useState(false);
@@ -100,6 +102,10 @@ export default function Navigation() {
 			</nav>
 			<nav className={styles.nav}>
 				<ul>
+					<li className={styles.logo}>
+						<Logo />
+						<h1>{utils.getAppName()}</h1>
+					</li>
 					{items.slice(0, 4).map((item) => (
 						<li
 							onClick={() => handleClick(item.link)}

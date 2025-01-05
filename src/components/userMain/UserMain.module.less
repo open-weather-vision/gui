@@ -2,8 +2,7 @@
 
 .main {
     width: 100%;
-    min-height: 100%;
-    height: fit-content;
+    max-height: 100%;
     background-color: @backgroundColor2;
     color: @color2;
     box-sizing: border-box;
@@ -11,6 +10,7 @@
     padding-bottom: 5.5rem;
     opacity: 1;
     transition: all 0.15s ease-in-out;
+    overflow: scroll;
 
     &.hidden {
         opacity: 0;
@@ -18,9 +18,11 @@
     }
 
     @media screen and (min-width: 1000px) {
-        left: 20rem;
-        position: relative;
-        width: calc(100% - 20rem);
-        padding: 2.5rem;
-    }
+        max-height: calc(100% - 6.2rem);
+		position: relative;
+		top: 6.2em;
+        bottom: initial;
+        height: auto;
+        padding-bottom: 1rem;
+	}
 }
