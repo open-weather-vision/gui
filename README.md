@@ -2,6 +2,8 @@
 
 This package contains the open-weather-vision graphical user interface. It can be run as frontend application inside a browser or as electron desktop application.
 
+![](./docs/images/sneak_peak.png)
+
 ## Starter guide for developers
 
 *Prerequisites*:
