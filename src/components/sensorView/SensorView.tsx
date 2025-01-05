@@ -2,9 +2,9 @@ import styles from "./SensorView.module.css";
 import WeatherElementType from "../../types/WeatherElementType";
 
 import utils from "../../utils/utils";
-import { ReactComponent as WindDirectionCompassSvg } from "../../img/wind-direction-compass.svg";
-import { ReactComponent as WindDirectionArrow } from "../../img/wind-direction-arrow.svg";
-import { ReactComponent as ArrowLeft } from "../../img/arrow-left.svg";
+import { ReactComponent as WindDirectionCompassSvg } from "../../img/icons/wind-direction-compass.svg";
+import { ReactComponent as WindDirectionArrow } from "../../img/icons/wind-direction-arrow.svg";
+import { ReactComponent as ArrowLeft } from "../../img/icons/arrow-left.svg";
 import AnimatedTextChange from "../animatedTextChange/AnimatedTextChange";
 import { useState, useRef } from "react";
 import useSmoothNavigation from "../../utils/useSmoothNavigation";
@@ -88,7 +88,7 @@ function WeatherState({
 					setTimeout(() => setScroll(true), 300);
 				}}
 			>
-				{utils.weatherStateIcon(
+				{utils.weatherStateIconComponent(
 							weatherState,
 							true
 						)}
@@ -116,7 +116,7 @@ function WeatherState({
 							<div className={styles.time}>{item.time}</div>
 							<div
 								style={{
-									backgroundImage: `url(${utils.weatherStateIcon(
+									backgroundImage: `url(${utils.weatherStateIconUrl(
 										item.weatherState,
 										true
 									)})`,
@@ -231,7 +231,7 @@ export default function SensorView(props: SensorViewProps) {
 			{content()}
 
 			<div className={styles.label}>
-				{utils.icon(props.elementType)}
+				{utils.iconComponent(props.elementType)}
 				{props.label}
 				{props.location && (
 					<div className={styles.location}>{props.location}</div>

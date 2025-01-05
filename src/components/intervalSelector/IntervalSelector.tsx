@@ -1,8 +1,8 @@
 import { SetStateAction } from "react";
 import { useTranslation } from "react-multi-lang";
 import styles from "./IntervalSelector.module.css";
-import { ReactComponent as LeftArrow } from "../../img/arrow-left-2.svg";
-import { ReactComponent as RightArrow } from "../../img/arrow-right-2.svg";
+import {ReactComponent as LeftArrow} from "../../img/icons/arrow-left-2.svg";
+import {ReactComponent as RightArrow} from "../../img/icons/arrow-right-2.svg";
 
 function weekNumber(date: Date) {
 	// Copy date so don't modify original

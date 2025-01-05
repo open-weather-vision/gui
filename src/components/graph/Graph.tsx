@@ -605,13 +605,13 @@ export default function (props: GraphProps) {
 		>
 			<div className={styles.heading}>
 				<div className={styles.leftAxisTitle}>
-					{utils.icon(props.leftAxis.elementType)}{" "}
+					{utils.iconComponent(props.leftAxis.elementType)}{" "}
 					{props.leftAxis.label}
 				</div>
 				<div className={styles.title}></div>
 				<div className={styles.rightAxisTitle}>
 					{props.rightAxis.label}{" "}
-					{utils.icon(props.rightAxis.elementType)}
+					{utils.iconComponent(props.rightAxis.elementType)}
 				</div>
 			</div>
 			<div id={props.leftAxis.sensorId}></div>

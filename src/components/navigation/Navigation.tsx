@@ -1,14 +1,14 @@
 import styles from "./Navigation.module.css";
 import { useLocation } from "react-router-dom";
-import { ReactComponent as MenuIcon } from "../../img/menu.svg";
-import { ReactComponent as LiveIcon } from "../../img/live.svg";
-import { ReactComponent as ForecastIcon } from "../../img/forecast.svg";
-import { ReactComponent as ExtremesIcon } from "../../img/extremes.svg";
-import { ReactComponent as GraphsIcon } from "../../img/graphs.svg";
-import { ReactComponent as SettingsIcon } from "../../img/settings.svg";
-import { ReactComponent as WeatherStationIcon } from "../../img/weather-station.svg";
-import { ReactComponent as SwitchIcon } from "../../img/switch.svg";
-import { ReactComponent as ClimateIcon } from "../../img/climate.svg";
+import { ReactComponent as MenuIcon} from "../../img/icons/menu.svg";
+import { ReactComponent as LiveIcon} from "../../img/icons/live.svg";
+import { ReactComponent as ForecastIcon} from "../../img/icons/forecast.svg";
+import { ReactComponent as ExtremesIcon} from "../../img/icons/extremes.svg";
+import { ReactComponent as GraphsIcon} from "../../img/icons/graphs.svg";
+import { ReactComponent as SettingsIcon} from "../../img/icons/settings.svg";
+import { ReactComponent as WeatherStationIcon} from "../../img/icons/weather-station.svg";
+import { ReactComponent as SwitchIcon} from "../../img/icons/switch.svg";
+import { ReactComponent as ClimateIcon} from "../../img/icons/climate.svg";
 import { useState } from "react";
 import useSmoothNavigation from "../../utils/useSmoothNavigation";
 import { useTranslation } from "react-multi-lang";
@@ -20,7 +20,7 @@ export default function Navigation() {
 	const path = useLocation().pathname;
 	const items = [
 		{
-			icon: <LiveIcon />,
+			icon: <LiveIcon/>,	
 			label: t("live"),
 			link: "/user/live",
 		},
@@ -71,14 +71,12 @@ export default function Navigation() {
 			>
 				<ul>
 					<li className={styles.weatherStation}>
-						<WeatherStationIcon
-							className={styles.weatherStationIcon}
-						/>
+						<WeatherStationIcon className={styles.weatherStationIcon} />
 						<div className={styles.infoArea}>
 							<div className={styles.name}>Hüffelsheim</div>
 							<div className={styles.elevation}>230m</div>
 						</div>
-						<SwitchIcon />
+						<SwitchIcon className={styles.switchIcon} />
 					</li>
 					{items.map((item) => (
 						<li
