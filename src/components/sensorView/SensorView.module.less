@@ -124,10 +124,11 @@
                     text-align: center;
                     font-weight: 600;
 
-                    background-color: @backgroundColor2;
+                    background-color: fade(@backgroundColor2, 50%);
+                    opacity: 1;
+                    backdrop-filter: blur(10px);
                     /*.gradient2();*/
                     border-radius: 0.5rem;
-                    border: 1px solid @borderColor2;
                     padding: 1rem 0rem;
                     box-sizing: border-box;
                     /*box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);*/
@@ -144,6 +145,10 @@
                     .precipation {
                         color: lightblue;
                         font-family: "Roboto Mono", monospace;
+
+                        &.zeroPrecipation {
+                            color: rgba(255, 255, 255, 0.233);
+                        }
                     }
 
                     .unit {

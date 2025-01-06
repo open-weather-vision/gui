@@ -24,27 +24,32 @@ export default function Navigation() {
 		{
 			icon: <LiveIcon/>,	
 			label: t("live"),
-			link: "/user/live",
+			link: "/weather-station/live",
 		},
 		{
 			icon: <ForecastIcon />,
 			label: t("forecast"),
-			link: "/user/forecast",
+			link: "/weather-station/forecast",
 		},
 		{
 			icon: <GraphsIcon />,
 			label: t("graphs"),
-			link: "/user/graphs",
+			link: "/weather-station/graphs",
 		},
 		{
 			icon: <ExtremesIcon />,
 			label: t("extremes"),
-			link: "/user/extremes",
+			link: "/weather-station/extremes",
 		},
 		{
 			icon: <ClimateIcon />,
 			label: t("climate"),
-			link: "/user/climate",
+			link: "/weather-station/climate",
+		},
+		{
+			icon: <ClimateIcon />,
+			label: "Tests",
+			link: "/weather-station/tests",
 		},
 	];
 
@@ -91,9 +96,9 @@ export default function Navigation() {
 					))}
 					<li
 						className={`${styles.settings} ${
-							path === "/user/settings" ? styles.active : ""
+							path === "/weather-station/settings" ? styles.active : ""
 						}`}
-						onClick={() => handleClick("/user/settings")}
+						onClick={() => handleClick("/weather-station/settings")}
 					>
 						<SettingsIcon />
 						<div className={styles.label}>{t("settings")}</div>

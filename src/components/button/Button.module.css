@@ -1,0 +1,124 @@
+/* Global variables */
+.rainGradient {
+  background-color: #162049;
+  background: linear-gradient(90deg, #37549d 0%, rgba(55, 84, 157, 0.5) 100%);
+}
+.overlay {
+  background-color: rgba(33, 42, 60, 0.67);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: all 0.2s ease;
+  z-index: 999;
+  backdrop-filter: blur(5px);
+}
+.leafGradient {
+  background-color: #1d291e;
+  background: linear-gradient(90deg, #303d31 0%, rgba(48, 61, 49, 0.5) 100%);
+}
+.windGradient {
+  background-color: #2b192e;
+  background: linear-gradient(90deg, #3b303d 0%, rgba(59, 48, 61, 0.5) 100%);
+}
+.sunGradient {
+  background-color: #2c2b1d;
+  background: linear-gradient(90deg, #3d3c30 0%, rgba(61, 60, 48, 0.5) 100%);
+}
+.gradient1 {
+  background-color: #1f2124;
+  background: linear-gradient(90deg, #2d3138 0%, #1e2024 100%);
+}
+.gradient2 {
+  background-color: #1f2124;
+  background: linear-gradient(90deg, #2d3138 0vw, #1e2024 100vw);
+}
+.button {
+  padding: 0.6rem 1rem;
+  background-color: #202225;
+  border: 1px solid #32353a;
+  color: #fff;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.button svg {
+  fill: #fff;
+  color: #fff;
+  stroke: #fff;
+  transition: all 0.2s;
+}
+.button.color-1 {
+  background-color: #162049;
+  border: 1px solid #2e4992;
+  color: #fff;
+}
+.button.color-1:hover {
+  background-color: #233372;
+}
+.button.color-2 {
+  background-color: #111214;
+  border: 1px solid #343c41;
+  color: #fff;
+}
+.button.color-2:hover {
+  background-color: #24262b;
+}
+.button.color-3 {
+  background-color: #202225;
+  border: 1px solid #32353a;
+  color: #fff;
+}
+.button.color-3:hover {
+  background-color: #34363d;
+}
+.button.red {
+  background-color: #792727;
+  border: 1px solid #c23e3e;
+  color: #fff;
+}
+.button.green {
+  background-color: #238023;
+  border: 1px solid #3ec23e;
+  color: #fff;
+}
+.button.yellow {
+  background-color: #806723;
+  border: 1px solid #c29f3e;
+  color: #fff;
+}
+.button.notClickable {
+  pointer-events: none;
+}
+.button.hideIcon {
+  gap: 0;
+}
+.button.hideIcon svg,
+.button.hideIcon img {
+  width: 0px !important;
+  height: 0px !important;
+  opacity: 0;
+}
+.button.icon-small svg,
+.button.icon-small img {
+  width: 14px;
+  height: 14px;
+}
+.button.icon-medium svg,
+.button.icon-medium img {
+  width: 16px;
+  height: 16px;
+}
+.button.icon-large svg,
+.button.icon-large img {
+  width: 18px;
+  height: 18px;
+}
+/*# sourceMappingURL=Button.module.css.map */

@@ -1,0 +1,107 @@
+@import "../../variables.less";
+
+.button{
+    padding: .6rem 1rem;
+    background-color: @backgroundColor3;
+    border: 1px solid @borderColor3;
+    color: @color3;
+    border-radius: .5rem;
+    font-size: .9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all .2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+
+    svg{
+        fill: @color3;
+        color: @color3;
+        stroke: @color3;
+        transition: all .2s;
+    }
+
+    &.color-1{
+        background-color: @backgroundColor1;
+        border: 1px solid @borderColor1;
+        color: @color1;
+
+        &:hover{
+            background-color: @backgroundColor1Hover;
+        }
+    }
+
+    &.color-2{
+        background-color: @backgroundColor2;
+        border: 1px solid @borderColor2;
+        color: @color2;
+
+        &:hover{
+            background-color: @backgroundColor2Hover;
+        }
+    }
+
+    &.color-3{
+        background-color: @backgroundColor3;
+        border: 1px solid @borderColor3;
+        color: @color3;
+
+        &:hover{
+            background-color: @backgroundColor3Hover;
+        }
+    }
+
+    &.red{
+        background-color: @backgroundColorRed;
+        border: 1px solid @borderColorRed;
+        color: @colorRed;
+    }
+
+    &.green{
+        background-color: @backgroundColorGreen;
+        border: 1px solid @borderColorGreen;
+        color: @colorGreen;
+    }
+
+    &.yellow{
+        background-color: @backgroundColorYellow;
+        border: 1px solid @borderColorYellow;
+        color: @colorYellow;
+    }
+
+    &.notClickable{
+        pointer-events: none;
+    }
+
+    &.hideIcon{
+        svg, img{
+            width: 0px !important;
+            height: 0px !important;
+            opacity: 0;
+        }
+
+        gap: 0;
+    }
+
+    &.icon-small{
+        svg, img{
+            width: 14px;
+            height: 14px;
+        }
+    }
+
+    &.icon-medium{
+        svg, img{
+            width: 16px;
+            height: 16px;
+        }
+    }
+
+    &.icon-large{
+        svg, img{
+            width: 18px;
+            height: 18px;
+        }
+    }
+}

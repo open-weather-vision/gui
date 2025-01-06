@@ -1,0 +1,222 @@
+@import "../../variables.less";
+
+@connectingColorDark: rgb(128, 103, 35);
+@connectingColor: rgb(194, 159, 62);
+@connectedColor: rgb(62, 194, 62);
+@connectedColorDark: rgb(35, 128, 35);
+@disconnectedColor: rgb(194, 62, 62);
+@disconnectedColorDark: rgb(20, 5, 5);
+
+.container{
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: .9rem;
+    background-color: @backgroundColor2;
+    border: 1px solid @borderColor2;
+    border-radius: .5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    padding: .75rem;
+    font-size: .9rem;
+    font-weight: 500;
+
+    .icon{
+        width: 12px;
+        height: 12px;
+        color: white;
+        fill: white;
+    }
+
+    .status{
+        .icon{
+            margin: 0 .75rem;
+        }
+
+        &.connected .icon{
+            fill: @connectedColor;
+        }
+
+        &.disconnected .icon{
+            fill: @disconnectedColor;
+        }
+
+        &.connecting .icon{
+            fill: @connectingColor;
+            animation: fadeOutIn 2s infinite;
+        }
+
+        @keyframes fadeOutIn {
+            0% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+    }
+
+    .lastUpdate{
+        margin-left: auto;
+        color: fade(@color2, 70%);
+
+        .icon{
+            margin: 0 .5rem;
+            width: 14px;
+            height: 14px;
+        }
+    }
+}
+
+.disconnectedPopup{
+    .overlay();
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    transition: all .5s;
+
+    &.hidden{
+        opacity: 0;
+	    pointer-events: none;
+    }
+
+    .popupContent{
+        background-color: @backgroundColor2;
+        border: 1px solid @borderColor2;
+        border-radius: .5rem;
+        
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        align-content: center;
+        font-size: 1rem;
+        font-weight: 500;
+        color: @color2;
+        max-width: 25rem;
+        gap: 1rem;
+        overflow: hidden;
+
+        .icon{
+            width: 24px;
+            height: 24px;
+            fill: @color2;
+            margin-bottom: 1rem;
+        }
+
+        .popupHeader{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+            width: 100%;
+            padding: 1.2rem 1.5rem;
+            gap: 1rem;
+            box-sizing: border-box;
+            background-color: @disconnectedColorDark;
+
+            .disconnectedIcon{
+                width: 35px;
+                height: 35px;
+                fill: @disconnectedColor;
+            }
+
+            h1{
+                font-size: 1.3rem;
+                font-weight: 500;
+                color: white;
+                margin: 0;
+            }
+
+            border-bottom: 1px solid @borderColor2;
+        }
+
+        .popupBody{
+            display: flex;
+            flex-direction: column;
+            padding:  0 2rem 2rem 2rem;
+            gap: .5rem;
+
+            p{
+                font-size: .9rem;
+                font-weight: 400;
+                text-align: center;
+            }
+
+            hr{
+                width: 50%;
+                background-color: @borderColor2 ;
+                height: 1px;
+                border: none;
+            }
+
+            .reconnectButton{
+                margin-top: .5rem;
+
+                &.retrying{
+                    animation: fadeOutIn 1s infinite;
+                }
+
+
+                &.failed{
+                    animation: wiggle 0.5s 1;
+                }
+
+                &.success{
+                    animation: scaleUp 0.5s 1;
+                }
+
+                // fade in out animation
+                @keyframes fadeOutIn {
+                    0% {
+                        opacity: 1;
+                    }
+                    50% {
+                        opacity: 0.3;
+                    }
+                    100% {
+                        opacity: 1;
+                    }
+                }
+
+                // wiggle animation (horizontal)
+                @keyframes wiggle {
+                    0% {
+                        transform: translateX(0);
+                    }
+                    25% {
+                        transform: translateX(-5px);
+                    }
+                    50% {
+                        transform: translateX(5px);
+                    }
+                    75% {
+                        transform: translateX(-5px);
+                    }
+                    100% {
+                        transform: translateX(0);
+                    }
+                }
+
+                @keyframes scaleUp {
+                    0% {
+                        transform: scale(1);
+                    }
+                    50% {
+                        transform: scale(1.1);
+                    }
+                    100% {
+                        transform: scale(1);
+                    }
+                }
+            }
+        }
+
+    }
+}

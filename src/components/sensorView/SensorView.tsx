@@ -137,7 +137,7 @@ function WeatherState({
 									{utils.unit("temperature")}
 								</span>
 							</div>
-							<div className={styles.precipation}>
+							<div className={`${styles.precipation} ${item.precipation == 0 ? styles.zeroPrecipation : ""}`}>
 								{item.precipation.toFixed(1)}
 								<span className={styles.unit}>
 									{utils.unit("precipation")}
@@ -156,11 +156,11 @@ export default function SensorView(props: SensorViewProps) {
 	const backgroundImage = useResponsiveBackgroundImage("rain");
 
 	function goToGraph() {
-		navigate(`/user/graphs#${props.sensorId}`);
+		navigate(`/weather-station/graphs#${props.sensorId}`);
 	}
 
 	function goToExtremes() {
-		navigate(`/user/extremes#${props.sensorId}`);
+		navigate(`/weather-station/extremes#${props.sensorId}`);
 	}
 
 	function content() {

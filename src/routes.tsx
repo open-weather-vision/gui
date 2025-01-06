@@ -7,32 +7,36 @@ const routes: RouteObject[] = [
         "element": React.createElement(require('./pages/page').default)
     },
     {
-        "path": "user",
-        "element": React.createElement(require('./pages/user/layout').default),
+        "path": "weather-station",
+        "element": React.createElement(require('./pages/weather-station/layout').default),
         "children": [
             {
                 "path": "climate",
-                "element": React.createElement(require('./pages/user/climate/page').default)
+                "element": React.createElement(require('./pages/weather-station/climate/page').default)
             },
             {
                 "path": "extremes",
-                "element": React.createElement(require('./pages/user/extremes/page').default)
+                "element": React.createElement(require('./pages/weather-station/extremes/page').default)
             },
             {
                 "path": "forecast",
-                "element": React.createElement(require('./pages/user/forecast/page').default)
+                "element": React.createElement(require('./pages/weather-station/forecast/page').default)
             },
             {
                 "path": "graphs",
-                "element": React.createElement(require('./pages/user/graphs/page').default)
+                "element": React.createElement(require('./pages/weather-station/graphs/page').default)
             },
             {
                 "path": "live",
-                "element": React.createElement(require('./pages/user/live/page').default)
+                "element": React.createElement(require('./pages/weather-station/live/page').default)
             },
             {
                 "path": "settings",
-                "element": React.createElement(require('./pages/user/settings/page').default)
+                "element": React.createElement(require('./pages/weather-station/settings/page').default)
+            },
+            {
+                "path": "tests",
+                "element": React.createElement(require('./pages/weather-station/tests/page').default)
             }
         ]
     }
