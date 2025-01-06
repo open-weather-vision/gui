@@ -8,12 +8,14 @@ const path = require('path');
 function updateRoutes() {
     const routes = []; // the website's hierarchical structure (RouteObject[] from react-router-dom)
 
-    function addRoutesOfDir(currentDirectory, relativePath, fullPath, layout) {
+    function addRoutesOfDir(currentDirectory, relativePath, fullPath, layout, directChildren = true) {
         // Get all folders and files inside the current directory (dir)
         const pageDirs = fs.readdirSync(currentDirectory);
 
+        let addedNewLayoutInThisDir = false;
         // Handle layouts
         if (pageDirs.includes('layout.tsx')) {
+            addedNewLayoutInThisDir = true;
             if (layout) {
                 // If there already is an active layout, nest the new layout in the current one (add it as children and set it as new active layout)
                 const newLayout = {
@@ -43,10 +45,11 @@ function updateRoutes() {
             const isDir = fs.statSync(path.join(currentDirectory, item)).isDirectory();
             if (isDir) {
                 // If we have a subdirectory go on recursively
-                addRoutesOfDir(path.join(currentDirectory, item), item, fullPath + item + '/', layout);
+                
+                addRoutesOfDir(path.join(currentDirectory, item), addedNewLayoutInThisDir ? item : relativePath + "/" + item, fullPath + item + '/', layout);
             } else if (item === 'page.tsx') {
                 // If we have a page.tsx file create a new page entry
-                console.log(`Page: ${fullPath}`)
+                console.log(`Page: ${fullPath} with ${relativePath}`)
                 const page = {
                     path: relativePath,
                     element: `$React.createElement(require('./pages${fullPath}page').default)$`
