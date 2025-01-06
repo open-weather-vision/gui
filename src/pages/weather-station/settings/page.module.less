@@ -1,0 +1,100 @@
+@import "../../../variables.less";
+
+.section{
+    background-color: @backgroundColor2;
+    padding: 2rem;
+    border-radius: .5rem;
+    border: 1px solid @borderColor2;
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
+    margin-bottom: 1rem;
+
+    .heading{
+        svg{
+            width: 32px;
+            height: 32px;
+            color: @color2;
+            fill: @color2;
+        }
+
+        h1{
+            margin-bottom: 1rem;
+            font-size: 1.7rem;
+        }
+
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+    }
+
+    .content{
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding-left: 1rem;
+    }
+}
+
+.item{
+    border-radius: .5rem;
+    display: flex;
+    flex-direction: row;
+    gap: .75rem;
+    align-items: center;
+    width: fit-content;
+
+    svg{
+        width: 20px;
+        height: 20px;
+        color: @color2;
+        fill: @color2;
+    }
+
+    h2{
+        margin: 0;
+        font-size: 1rem;
+        font-weight: 400;
+        width: min(30vw, 12rem);
+        text-wrap-mode: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    .content{
+        margin-left: 2rem;
+    }
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+}
+
+select{
+    padding: .6rem 1rem;
+    background-color: @backgroundColor3;
+    border: 1px solid @borderColor3;
+    color: @color3;
+    border-radius: .5rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all .2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    appearance: none;
+    text-align: center;
+    min-width: unset;
+}
+
+select::after {
+    content: "";
+    width: 2em;
+    height: 0.5em;
+    background-color: red;
+    clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+    position: relative;
+    left: -1rem;
+}

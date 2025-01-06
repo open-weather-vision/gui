@@ -46,9 +46,13 @@ import VisibilityIcon, { ReactComponent as VisibilityIconComponent } from "../im
 import SnowHeightIcon, { ReactComponent as SnowHeightIconComponent } from "../img/icons/snow-height.svg";
 import ConditionIcon, { ReactComponent as ConditionIconComponent } from "../img/icons/weather-state.svg";
 import SoilPhIcon, { ReactComponent as SoilPhIconComponent } from "../img/icons/soil-ph.svg";
+import { ReactComponent as DeComponent } from "../img/languages/de.svg";
+import { ReactComponent as EnComponent } from "../img/languages/en.svg";
+import NoIcon, {ReactComponent as NoIconComponent} from "../img/icons/no.svg";
 import React from "react";
 
 const weatherStateComponents = {
+	"null": NoIconComponent,
     "0-day": WeatherState0DayComponent,
     "1-day": WeatherState1DayComponent,
     "2-day": WeatherState2DayComponent,
@@ -73,6 +77,7 @@ const weatherStateComponents = {
 };
 
 const weatherStateUrls = {
+	"null": NoIcon,
     "0-day": WeatherState0Day,
     "1-day": WeatherState1Day,
     "2-day": WeatherState2Day,
@@ -152,9 +157,15 @@ const iconUrls = {
 	"soil-ph": SoilPhIcon,
 }
 
+const flagComponents = {
+	"de": DeComponent,
+	"en": EnComponent,
+}
+
 
 export class Utils {
-	valueToColor(value: number, elementType?: WeatherElementType) {
+	valueToColor(value: number | null, elementType?: WeatherElementType) {
+		if(value === null) return "rgb(145, 145, 145)";
 		if (
 			elementType === "temperature" ||
 			elementType === "perceived-temperature"
@@ -181,11 +192,13 @@ export class Utils {
 		return undefined;
 	}
 
-	weatherStateIconUrl(weatherState: number, isDay: boolean): string {
-		return weatherStateUrls[`${weatherState}-${isDay ? "day" : "night"}` as keyof typeof weatherStateUrls];
+	weatherStateIconUrl(weatherState: number | null, isDay: boolean): string {
+		if(weatherState === null) return weatherStateUrls.null;
+		else return weatherStateUrls[`${weatherState}-${isDay ? "day" : "night"}` as keyof typeof weatherStateUrls];
 	}
 
-	weatherStateIconComponent(weatherState: number, isDay: boolean): React.ReactElement {
+	weatherStateIconComponent(weatherState: number | null, isDay: boolean): React.ReactElement {
+		if(weatherState === null) return React.createElement(weatherStateComponents.null);
 		return React.createElement(weatherStateComponents[`${weatherState}-${isDay ? "day" : "night"}` as keyof typeof weatherStateComponents]);
 	}
 
@@ -197,56 +210,55 @@ export class Utils {
 		return React.createElement(iconComponents[element || "temperature"]);
 	}
 
-	getAppName(): string {
-		return "harrystation";
+	flagComponent(language: keyof typeof flagComponents): React.ReactElement {
+		return React.createElement(flagComponents[language]);
 	}
 
-	unit(element?: WeatherElementType): string {
+	units(element?: WeatherElementType): string[] {
 		switch (element) {
 			case "temperature":
 			case "perceived-temperature":
 			case "wind-chill":
 			case "leaf-temperature":
 			case "soil-temperature":
-				return "°C";
+				return ["°C", "°F", "K"];
 			case "solar-radiation":
-				return "W/m²";
+				return ["W/m²", "kW/m²"];
 			case "wind-speed":
 			case "wind-gust":
-				return "m/s";
+				return ["m/s", "km/h", "mph", "knots"];
 			case "wind-direction":
-				return "°";
+				return ["°"];
 			case "uv":
-				return "UVI";
+				return ["UVI"];
 			case "evaporation":
-				return "mm";
+				return ["mm", "in"];
 			case "leaf-wetness":
-				return "LWI";
+				return ["LWI", "%"];
 			case "pressure":
-				return "hPa";
+				return ["hPa", "kPa", "mmHg", "inHg"];
 			case "precipation-rate":
-				return "mm/h";
-			case "shower-precipation":
+				return ["mm/h", "in/h"];
 			case "precipation":
-				return "mm";
+				return ["mm", "in"];
 			case "soil-moisture":
-				return "cb";
+				return ["cb", "%"];
 			case "precipation-probability":
 			case "humidity":
 			case "cloudiness":
-				return "%";
+				return ["%"];
 			case "sunshine":
-				return "min/h";
+				return ["min", "hours"];
 			case "visibility":
-				return "km";
+				return ["km", "miles"];
 			case "snow-height":
-				return "cm";
+				return ["cm", "in"];
 			case "weather-state":
-				return "";
+				return ["none"]; // Kein Wert, daher 'none'
 			case "soil-ph":
-				return "pH";
+				return ["pH"];
 			default:
-				return "";
+				return [""]; // Standardfall
 		}
 	}
 }

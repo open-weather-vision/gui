@@ -1,57 +1,38 @@
 import styles from "./Navigation.module.css";
 import { useLocation } from "react-router-dom";
 import { ReactComponent as MenuIcon} from "../../img/icons/menu.svg";
-import { ReactComponent as LiveIcon} from "../../img/icons/live.svg";
-import { ReactComponent as ForecastIcon} from "../../img/icons/forecast.svg";
-import { ReactComponent as ExtremesIcon} from "../../img/icons/extremes.svg";
-import { ReactComponent as GraphsIcon} from "../../img/icons/graphs.svg";
-import { ReactComponent as SettingsIcon} from "../../img/icons/settings.svg";
-import { ReactComponent as WeatherStationIcon} from "../../img/icons/weather-station.svg";
-import { ReactComponent as SwitchIcon} from "../../img/icons/switch.svg";
-import { ReactComponent as ClimateIcon} from "../../img/icons/climate.svg";
-import { ReactComponent as Logo} from "../../img/icons/logo.svg";
+
 import { useState } from "react";
 import useSmoothNavigation from "../../utils/useSmoothNavigation";
-import { useTranslation } from "react-multi-lang";
-import utils from "../../utils/utils";
 
-export default function Navigation() {
+export type NavigationProps = {
+	items: {
+		icon: JSX.Element;
+		label: string;
+		link: string;
+	}[],
+	logo: JSX.Element;
+	title: string;
+	settingsEntry?: {
+		icon: JSX.Element;
+		label: string;
+		link: string;
+	}
+	topSection?: {
+		icon: JSX.Element,
+		heading: string,
+		subheading: string,
+		actionFields: {
+			icon: JSX.Element,
+			onClick?: () => void,
+		}[]
+	}
+};
+
+export default function Navigation(props: NavigationProps) {
 	const [sideMenuOpen, setSideMenuOpen] = useState(false);
-	const t = useTranslation("menu");
-	const navigate = useSmoothNavigation();
+	const {navigate} = useSmoothNavigation();
 	const path = useLocation().pathname;
-	const items = [
-		{
-			icon: <LiveIcon/>,	
-			label: t("live"),
-			link: "/weather-station/live",
-		},
-		{
-			icon: <ForecastIcon />,
-			label: t("forecast"),
-			link: "/weather-station/forecast",
-		},
-		{
-			icon: <GraphsIcon />,
-			label: t("graphs"),
-			link: "/weather-station/graphs",
-		},
-		{
-			icon: <ExtremesIcon />,
-			label: t("extremes"),
-			link: "/weather-station/extremes",
-		},
-		{
-			icon: <ClimateIcon />,
-			label: t("climate"),
-			link: "/weather-station/climate",
-		},
-		{
-			icon: <ClimateIcon />,
-			label: "Tests",
-			link: "/weather-station/tests",
-		},
-	];
 
 	async function handleClick(link: string) {
 		setSideMenuOpen(false);
@@ -76,16 +57,22 @@ export default function Navigation() {
 					!sideMenuOpen ? styles.closed : ""
 				}`}
 			>
+				{props.topSection && 
+				<div className={styles.topArea}>
+					<div className={styles.icon}>
+						{props.topSection.icon}
+					</div>
+					<div className={styles.infoArea}>
+						<div className={styles.heading}>{props.topSection.heading}</div>
+						<div className={styles.subheading}>{props.topSection.subheading}</div>
+					</div>
+					{props.topSection.actionFields.map((action, index) => <div className={`${styles.action} ${index === 0 ? styles.first : ""}`} onClick={action.onClick}>
+						{action.icon}
+					</div>)}
+				</div>
+				}
 				<ul>
-					<li className={styles.weatherStation}>
-						<WeatherStationIcon className={styles.weatherStationIcon} />
-						<div className={styles.infoArea}>
-							<div className={styles.name}>Hüffelsheim</div>
-							<div className={styles.elevation}>230m</div>
-						</div>
-						<SwitchIcon className={styles.switchIcon} />
-					</li>
-					{items.map((item) => (
+					{props.items.map((item) => (
 						<li
 							onClick={() => handleClick(item.link)}
 							className={path === item.link ? styles.active : ""}
@@ -94,24 +81,27 @@ export default function Navigation() {
 							<div className={styles.label}>{item.label}</div>
 						</li>
 					))}
-					<li
-						className={`${styles.settings} ${
-							path === "/weather-station/settings" ? styles.active : ""
-						}`}
-						onClick={() => handleClick("/weather-station/settings")}
-					>
-						<SettingsIcon />
-						<div className={styles.label}>{t("settings")}</div>
-					</li>
 				</ul>
+				
+				{props.settingsEntry &&
+				<div
+					className={`${styles.settings} ${
+						path === props.settingsEntry.link ? styles.active : ""
+					}`}
+					onClick={() => handleClick(props.settingsEntry!.link)}
+				>
+					{props.settingsEntry.icon}
+					<div className={styles.label}>{props.settingsEntry.label}</div>
+				</div>
+				}
 			</nav>
 			<nav className={styles.nav}>
 				<ul>
 					<li className={styles.logo}>
-						<Logo />
-						<h1>{utils.getAppName()}</h1>
+						{props.logo}
+						<h1>{props.title}</h1>
 					</li>
-					{items.slice(0, 4).map((item) => (
+					{props.items.slice(0, 4).map((item) => (
 						<li
 							onClick={() => handleClick(item.link)}
 							className={path === item.link ? styles.active : ""}

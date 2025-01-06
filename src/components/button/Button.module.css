@@ -40,7 +40,6 @@
   border: 1px solid #32353a;
   color: #fff;
   border-radius: 0.5rem;
-  font-size: 0.9rem;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s;
@@ -60,7 +59,7 @@
   border: 1px solid #2e4992;
   color: #fff;
 }
-.button.color-1:hover {
+.button.color-1:hover:not(:disabled) {
   background-color: #233372;
 }
 .button.color-2 {
@@ -68,7 +67,7 @@
   border: 1px solid #343c41;
   color: #fff;
 }
-.button.color-2:hover {
+.button.color-2:hover:not(:disabled) {
   background-color: #24262b;
 }
 .button.color-3 {
@@ -76,7 +75,7 @@
   border: 1px solid #32353a;
   color: #fff;
 }
-.button.color-3:hover {
+.button.color-3:hover:not(:disabled) {
   background-color: #34363d;
 }
 .button.red {
@@ -120,5 +119,71 @@
 .button.icon-large img {
   width: 18px;
   height: 18px;
+}
+.button.text-small {
+  font-size: 0.8rem;
+}
+.button.text-medium {
+  font-size: 0.9rem;
+}
+.button.text-large {
+  font-size: 1.2rem;
+}
+.button:disabled {
+  background-color: #111214;
+  color: #40444b;
+  border-color: #40444b;
+  cursor: not-allowed;
+}
+.button:disabled svg {
+  opacity: 0.5;
+}
+.button.fadeInOutInfinitely {
+  animation: fadeOutIn 2s infinite;
+}
+@keyframes fadeOutIn {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.button.wiggleOnce {
+  animation: wiggle 0.5s 1;
+}
+@keyframes wiggle {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  75% {
+    transform: translateX(-5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+.button.scaleUpOnce {
+  animation: scaleUp 0.5s 1 ease-in-out;
+}
+@keyframes scaleUp {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 /*# sourceMappingURL=Button.module.css.map */

@@ -18,11 +18,13 @@
 		"deepcopy": "^2.1.0",
 		"deepmerge": "^4.3.1",
 		"react": "^18.2.0",
+		"react-cookie": "^7.2.2",
 		"react-dom": "^18.2.0",
 		"react-multi-lang": "^2.2.0",
 		"react-router-dom": "^6.21.1",
 		"react-scripts": "5.0.1",
 		"react-scroll-ondrag": "^3.0.1",
+		"react-select": "^5.9.0",
 		"react-snowfall": "^1.2.1",
 		"typescript": "^4.9.5",
 		"web-vitals": "^2.1.4",
@@ -40,6 +42,7 @@
 		"workbox-streams": "^6.6.0"
 	},
 	"scripts": {
+		"update:routes": "node util/updateRoutes.js",
 		"web:dev": "env-cmd -f .env.development.web concurrently --kill-others \"less-watch-compiler --config less-watcher.config.json\" \"node util/updateRoutesWatch.js\" \"react-scripts start\"",
 		"web:build": "env-cmd -f .env.production.web node util/updateRoutes.js && react-scripts build",
 		"web:start": "env-cmd -f .env.production.web serve -s build",

@@ -37,9 +37,9 @@
 .container {
   width: 100%;
   box-sizing: border-box;
-  margin-top: 0.9rem;
   background-color: #111214;
   border: 1px solid #343c41;
+  margin-top: 0.9rem;
   border-radius: 0.5rem;
   display: flex;
   flex-direction: row;
@@ -49,6 +49,9 @@
   padding: 0.75rem;
   font-size: 0.9rem;
   font-weight: 500;
+}
+.container.hidden {
+  display: none;
 }
 .container .icon {
   width: 12px;
@@ -182,44 +185,5 @@
 }
 .disconnectedPopup .popupContent .popupBody .reconnectButton.success {
   animation: scaleUp 0.5s 1;
-}
-@keyframes fadeOutIn {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.3;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-@keyframes wiggle {
-  0% {
-    transform: translateX(0);
-  }
-  25% {
-    transform: translateX(-5px);
-  }
-  50% {
-    transform: translateX(5px);
-  }
-  75% {
-    transform: translateX(-5px);
-  }
-  100% {
-    transform: translateX(0);
-  }
-}
-@keyframes scaleUp {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.1);
-  }
-  100% {
-    transform: scale(1);
-  }
 }
 /*# sourceMappingURL=ConnectionStatusBar.module.css.map */

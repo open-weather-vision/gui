@@ -11,6 +11,13 @@ import useSmoothNavigation from "../../utils/useSmoothNavigation";
 // @ts-ignore
 import useScrollOnDrag from "react-scroll-ondrag";
 import useResponsiveBackgroundImage from "../../utils/useResponsiveBackgroundImage";
+import { useTranslation } from "react-multi-lang";
+import Button from "../button/Button";
+
+import { ReactComponent as ExtremesIcon} from "../../img/icons/extremes.svg";
+import { ReactComponent as GraphsIcon} from "../../img/icons/graphs.svg";
+import {ReactComponent as NoIcon} from "../../img/icons/no.svg";
+import useGlobalContext from "../../utils/useGlobalContext";
 
 type ForecastItem = {
 	time: string;
@@ -24,35 +31,33 @@ type SensorViewProps =
 			/** The sensor's id */
 			sensorId?: string;
 			/** The sensor's value */
-			value: number;
+			value: number | null;
 			/** The type of weather element. Configures the coloring and the used icon */
 			elementType?: WeatherElementType;
-			/** Short description of the sensor */
-			label?: string;
-			/** Detailed description of the sensor */
-			description?: string;
 			/** Number of digits after the decimal point */
 			precision: number;
 			/** Adds a "INSIDE" or "OUTSIDE" tag  */
 			location?: "inside" | "outside";
+
+			hasGraph?: boolean;
+			hasExtremes?: boolean;
 	  }
 	| {
 			/** The sensor's id */
 			sensorId?: string;
 			/** The sensor's value */
-			value: number;
+			value: number | null;
 			/** The type of weather element. Configures the coloring and the used icon */
 			elementType?: "weather-state";
-			/** Short description of the sensor */
-			label?: string;
-			/** Detailed description of the sensor */
-			description?: string;
 			/** Number of digits after the decimal point */
 			precision: number;
 			/** Adds a "INSIDE" or "OUTSIDE" tag  */
 			location?: "inside" | "outside";
 			/** Adds a scrollable forecast to the weather-state sensor view */
 			forecast?: ForecastItem[];
+
+			hasGraph?: boolean;
+			hasExtremes?: boolean;
 	  };
 
 function WindDirectionCompass({ direction }: { direction: number }) {
@@ -71,13 +76,14 @@ function WeatherState({
 	weatherState,
 	forecast,
 }: {
-	weatherState: number;
+	weatherState: number | null;
 	forecast?: ForecastItem[];
 }) {
 	const ref = useRef();
 	const { events } = useScrollOnDrag(ref);
 	const [showForecast, setShowForecast] = useState(false);
 	const [scroll, setScroll] = useState(false);
+	const globals = useGlobalContext();
 
 	return (
 		<div className={styles.sensorData}>
@@ -134,13 +140,13 @@ function WeatherState({
 							>
 								{item.temperature.toFixed(0)}
 								<span className={styles.unit}>
-									{utils.unit("temperature")}
+									{globals.units["temperature"]}
 								</span>
 							</div>
 							<div className={`${styles.precipation} ${item.precipation == 0 ? styles.zeroPrecipation : ""}`}>
 								{item.precipation.toFixed(1)}
 								<span className={styles.unit}>
-									{utils.unit("precipation")}
+									{globals.units["precipation"]}
 								</span>
 							</div>
 						</div>
@@ -151,22 +157,25 @@ function WeatherState({
 }
 
 export default function SensorView(props: SensorViewProps) {
-	const [showDetails, setShowDetails] = useState(false);
-	const navigate = useSmoothNavigation();
+	const {navigate} = useSmoothNavigation();
 	const backgroundImage = useResponsiveBackgroundImage("rain");
+	const t = useTranslation("sensor-view");
+	const globals = useGlobalContext();
 
-	function goToGraph() {
+	function goToGraph(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+		event.preventDefault()
 		navigate(`/weather-station/graphs#${props.sensorId}`);
 	}
 
-	function goToExtremes() {
+	function goToExtremes(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+		event.preventDefault()
 		navigate(`/weather-station/extremes#${props.sensorId}`);
 	}
 
 	function content() {
 		switch (props.elementType) {
 			case "wind-direction":
-				return <WindDirectionCompass direction={props.value} />;
+				return <WindDirectionCompass direction={props.value ?? 0} />;
 			case "weather-state":
 				return (
 					<WeatherState
@@ -178,7 +187,7 @@ export default function SensorView(props: SensorViewProps) {
 				);
 			default:
 				return (
-					<div className={styles.sensorData}>
+					<div className={`${styles.sensorData}`}>
 						<div
 							className={styles.value}
 							style={{
@@ -189,12 +198,16 @@ export default function SensorView(props: SensorViewProps) {
 							}}
 						>
 							<AnimatedTextChange
-								text={props.value.toFixed(props.precision)}
+								text={props.value !== null ? props.value.toFixed(props.precision): ""}
 								sensorData
 							/>
+							{props.value === null && <div className={styles.disconnectedView}>
+								<NoIcon className={styles.disconnectedIcon} />
+								{t("no-signal")}
+							</div>}
 						</div>
 						<div className={styles.unit}>
-							{utils.unit(props.elementType)}
+							{props.value !== null && props.elementType ? globals.units[props.elementType] : ""}
 						</div>
 					</div>
 				);
@@ -203,38 +216,39 @@ export default function SensorView(props: SensorViewProps) {
 
 	return (
 		<div
-			className={`${styles.sensorView} ${
+			className={`${styles.sensorView} ${props.value === null && styles.disconnected} ${
 				props.elementType && styles[props.elementType]
 			}`}
-			onClick={() => setShowDetails(!showDetails)}
+			onClick={(event) => {
+				const div = event.target as HTMLDivElement
+				div.focus({preventScroll: true})
+				console.log("Focused div!")
+			}}
+			tabIndex={0}
 		>
 			{props.elementType === "weather-state" && (
 				<div className={styles.backgroundImage} {...backgroundImage} />
 			)}
-			{props.description && (
+			{
+				props.elementType !== "weather-state"
+				&&
 				<div
-					className={`${styles.details} ${
-						!showDetails && styles.hidden
-					}`}
-				>
-					{props.description}
-					{props.sensorId && (
-						<div className={styles.buttonArea}>
-							<button onClick={goToGraph}>View graph</button>
-							<button onClick={goToExtremes}>
-								View extremes
-							</button>
-						</div>
-					)}
+				className={`${styles.details}`}
+			>
+				<div className={styles.description}>{t(`${props.elementType}_description`)}</div>
+				<div className={styles.buttonArea}>
+					<Button disabled={!props.hasGraph} textSize="small" icon={<GraphsIcon />} color="color-1" text={t("graph")} onClick={goToGraph} />
+					<Button disabled={!props.hasExtremes} textSize="small" icon={<ExtremesIcon />} text={t("extremes")} onClick={goToExtremes} />
 				</div>
-			)}
+			</div>
+			}
 			{content()}
 
 			<div className={styles.label}>
 				{utils.iconComponent(props.elementType)}
-				{props.label}
+				{t(`${props.elementType}_label`)}
 				{props.location && (
-					<div className={styles.location}>{props.location}</div>
+					<div className={styles.location}>{t(props.location)}</div>
 				)}
 			</div>
 		</div>

@@ -45,8 +45,8 @@
 		}
 
 		li {
-			background-color: @backgroundColor2;
-			border-right: 1px solid @borderColor2;
+			background-color: @backgroundColor3;
+			border-right: 1px solid @borderColor3;
 			cursor: pointer;
 			display: flex;
 			flex-direction: column;
@@ -107,6 +107,10 @@
 
 			&.active {
 				color: @accentColor;
+
+				svg{
+					fill: @accentColor;
+				}
 			}
 
 			@media screen and (min-width: 1000px) {
@@ -159,11 +163,20 @@
 			&.menuButton{
 				background-color: @backgroundColor1;
 				color: @color1;
+				border-top: 1px solid @borderColor1;
+				border-left: 1px solid @borderColor1;
+				position: relative;
+				left: -1px;
+				top: -1px;
+				width: 100% + 1px;
+				height: 100% + 1px;
 
 				@media screen and (min-width: 1000px) {
 					margin-left: auto;
 					border-color: @borderColor1Decent;
 					padding: 1.25rem;
+					width: auto;
+					height: auto;
 				}
 
 				svg{
@@ -183,7 +196,7 @@
 	padding: 0;
 	border: 0;
 	display: flex;
-	justify-content: center;
+	overflow-y: scroll;
 	position: fixed;
 	top: 0;
 	right: 0;
@@ -194,16 +207,111 @@
 	user-select: none;
 	/*box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.3);*/
 	border-left: 1px solid @borderColor2;
+	display: flex;
+	flex-direction: column;
+
+	.topArea {
+		background-color: @backgroundColor2;
+		border-color: transparent;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		padding: 2rem;
+		border-bottom: 1px solid @borderColor2;
+
+
+		.icon, .icon svg, .icon img {
+			color: @accentColor;
+			width: 30px;
+			height: 30px;
+		}
+
+		.infoArea {
+			margin-left: 2rem;
+
+			.heading {
+				font-size: 1.1rem;
+				font-weight: 600;
+				max-width: 8rem;
+				text-wrap-mode: nowrap;
+
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+			.subheading {
+				font-size: 0.8rem;
+				font-weight: 400;
+			}
+		}
+
+		.action {
+			padding: 1rem;
+			background-color: @backgroundColor3;
+			border: 1px solid @borderColor3;
+			border-radius: .5rem;
+			cursor: pointer;
+			margin-left: .5rem;
+			display: flex;
+			align-items: center;
+
+			svg, img{
+				fill: @color3;
+				stroke: @color3;
+				height: 16px;
+				width: 16px;
+			}
+		}
+
+		.action.first{
+			margin-left: auto;
+		}
+
+		.action:hover {	
+			background-color: @backgroundColor3Hover;
+		}
+	}
+
+	
+
+	.settings {
+		border-bottom: none;
+		border-top: 1px solid @borderColor2;
+		margin-top: auto;
+		background-color: @backgroundColor2;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		padding: 2rem;
+		gap: 2rem;
+		cursor: pointer;
+
+		.label{
+			font-weight: 700;
+			font-size: .9rem;
+		}
+
+		svg {
+			color: @color2;
+			width: 18px;
+			height: 18px;
+		}
+
+		&:hover, &.active:hover  {
+			background-color: @backgroundColor2Hover;
+		}
+	}
 
 	ul {
-		padding: 0;
+		padding: 1rem;
 		margin: 0;
 		list-style: none;
 		display: flex;
 		flex-direction: column;
 		justify-content: start;
+		gap: 1rem;
 		width: 100%;
 		height: 100%;
+		box-sizing: border-box;
 
 		li {
 			cursor: pointer;
@@ -213,9 +321,11 @@
 			width: 100%;
 			align-items: center;
 			font-weight: 600;
-			padding: 1.5rem 0 1.5rem 2rem;
+			padding: 1.4rem 1.8rem;
 			box-sizing: border-box;
-			border-bottom: 1px solid @borderColor2;
+			border: 1px solid @borderColor3;
+			border-radius: .75rem;
+			background-color: @backgroundColor3;
 
 			svg {
 				width: 20px;
@@ -223,95 +333,22 @@
 			}
 
 			.label {
-				font-size: 0.8rem;
+				font-size: .8rem;
 				margin-left: 1.4rem;
 			}
 
-			&.weatherStation {
+			&.active {
 				background-color: @backgroundColor1;
 				border-color: @borderColor1;
-				display: flex;
-				flex-direction: row;
-				
-				&.active {
-					background-color: @backgroundColor1Active;
-				}
-
-				&:hover, &.active:hover {
-					background-color: @backgroundColor1Hover;
-				}
-
-
-				.weatherStationIcon {
-					color: @accentColor;
-					width: 30px;
-					height: 30px;
-				}
-
-				.infoArea {
-					margin-left: 2rem;
-
-					.name {
-						font-size: 1.1rem;
-						font-weight: 600;
-					}
-					.elevation {
-						font-size: 0.8rem;
-						font-weight: 400;
-					}
-				}
-
-				> :last-child {
-					margin-left: auto;
-					padding: 0 2rem;
-					width: 25px;
-					height: 25px;
-				}
-			}
-
-			&.settings {
-				border-bottom: none;
-				border-top: 1px solid @borderColor1;
-				margin-top: auto;
-				background-color: @backgroundColor1;
 
 				svg {
 					color: @accentColor;
-				}
-
-				&:hover, &.active:hover  {
-					background-color: @backgroundColor1Hover;
-				}
-
-				&.active {
-					background-color: @backgroundColor1Active;
-				}
-			}
-
-			&.active {
-				background-color: @backgroundColor2Active;
-
-				svg {
-					color: @accentColor;
-				}
-			}
-
-			@media screen and (min-width: 1000px) {
-				padding: 1.3rem 0 1.3rem 2rem;
-
-				svg {
-					width: 17px;
-					height: 17px;
-				}
-
-				.label {
-					font-size: 0.7rem;
 				}
 			}
 
 			@media (pointer: fine) {
-				&:hover {
-					background-color: @backgroundColor2Hover;
+				&:hover:not(.active) {
+					background-color: @backgroundColor3Hover;
 				}
 			}
 		}

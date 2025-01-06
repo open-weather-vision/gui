@@ -9,15 +9,20 @@ import { ReactComponent as RetryIcon } from "../../img/icons/retry.svg";
 import { ReactComponent as SwitchStationIcon } from "../../img/icons/switch.svg";
 import { ReactComponent as Troubleshoot } from "../../img/icons/tool.svg";
 import Button from "../button/Button";
+import useGlobalContext from "../../utils/useGlobalContext";
+import { useTranslation } from "react-multi-lang";
 
 export type ConnectionStatusBarProps = {
     state: "connected" | "disconnected" | "connecting";
     latestUpdate: Date;
     reconnectFunction: () => Promise<boolean>;
+    showStatusBar?: boolean
 };
 
 export default function ConnectionStatusBar(props: ConnectionStatusBarProps) {
     const [retryState, setRetryState] = useState<"idle" | "retrying" | "failed" | "success">("idle");
+    const globals = useGlobalContext();
+    const t = useTranslation("connection-state");
     useEffect(() => {
         console.log("Weather station connection status updated to: ", props.state);
     }, [props.state]);
@@ -38,10 +43,10 @@ export default function ConnectionStatusBar(props: ConnectionStatusBarProps) {
 
     return (
         <>
-            <div className={styles.container} >
+            <div className={`${styles.container} ${!props.showStatusBar && styles.hidden}`} >
                 <div className={`${styles.status} ${styles[props.state]}`}>
                     <StateIcon className={styles.icon} />
-                    {props.state === "connected" ? "Connected" : props.state === "disconnected" ? "Disconnected" : "Connecting"}
+                    {t(props.state)}
                 </div>
                 <div className={styles.lastUpdate}>
                     <LatestUpdate className={styles.icon} />
@@ -52,23 +57,26 @@ export default function ConnectionStatusBar(props: ConnectionStatusBarProps) {
                 <div className={styles.popupContent}>
                     <div className={styles.popupHeader}>
                         <DisconnectedIcon className={styles.disconnectedIcon} />
-                        <h1>Disconnected</h1>
+                        <h1>{t("disconnected")}</h1>
                     </div>
                     <div className={styles.popupBody}>
                         <p>
-                            The weather station is currently not reachable. Please check the connection and try again.
+                            {t("disconnected-message")}
                         </p>
-                        <Button className={`${styles[retryState]} ${styles.reconnectButton}`} color={
+                        <Button className={styles.reconnectButton}
+                        wiggleOnce={retryState === "failed"}
+                        fadeInOutInfinitely={retryState === "retrying"}
+                        scaleUpOnce={retryState === "success"}
+                        color={
                             retryState === "retrying" ? "yellow" : 
                             retryState === "failed" ? "red" :
                             retryState === "success" ? "green" : "yellow"
-                        } icon={<RetryIcon />} text={retryState === "retrying" ? "Retrying..." : 
-                            retryState === "failed" ? "Failed!" :
-                            retryState === "success" ? "Success!" : "Reconnect"} hideIcon={retryState !== "idle"} onClick={reconnect}
+                        } icon={<RetryIcon />} text={t(retryState)} hideIcon={retryState !== "idle"} onClick={reconnect}
                             notClickable={retryState !== "idle"} />
-                        <Button color="color-3" iconSize="medium" className={`${styles.switchStationButton}`} text="Switch station" icon={<SwitchStationIcon/>} />
-                        <hr />
-                        <Button color="color-3" iconSize="medium" className={`${styles.switchStationButton}`} text="Trouble shoot" icon={<Troubleshoot/>} />
+                        <Button color="color-3" iconSize="medium" className={`${styles.switchStationButton}`} text={t("switch-station")} icon={<SwitchStationIcon/>} />
+                        {
+                            globals.isAdmin && <Button color="color-3" iconSize="medium" className={`${styles.switchStationButton}`} text={t("trouble-shoot")} icon={<Troubleshoot/>} />
+                        }
                     </div>
                 </div>
             </div>

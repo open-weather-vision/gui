@@ -6,7 +6,6 @@
     border: 1px solid @borderColor3;
     color: @color3;
     border-radius: .5rem;
-    font-size: .9rem;
     font-weight: 500;
     cursor: pointer;
     transition: all .2s;
@@ -27,7 +26,7 @@
         border: 1px solid @borderColor1;
         color: @color1;
 
-        &:hover{
+        &:hover:not(:disabled){
             background-color: @backgroundColor1Hover;
         }
     }
@@ -37,7 +36,7 @@
         border: 1px solid @borderColor2;
         color: @color2;
 
-        &:hover{
+        &:hover:not(:disabled){
             background-color: @backgroundColor2Hover;
         }
     }
@@ -47,7 +46,7 @@
         border: 1px solid @borderColor3;
         color: @color3;
 
-        &:hover{
+        &:hover:not(:disabled){
             background-color: @backgroundColor3Hover;
         }
     }
@@ -102,6 +101,83 @@
         svg, img{
             width: 18px;
             height: 18px;
+        }
+    }
+
+    &.text-small{
+        font-size: .8rem
+    }
+
+    &.text-medium{
+        font-size: .9rem;
+    }
+
+    &.text-large{
+        font-size: 1.2rem
+    }
+
+    &:disabled{
+        background-color: @backgroundColor2;
+        color: lighten(@backgroundColor2, 20%);
+        border-color: lighten(@backgroundColor2, 20%);
+        cursor: not-allowed;
+
+        svg{
+            opacity: .5;
+        }
+    }
+
+    &.fadeInOutInfinitely{
+        animation: fadeOutIn 2s infinite;
+    }
+
+    @keyframes fadeOutIn {
+        0% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0.3;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+
+    &.wiggleOnce{
+        animation: wiggle .5s 1;
+    }
+
+    @keyframes wiggle {
+        0% {
+            transform: translateX(0);
+        }
+        25% {
+            transform: translateX(-5px);
+        }
+        50% {
+            transform: translateX(5px);
+        }
+        75% {
+            transform: translateX(-5px);
+        }
+        100% {
+            transform: translateX(0);
+        }
+    }
+
+    &.scaleUpOnce{
+        animation: scaleUp .5s 1 ease-in-out;
+    }
+
+    @keyframes scaleUp {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.1);
+        }
+        100% {
+            transform: scale(1);
         }
     }
 }

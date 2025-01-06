@@ -48,7 +48,7 @@
   flex-direction: column;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out, filter 0s;
   user-select: none;
   min-width: 18rem !important;
 }
@@ -200,6 +200,12 @@
 .sensorView.precipation-probability .sensorData .value {
   color: #b5c9ff;
 }
+.sensorView.precipation:focus,
+.sensorView.precipation-rate:focus,
+.sensorView.shower-precipation:focus,
+.sensorView.precipation-probability:focus {
+  border: 1px solid #5b79cb;
+}
 .sensorView.leaf-temperature,
 .sensorView.leaf-wetness,
 .sensorView.soil-temperature,
@@ -215,6 +221,13 @@
 .sensorView.soil-moisture .sensorData .value,
 .sensorView.soil-ph .sensorData .value {
   color: #a4ff79;
+}
+.sensorView.leaf-temperature:focus,
+.sensorView.leaf-wetness:focus,
+.sensorView.soil-temperature:focus,
+.sensorView.soil-moisture:focus,
+.sensorView.soil-ph:focus {
+  border: 1px solid #5b835e;
 }
 .sensorView.wind-speed,
 .sensorView.wind-direction,
@@ -244,6 +257,21 @@
 .sensorView.sunshine .sensorData .value {
   color: #ffd28d;
 }
+.sensorView.solar-radiation:focus,
+.sensorView.uv:focus,
+.sensorView.sunshine:focus {
+  border: 1px solid #8c885b;
+}
+.sensorView:focus .details,
+.sensorView .details:focus-within,
+.sensorView .details:active {
+  visibility: visible;
+  pointer-events: all;
+  opacity: 1;
+}
+.sensorView:focus {
+  border: 1px solid #61707a;
+}
 .sensorView .details {
   position: absolute;
   z-index: 50;
@@ -256,39 +284,34 @@
   border-radius: 0.5rem;
   box-sizing: border-box;
   padding: 1.5rem;
-  transition: all 0.15s ease-in-out;
+  transition: all 0.1s ease-in-out;
   font-size: 0.8rem;
   display: flex;
   flex-direction: column;
   row-gap: 0.5rem;
-}
-.sensorView .details.hidden {
   visibility: none;
   pointer-events: none;
   opacity: 0;
+  text-align: left;
 }
 .sensorView .details .buttonArea {
   margin-top: auto;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
 }
-.sensorView .details .buttonArea button {
-  background-color: #162049;
-  padding: 0.6rem;
-  margin-right: 0.5rem;
-  border-radius: 0.4rem;
-  font-weight: 600;
-  border: 1px solid #96c7ff;
-  color: #fff;
-  transition: all 0.2s ease-in-out;
-  cursor: pointer;
-}
-.sensorView .details .buttonArea button:active {
-  transform: scale(1.05);
-}
-@media (pointer: fine) {
-  .sensorView .details .buttonArea button:hover {
-    background-color: #96c7ff;
-    color: #162049;
-  }
+.sensorView .details .description {
+  margin: 0;
+  height: 2rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-wrap-mode: wrap;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  /* Number of lines */
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  width: 100%;
 }
 .sensorView .windDirectionContainer {
   display: flex;
@@ -305,6 +328,12 @@
   width: 3rem;
   transition: all 0.3s ease-in-out;
 }
+.sensorView.disconnected {
+  opacity: 0.5 !important;
+  pointer-events: none;
+  cursor: not-allowed;
+  filter: contrast(0.8);
+}
 .sensorView .sensorData {
   font-weight: 600;
   font-size: 2.5rem;
@@ -315,6 +344,19 @@
 }
 .sensorView .sensorData .value {
   color: #96c7ff;
+}
+.sensorView .sensorData .disconnectedView {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+  color: #da8c8c;
+  font-size: 1.5rem;
+}
+.sensorView .sensorData .disconnectedView .disconnectedIcon {
+  color: #da8c8c;
+  fill: #da8c8c;
+  width: 24px;
 }
 .sensorView .sensorData .unit {
   font-size: 1.5rem;

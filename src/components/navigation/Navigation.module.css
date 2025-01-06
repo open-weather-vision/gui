@@ -81,8 +81,8 @@
   }
 }
 .nav ul li {
-  background-color: #111214;
-  border-right: 1px solid #343c41;
+  background-color: #202225;
+  border-right: 1px solid #32353a;
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -138,6 +138,9 @@
 .nav ul li.active {
   color: #96c7ff;
 }
+.nav ul li.active svg {
+  fill: #96c7ff;
+}
 @media screen and (min-width: 1000px) {
   .nav ul li {
     background-color: #202225;
@@ -186,12 +189,21 @@
 .nav ul li.menuButton {
   background-color: #162049;
   color: #fff;
+  border-top: 1px solid #2e4992;
+  border-left: 1px solid #2e4992;
+  position: relative;
+  left: -1px;
+  top: -1px;
+  width: 101%;
+  height: 101%;
 }
 @media screen and (min-width: 1000px) {
   .nav ul li.menuButton {
     margin-left: auto;
     border-color: #23376d;
     padding: 1.25rem;
+    width: auto;
+    height: auto;
   }
 }
 .nav ul li.menuButton svg {
@@ -206,8 +218,7 @@
   margin: 0;
   padding: 0;
   border: 0;
-  display: flex;
-  justify-content: center;
+  overflow-y: scroll;
   position: fixed;
   top: 0;
   right: 0;
@@ -218,16 +229,99 @@
   user-select: none;
   /*box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.3);*/
   border-left: 1px solid #343c41;
+  display: flex;
+  flex-direction: column;
+}
+.sideNav .topArea {
+  background-color: #111214;
+  border-color: transparent;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 2rem;
+  border-bottom: 1px solid #343c41;
+}
+.sideNav .topArea .icon,
+.sideNav .topArea .icon svg,
+.sideNav .topArea .icon img {
+  color: #96c7ff;
+  width: 30px;
+  height: 30px;
+}
+.sideNav .topArea .infoArea {
+  margin-left: 2rem;
+}
+.sideNav .topArea .infoArea .heading {
+  font-size: 1.1rem;
+  font-weight: 600;
+  max-width: 8rem;
+  text-wrap-mode: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sideNav .topArea .infoArea .subheading {
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+.sideNav .topArea .action {
+  padding: 1rem;
+  background-color: #202225;
+  border: 1px solid #32353a;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  margin-left: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+.sideNav .topArea .action svg,
+.sideNav .topArea .action img {
+  fill: #fff;
+  stroke: #fff;
+  height: 16px;
+  width: 16px;
+}
+.sideNav .topArea .action.first {
+  margin-left: auto;
+}
+.sideNav .topArea .action:hover {
+  background-color: #34363d;
+}
+.sideNav .settings {
+  border-bottom: none;
+  border-top: 1px solid #343c41;
+  margin-top: auto;
+  background-color: #111214;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 2rem;
+  gap: 2rem;
+  cursor: pointer;
+}
+.sideNav .settings .label {
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+.sideNav .settings svg {
+  color: #fff;
+  width: 18px;
+  height: 18px;
+}
+.sideNav .settings:hover,
+.sideNav .settings.active:hover {
+  background-color: #24262b;
 }
 .sideNav ul {
-  padding: 0;
+  padding: 1rem;
   margin: 0;
   list-style: none;
   display: flex;
   flex-direction: column;
   justify-content: start;
+  gap: 1rem;
   width: 100%;
   height: 100%;
+  box-sizing: border-box;
 }
 .sideNav ul li {
   cursor: pointer;
@@ -237,9 +331,11 @@
   width: 100%;
   align-items: center;
   font-weight: 600;
-  padding: 1.5rem 0 1.5rem 2rem;
+  padding: 1.4rem 1.8rem;
   box-sizing: border-box;
-  border-bottom: 1px solid #343c41;
+  border: 1px solid #32353a;
+  border-radius: 0.75rem;
+  background-color: #202225;
 }
 .sideNav ul li svg {
   width: 20px;
@@ -249,78 +345,16 @@
   font-size: 0.8rem;
   margin-left: 1.4rem;
 }
-.sideNav ul li.weatherStation {
+.sideNav ul li.active {
   background-color: #162049;
   border-color: #2e4992;
-  display: flex;
-  flex-direction: row;
-}
-.sideNav ul li.weatherStation.active {
-  background-color: #1d2a5e;
-}
-.sideNav ul li.weatherStation:hover,
-.sideNav ul li.weatherStation.active:hover {
-  background-color: #233372;
-}
-.sideNav ul li.weatherStation .weatherStationIcon {
-  color: #96c7ff;
-  width: 30px;
-  height: 30px;
-}
-.sideNav ul li.weatherStation .infoArea {
-  margin-left: 2rem;
-}
-.sideNav ul li.weatherStation .infoArea .name {
-  font-size: 1.1rem;
-  font-weight: 600;
-}
-.sideNav ul li.weatherStation .infoArea .elevation {
-  font-size: 0.8rem;
-  font-weight: 400;
-}
-.sideNav ul li.weatherStation > :last-child {
-  margin-left: auto;
-  padding: 0 2rem;
-  width: 25px;
-  height: 25px;
-}
-.sideNav ul li.settings {
-  border-bottom: none;
-  border-top: 1px solid #2e4992;
-  margin-top: auto;
-  background-color: #162049;
-}
-.sideNav ul li.settings svg {
-  color: #96c7ff;
-}
-.sideNav ul li.settings:hover,
-.sideNav ul li.settings.active:hover {
-  background-color: #233372;
-}
-.sideNav ul li.settings.active {
-  background-color: #1d2a5e;
-}
-.sideNav ul li.active {
-  background-color: #1f2124;
 }
 .sideNav ul li.active svg {
   color: #96c7ff;
 }
-@media screen and (min-width: 1000px) {
-  .sideNav ul li {
-    padding: 1.3rem 0 1.3rem 2rem;
-  }
-  .sideNav ul li svg {
-    width: 17px;
-    height: 17px;
-  }
-  .sideNav ul li .label {
-    font-size: 0.7rem;
-  }
-}
 @media (pointer: fine) {
-  .sideNav ul li:hover {
-    background-color: #24262b;
+  .sideNav ul li:hover:not(.active) {
+    background-color: #34363d;
   }
 }
 .sideNav ul .menuButton {

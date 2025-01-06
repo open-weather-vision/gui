@@ -1,0 +1,125 @@
+/* Global variables */
+.rainGradient {
+  background-color: #162049;
+  background: linear-gradient(90deg, #37549d 0%, rgba(55, 84, 157, 0.5) 100%);
+}
+.overlay {
+  background-color: rgba(33, 42, 60, 0.67);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: all 0.2s ease;
+  z-index: 999;
+  backdrop-filter: blur(5px);
+}
+.leafGradient {
+  background-color: #1d291e;
+  background: linear-gradient(90deg, #303d31 0%, rgba(48, 61, 49, 0.5) 100%);
+}
+.windGradient {
+  background-color: #2b192e;
+  background: linear-gradient(90deg, #3b303d 0%, rgba(59, 48, 61, 0.5) 100%);
+}
+.sunGradient {
+  background-color: #2c2b1d;
+  background: linear-gradient(90deg, #3d3c30 0%, rgba(61, 60, 48, 0.5) 100%);
+}
+.gradient1 {
+  background-color: #1f2124;
+  background: linear-gradient(90deg, #2d3138 0%, #1e2024 100%);
+}
+.gradient2 {
+  background-color: #1f2124;
+  background: linear-gradient(90deg, #2d3138 0vw, #1e2024 100vw);
+}
+.loginPopup {
+  background-color: rgba(33, 42, 60, 0.67);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: all 0.2s ease;
+  z-index: 999;
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+  transition: all 0.5s;
+}
+.loginPopup.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+.loginPopup .popupContent {
+  background-color: #111214;
+  border: 1px solid #343c41;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #fff;
+  max-width: min(25rem, 97%);
+  gap: 1rem;
+  overflow: hidden;
+}
+.loginPopup .popupContent .icon {
+  width: 24px;
+  height: 24px;
+  fill: #fff;
+  margin-bottom: 1rem;
+}
+.loginPopup .popupContent .popupHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 1.2rem 1.5rem;
+  gap: 1rem;
+  box-sizing: border-box;
+  background-color: #140505;
+  border-bottom: 1px solid #343c41;
+}
+.loginPopup .popupContent .popupHeader .loginIcon {
+  width: 35px;
+  height: 35px;
+  fill: #fff;
+}
+.loginPopup .popupContent .popupHeader h1 {
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: white;
+  margin: 0;
+}
+.loginPopup .popupContent .popupBody {
+  display: flex;
+  flex-direction: column;
+  padding: 0 2rem 2rem 2rem;
+  gap: 0.5rem;
+}
+.loginPopup .popupContent .popupBody p {
+  font-size: 0.9rem;
+  font-weight: 400;
+  text-align: center;
+}
+.loginPopup .popupContent .popupBody input {
+  background-color: #202225;
+  padding: 1rem;
+  border: 1px solid #32353a;
+  color: #fff;
+  border-radius: 0.3rem;
+  outline: none;
+}
+.loginPopup .popupContent .popupBody input:focus {
+  background-color: #34363d;
+  border: 1px solid #616771;
+}
+/*# sourceMappingURL=AdminLogin.module.css.map */

@@ -10,9 +10,9 @@
 .container{
     width: 100%;
     box-sizing: border-box;
-    margin-top: .9rem;
     background-color: @backgroundColor2;
     border: 1px solid @borderColor2;
+    margin-top: .9rem;
     border-radius: .5rem;
     display: flex;
     flex-direction: row;
@@ -22,6 +22,10 @@
     padding: .75rem;
     font-size: .9rem;
     font-weight: 500;
+
+    &.hidden{
+        display: none;
+    }
 
     .icon{
         width: 12px;
@@ -170,50 +174,6 @@
 
                 &.success{
                     animation: scaleUp 0.5s 1;
-                }
-
-                // fade in out animation
-                @keyframes fadeOutIn {
-                    0% {
-                        opacity: 1;
-                    }
-                    50% {
-                        opacity: 0.3;
-                    }
-                    100% {
-                        opacity: 1;
-                    }
-                }
-
-                // wiggle animation (horizontal)
-                @keyframes wiggle {
-                    0% {
-                        transform: translateX(0);
-                    }
-                    25% {
-                        transform: translateX(-5px);
-                    }
-                    50% {
-                        transform: translateX(5px);
-                    }
-                    75% {
-                        transform: translateX(-5px);
-                    }
-                    100% {
-                        transform: translateX(0);
-                    }
-                }
-
-                @keyframes scaleUp {
-                    0% {
-                        transform: scale(1);
-                    }
-                    50% {
-                        transform: scale(1.1);
-                    }
-                    100% {
-                        transform: scale(1);
-                    }
                 }
             }
         }

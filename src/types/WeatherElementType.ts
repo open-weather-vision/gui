@@ -14,7 +14,6 @@ type WeatherElementType =
     | "leaf-wetness"
     | "pressure"
     | "precipation-rate"
-    | "shower-precipation"
     | "precipation"
     | "precipation-probability"
     | "humidity"
@@ -24,5 +23,33 @@ type WeatherElementType =
     | "snow-height"
     | "weather-state"
     | "soil-ph";
+export type UnitConfiguration = { [Property in WeatherElementType]: string };
+
+export const WeatherElementTypes : WeatherElementType[] =
+     ["temperature"
+    , "perceived-temperature"
+    , "wind-chill"
+    , "leaf-temperature"
+    , "soil-temperature"
+    , "soil-moisture"
+    , "solar-radiation"
+    , "wind-speed"
+    , "wind-gust"
+    , "wind-direction"
+    , "uv"
+    , "evaporation"
+    , "leaf-wetness"
+    , "pressure"
+    , "precipation-rate"
+    , "precipation"
+    , "precipation-probability"
+    , "humidity"
+    , "cloudiness"
+    , "sunshine"
+    , "visibility"
+    , "snow-height"
+    , "weather-state"
+    , "soil-ph"];
+
 
 export default WeatherElementType;
