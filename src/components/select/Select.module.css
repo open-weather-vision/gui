@@ -1,0 +1,69 @@
+/* Global variables */
+.overlay {
+  background-color: rgba(33, 42, 60, 0.67);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: all 0.2s ease;
+  z-index: 999;
+  backdrop-filter: blur(5px);
+}
+.select {
+  position: relative;
+}
+.selection {
+  padding: 0.6rem 1rem;
+  background-color: #202225;
+  border: 1px solid #32353a;
+  color: #fff;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+.selection:focus ~ .options.visible {
+  opacity: 1;
+  pointer-events: all;
+}
+.options {
+  background-color: #202225;
+  border: 1px solid #32353a;
+  color: #fff;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  top: 3rem;
+  overflow: scroll;
+  max-height: 10rem;
+  z-index: 99;
+  opacity: 0;
+  pointer-events: none;
+}
+.options.visible:focus,
+.options.visible:active {
+  opacity: 1;
+  pointer-events: all;
+}
+.options .option {
+  padding: 0.7rem 2rem;
+  border-bottom: 1px solid #32353a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+}
+.options .option.selected {
+  background-color: #34363d;
+}
+/*# sourceMappingURL=Select.module.css.map */

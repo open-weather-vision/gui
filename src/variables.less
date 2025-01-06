@@ -59,19 +59,29 @@
 @borderColorBlue: #2f4496;
 @colorBlue: #fff;  
 
+// Colors for special sensor views
 @rainColor: #b5c9ff;
 @rainBackgroundColor: #162049;
 @rainBorderColor: #2e4992;
 
-.rainGradient {
-    background-color: @rainBackgroundColor;
-    background: linear-gradient(
-        90deg,
-        rgba(55, 84, 157, 1) 0%,
-        rgba(55, 84, 157, 0.5) 100%
-    );
-}
+@leafColor: #a4ff79;
+@leafBackgroundColor: #1d291e;
+@leafBorderColor: #314733;
 
+@windColor: #dab8df;
+@windBackgroundColor: #2b192e;
+@windBorderColor: #4c2b50;
+
+@sunColor: #ffd28d;
+@sunBackgroundColor: #2c2b1d;
+@sunBorderColor: #4e4c33;
+
+@accentColorDark: #344a64;
+@accentColor: #96c7ff;
+
+@overlayColor: rgba(33, 42, 60, 0.67);
+
+// Mixins
 .overlay {
     background-color: @overlayColor;
 	position: fixed;
@@ -82,58 +92,4 @@
 	transition: all 0.2s ease;
 	z-index: 999;
 	backdrop-filter: blur(5px);
-}
-
-@leafColor: #a4ff79;
-@leafBackgroundColor: #1d291e;
-@leafBorderColor: #314733;
-
-.leafGradient {
-    background-color: @leafBackgroundColor;
-    background: linear-gradient(
-        90deg,
-        rgba(48, 61, 49, 1) 0%,
-        rgba(48, 61, 49, 0.5) 100%
-    );
-}
-
-@windColor: #dab8df;
-@windBackgroundColor: #2b192e;
-@windBorderColor: #4c2b50;
-
-.windGradient {
-    background-color: @windBackgroundColor;
-    background: linear-gradient(
-        90deg,
-        rgba(59, 48, 61, 1) 0%,
-        rgba(59, 48, 61, 0.5) 100%
-    );
-}
-
-@sunColor: #ffd28d;
-@sunBackgroundColor: #2c2b1d;
-@sunBorderColor: #4e4c33;
-
-.sunGradient {
-    background-color: @sunBackgroundColor;
-    background: linear-gradient(
-        90deg,
-        rgba(61, 60, 48, 1) 0%,
-        rgba(61, 60, 48, 0.5) 100%
-    );
-}
-
-@accentColorDark: #344a64;
-@accentColor: #96c7ff;
-
-@overlayColor: rgba(33, 42, 60, 0.67);
-
-.gradient1 {
-    background-color: @backgroundColor4;
-    background: linear-gradient(90deg, #2d3138 0%, #1e2024 100%);
-}
-
-.gradient2 {
-    background-color: @backgroundColor4;
-    background: linear-gradient(90deg, #2d3138 0vw, #1e2024 100vw);
 }

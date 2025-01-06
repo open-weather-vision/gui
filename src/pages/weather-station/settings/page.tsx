@@ -9,6 +9,7 @@ import { ReactComponent as UnitsIcon } from "../../../img/icons/units.svg";
 import useGlobalContext from "../../../utils/useGlobalContext";
 import WeatherElementType, { WeatherElementTypes } from "../../../types/WeatherElementType";
 import utils from "../../../utils/utils";
+import Select, { fromOptionsArray } from "../../../components/select/Select";
 
 function SettingsItem(
     props: PropsWithChildren<{
@@ -52,37 +53,32 @@ export default function Page() {
     }, [globals.units])
 
     return (
-        <>
+        <div className={styles.settings}>
             <SettingsSection title={t("general")}>
                 <SettingsItem icon={<LanguageIcon />} title={t("language")}>
-                    <select value={getLanguage()} onChange={(event) => setLanguage(event.target.value)}>
-                        <option value="de">{t("de")}</option>
-                        <option value="en">{t("en")}</option>
-                    </select>
+                    <Select value={getLanguage()} options={{
+                        "de": t("de"),
+                        "en": t("en")
+                    }} onSelect={(value) => setLanguage(value)}/>
                 </SettingsItem>
 
                 <SettingsItem icon={<ThemeIcon />} title={t("theme")}>
-                    <select
-                        value={globals.theme}
-                        onChange={(event) => globals.setTheme(event.target.value as "dark" | "light")}
-                    >
-                        <option value="dark">{t("dark")}</option>
-                        <option value="light">{t("light")}</option>
-                    </select>
+                    <Select value={globals.theme} options={{
+                            "dark": t("dark"),
+                            "light": t("light")
+                        }} onSelect={(value) => globals.setTheme(value)}/>
                 </SettingsItem>
             </SettingsSection>
             <SettingsSection title={t("units")}>
-                {WeatherElementTypes.map((element) => (
-                    <SettingsItem icon={utils.iconComponent(element)} title={tWeatherElements(element + "_label")}>
-                        <select value={globals.units[element]} onChange={(event) => {
-                            console.log("here")
-                            globals.setUnitType(element, event.target.value)
-                        }}>
-                            {utils.units(element).map(unit => <option value={unit}>{unit}</option>)}
-                        </select>
+                {WeatherElementTypes.filter(element => utils.units(element).length > 0).map((element, index) => (
+                    <SettingsItem key={index} icon={utils.iconComponent(element)} title={tWeatherElements(element + "_label")}>
+                        <Select value={globals.units[element]} options={fromOptionsArray(utils.units(element).map(unit => ({label: unit, value: unit})))} onSelect={(value) => globals.setUnitType(element, value)}/>
                     </SettingsItem>
                 ))}
             </SettingsSection>
-        </>
+            <SettingsSection title={t("notifications")}>
+                
+            </SettingsSection>
+        </div>
     );
 }

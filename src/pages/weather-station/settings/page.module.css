@@ -1,8 +1,4 @@
 /* Global variables */
-.rainGradient {
-  background-color: #162049;
-  background: linear-gradient(90deg, #37549d 0%, rgba(55, 84, 157, 0.5) 100%);
-}
 .overlay {
   background-color: rgba(33, 42, 60, 0.67);
   position: fixed;
@@ -14,25 +10,11 @@
   z-index: 999;
   backdrop-filter: blur(5px);
 }
-.leafGradient {
-  background-color: #1d291e;
-  background: linear-gradient(90deg, #303d31 0%, rgba(48, 61, 49, 0.5) 100%);
-}
-.windGradient {
-  background-color: #2b192e;
-  background: linear-gradient(90deg, #3b303d 0%, rgba(59, 48, 61, 0.5) 100%);
-}
-.sunGradient {
-  background-color: #2c2b1d;
-  background: linear-gradient(90deg, #3d3c30 0%, rgba(61, 60, 48, 0.5) 100%);
-}
-.gradient1 {
-  background-color: #1f2124;
-  background: linear-gradient(90deg, #2d3138 0%, #1e2024 100%);
-}
-.gradient2 {
-  background-color: #1f2124;
-  background: linear-gradient(90deg, #2d3138 0vw, #1e2024 100vw);
+.settings {
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+  width: 100%;
 }
 .section {
   background-color: #111214;
@@ -42,7 +24,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  margin-bottom: 1rem;
+  flex-grow: 1;
 }
 .section .heading {
   display: flex;
@@ -91,31 +73,5 @@
 }
 .item .content {
   margin-left: 2rem;
-}
-select {
-  padding: 0.6rem 1rem;
-  background-color: #202225;
-  border: 1px solid #32353a;
-  color: #fff;
-  border-radius: 0.5rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  appearance: none;
-  text-align: center;
-  min-width: unset;
-}
-select::after {
-  content: "";
-  width: 2em;
-  height: 0.5em;
-  background-color: red;
-  clip-path: polygon(100% 0%, 0 0%, 50% 100%);
-  position: relative;
-  left: -1rem;
 }
 /*# sourceMappingURL=page.module.css.map */

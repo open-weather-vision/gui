@@ -1,0 +1,70 @@
+@import "../../variables.less";
+
+.select{
+    position: relative;
+}
+.selection{
+    padding: .6rem 1rem;
+    background-color: @backgroundColor3;
+    border: 1px solid @borderColor3;
+    color: @color3;
+    border-radius: .5rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all .2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+
+    .arrow{
+    }
+
+    &:focus{
+    }
+
+    &:focus ~ .options.visible{
+        opacity: 1;
+        pointer-events: all;
+    }
+}
+
+.options{
+    &.visible:focus, &.visible:active{
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    background-color: @backgroundColor3;
+    border: 1px solid @borderColor3;
+    color: @color3;
+    border-radius: .5rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all .2s;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    top: 3rem;
+    overflow: scroll;
+    max-height: 10rem;
+    z-index: 99;
+    
+    opacity: 0;
+    pointer-events: none;
+
+    .option{
+        padding: .7rem 2rem;
+        border-bottom: 1px solid @borderColor3;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        justify-items: center;
+
+        &.selected{
+            background-color: @backgroundColor3Hover;
+        }
+    }
+}
+

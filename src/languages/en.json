@@ -34,6 +34,17 @@
 		"overview": "Overview",
 		"logged-in": "Logged In"
 	},
+	"settings": {
+		"general": "General",
+		"language": "Language",
+		"de": "German",
+		"en": "English",
+		"units": "Units",
+		"theme": "Theme",
+		"light": "light",
+		"dark": "dark",
+		"notifications": "Notifications"
+	},
 	"sensor-view": {
 		"inside": "Inside",
 		"outside": "Outside",

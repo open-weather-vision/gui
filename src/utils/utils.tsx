@@ -254,11 +254,11 @@ export class Utils {
 			case "snow-height":
 				return ["cm", "in"];
 			case "weather-state":
-				return ["none"]; // Kein Wert, daher 'none'
+				return [] // Kein Wert, daher 'none'
 			case "soil-ph":
 				return ["pH"];
 			default:
-				return [""]; // Standardfall
+				return []; // Standardfall
 		}
 	}
 }

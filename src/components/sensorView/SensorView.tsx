@@ -222,7 +222,6 @@ export default function SensorView(props: SensorViewProps) {
 			onClick={(event) => {
 				const div = event.target as HTMLDivElement
 				div.focus({preventScroll: true})
-				console.log("Focused div!")
 			}}
 			tabIndex={0}
 		>
