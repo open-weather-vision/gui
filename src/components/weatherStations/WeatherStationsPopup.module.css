@@ -8,6 +8,7 @@
   transition: all 0.2s ease;
   z-index: 1000;
   backdrop-filter: blur(5px);
+  overflow: hidden;
 }
 .addStationButton {
   margin-top: auto;
@@ -22,6 +23,7 @@
   transition: all 0.2s ease;
   z-index: 1000;
   backdrop-filter: blur(5px);
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;

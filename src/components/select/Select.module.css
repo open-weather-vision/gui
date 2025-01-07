@@ -8,9 +8,16 @@
   transition: all 0.2s ease;
   z-index: 1000;
   backdrop-filter: blur(5px);
+  overflow: hidden;
 }
 .select {
   position: relative;
+  user-select: none;
+  background: none;
+}
+.select:focus .options.visible {
+  opacity: 1;
+  pointer-events: all;
 }
 .selection {
   padding: 0.6rem 1rem;
@@ -25,10 +32,6 @@
   align-items: center;
   justify-content: center;
   gap: 1rem;
-}
-.selection:focus ~ .options.visible {
-  opacity: 1;
-  pointer-events: all;
 }
 .options {
   background-color: var(--backgroundColor3);
