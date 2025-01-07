@@ -165,7 +165,7 @@ function WeatherState({
 
 export default function SensorView(props: SensorViewProps) {
 	const {navigate} = useSmoothNavigation();
-	const backgroundImage = useResponsiveBackgroundImage("rain");
+	const backgroundImage = useResponsiveBackgroundImage(`weather-state-${props.value}`);
 	const t = useTranslation("sensor-view");
 	const globals = useGlobalContext();
 

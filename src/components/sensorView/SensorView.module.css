@@ -217,12 +217,16 @@
 .sensorView.wind-gust {
   background: var(--windBackgroundColor);
   border-color: var(--windBorderColor);
-  /*.windGradient();*/
 }
 .sensorView.wind-speed .sensorData .value,
 .sensorView.wind-direction .sensorData .value,
 .sensorView.wind-gust .sensorData .value {
   color: var(--windColor);
+}
+.sensorView.wind-speed:focus,
+.sensorView.wind-direction:focus,
+.sensorView.wind-gust:focus {
+  border: 1px solid var(--windBorderColorLighten);
 }
 .sensorView.wind-direction {
   flex-grow: 9999;

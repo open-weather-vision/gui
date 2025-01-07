@@ -116,12 +116,12 @@ h6 {
 }
 [data-theme="dark"] {
   --themeColor: black;
-  --backgroundColor0: #000;
+  --backgroundColor0: url("./img/pattern-dark.svg");
   --topNavBackground: var(--backgroundColor1Active);
   --topNavColor: var(--color1);
   --topNavBorder: var(--borderColor1);
-  --disconnectedHeaderBackground: var(--backgroundColorRedDark);
-  --disconnectedHeaderBorder: var(--borderColor2);
+  --popupHeaderBackground: var(--backgroundColorRedDark);
+  --popupHeaderBorder: var(--borderColor2);
   --disconnectedIconColor: var(--borderColorRedLighten);
   --sensorDisconnectedColor: var(--borderColorRedLighten);
   /* Color 1 (Special blue accent items) */
@@ -198,15 +198,15 @@ h6 {
   --sensorViewOverlayColor: rgba(31, 36, 45, 0.777);
 }
 [data-theme="light"] {
-  --backgroundColor0: url("./img/pattern-2.svg");
+  --backgroundColor0: url("./img/pattern-light.svg");
   /* Heller Hintergrund */
   --topNavBackground: var(--backgroundColor1);
   --topNavColor: var(--color1);
   --topNavBorder: var(--borderColor1);
-  --disconnectedHeaderBackground: var(--backgroundColor1);
-  --disconnectedHeaderBorder: var(--borderColor1);
+  --popupHeaderBackground: var(--backgroundColor1);
+  --popupHeaderBorder: var(--borderColor1);
   --disconnectedIconColor: var(--borderColor1);
-  --sensorDisconnectedColor: #888888;
+  --sensorDisconnectedColor: #3f3f3f;
   /* Color 1 (Special blue accent items) */
   --backgroundColor1: #0066b9;
   /* Helles Blau für den Hintergrund */
@@ -291,13 +291,13 @@ h6 {
   --weatherStateBackground: #ffffff;
   --weatherStateBackgroundOpacity: 0.2;
   /* Colors for special sensor views */
-  --rainColor: #015dd4;
+  --rainColor: var(--accentColor);
   /* Helles Regen-Blau */
   --rainBackgroundColor: #f0f8ff;
   /* Helles Blau für Hintergrund */
-  --rainBorderColor: #cddbff;
+  --rainBorderColor: #abcfeb;
   /* Helle Ränder */
-  --rainBorderColorLighten: #c4c4c4;
+  --rainBorderColorLighten: #abcfeb;
   /* Helle Ränder */
   --leafColor: #009742;
   /* Helles Blattgrün */
@@ -305,7 +305,7 @@ h6 {
   /* Helleres Grün für den Hintergrund */
   --leafBorderColor: #8ace93;
   /* Grüner Rand */
-  --leafBorderColorLighten: #c4c4c4;
+  --leafBorderColorLighten: #8ace93;
   /* Hellerer Grünton für Rand */
   --windColor: #7a0074;
   /* Helles Violett für Wind */
@@ -324,7 +324,7 @@ h6 {
   /* Helleres Gelb für den Hintergrund */
   --sunBorderColor: #d1bc85;
   /* Helle Ränder */
-  --sunBorderColorLighten: #c4c4c4;
+  --sunBorderColorLighten: #d1bc85;
   /* Noch helleres Gelb für Rand */
   --accentColorDark: #c3dbec;
   /* Helle Akzentfarbe */
@@ -332,7 +332,7 @@ h6 {
   /* Helles Blau für Akzentfarbe */
   --overlayColor: rgba(33, 42, 60, 0.67);
   /* Der Overlay-Effekt bleibt gleich */
-  --sensorViewOverlayColor: rgba(242, 246, 255, 0.8);
+  --sensorViewOverlayColor: rgba(255, 255, 255, 0.8);
   --themeColor: white;
 }
 /*# sourceMappingURL=index.css.map */

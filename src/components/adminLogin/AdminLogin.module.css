@@ -40,7 +40,7 @@
   font-size: 1rem;
   font-weight: 500;
   color: var(--color2);
-  max-width: min(25rem, 97%);
+  max-width: min(25rem, 94%);
   overflow: hidden;
 }
 .loginPopup .popupContent .icon {
@@ -58,9 +58,10 @@
   padding: 1.2rem 1.5rem;
   gap: 1rem;
   box-sizing: border-box;
-  background-color: var(--backgroundColorRedDark);
+  background-color: var(--popupHeaderBackground);
   color: var(--colorRed2);
-  border: var(--connectionStatusBarBorderWidth) solid var(--borderColor2);
+  border: 1px solid var(--popupHeaderBorder);
+  border-radius: 0.5rem 0.5rem 0 0;
 }
 .loginPopup .popupContent .popupHeader .loginIcon {
   width: 35px;

@@ -45,7 +45,7 @@ export default function ConnectionStatusBar(props: ConnectionStatusBarProps) {
         <>
             <div className={`${styles.container} ${!props.showStatusBar && styles.hidden}`} >
                 <div className={`${styles.status} ${styles[props.state]}`}>
-                    <StateIcon className={styles.icon} />
+                    <div className={styles.icon} />
                     {t(props.state)}
                 </div>
                 <div className={styles.lastUpdate}>

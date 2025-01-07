@@ -21,8 +21,8 @@
 	},
 	"menu": {
 		"live": "Live",
-		"forecast": "Vorhersage",
-		"graphs": "Diagramme",
+		"forecast": "Prognose",
+		"graphs": "Graphen",
 		"extremes": "Rekorde",
 		"climate": "Klima",
 		"settings": "Einstellungen"

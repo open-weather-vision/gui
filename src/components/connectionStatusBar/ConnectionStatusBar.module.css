@@ -25,6 +25,7 @@
   padding: 0.75rem;
   font-size: 0.9rem;
   font-weight: 500;
+  position: relative;
 }
 .container.hidden {
   display: none;
@@ -35,17 +36,53 @@
   color: var(--color2);
   fill: var(--color2);
 }
+.container .status {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
 .container .status .icon {
   margin: 0 0.75rem;
+  position: relative;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 100%;
+}
+.container .status.connected .icon::after {
+  margin: 0 0.75rem;
+  content: "";
+  width: 0.75rem;
+  height: 0.75rem;
+  z-index: 9999999999;
+  position: absolute;
+  top: -1px;
+  left: -111%;
+  border-radius: 100%;
+  border: 1px solid var(--backgroundColorGreen);
+  animation: scaleUpAndFadeOut 2s ease-out infinite;
+}
+@keyframes scaleUpAndFadeOut {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(2);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
 }
 .container .status.connected .icon {
-  fill: var(--backgroundColorGreen);
+  background-color: var(--backgroundColorGreen);
 }
 .container .status.disconnected .icon {
-  fill: var(--backgroundColorRed);
+  background-color: var(--backgroundColorRed);
 }
 .container .status.connecting .icon {
-  fill: var(--backgroundColorYellow);
+  background-color: var(--backgroundColorYellow);
   animation: fadeOutIn 2s infinite;
 }
 @keyframes fadeOutIn {
@@ -89,6 +126,9 @@
   opacity: 0;
   pointer-events: none;
 }
+.disconnectedPopup.hidden .popupContent {
+  transform: translateY(50vh);
+}
 .disconnectedPopup .popupContent {
   background-color: var(--backgroundColor2);
   border-radius: 0.5rem;
@@ -100,8 +140,9 @@
   font-size: 1rem;
   font-weight: 500;
   color: var(--color2);
-  max-width: 25rem;
+  max-width: min(25rem, 94%);
   overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.24, 0.37, 0, 0.96);
 }
 .disconnectedPopup .popupContent .icon {
   width: 24px;
@@ -119,8 +160,8 @@
   padding: 1.2rem 1.5rem;
   gap: 1.2rem;
   box-sizing: border-box;
-  background-color: var(--disconnectedHeaderBackground);
-  border: 1px solid var(--disconnectedHeaderBorder);
+  background-color: var(--popupHeaderBackground);
+  border: 1px solid var(--popupHeaderBorder);
 }
 .disconnectedPopup .popupContent .popupHeader .disconnectedIcon {
   margin-left: 1rem;

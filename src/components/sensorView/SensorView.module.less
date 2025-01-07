@@ -230,7 +230,9 @@
         background: var(--windBackgroundColor);
         border-color: var(--windBorderColor);
 
-        /*.windGradient();*/
+        &:focus{
+            border: 1px solid var(--windBorderColorLighten)
+        }
     }
 
     &.wind-direction {

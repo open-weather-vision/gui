@@ -31,7 +31,13 @@ function WrappedLayout(){
 	const globals = useGlobalContext();
 	const t = useTranslation("menu");
 
-	const [connectionState, setConnectionState] = useState<"connected" | "disconnected" | "connecting">("disconnected");
+	const [connectionState, setConnectionState] = useState<"connected" | "disconnected" | "connecting">("connected");
+
+	useEffect(() => {
+		setTimeout(() => {
+			setConnectionState("disconnected");
+		}, 1000);
+	}, []);
 
 	async function reconnect(){
 		setConnectionState("connecting");

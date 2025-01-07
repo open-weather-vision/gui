@@ -1,10 +1,5 @@
-/* Global variables */
-.rainGradient {
-  background-color: #162049;
-  background: linear-gradient(90deg, #37549d 0%, rgba(55, 84, 157, 0.5) 100%);
-}
 .overlay {
-  background-color: rgba(33, 42, 60, 0.67);
+  background-color: var(--overlayColor);
   position: fixed;
   top: 0;
   left: 0;
@@ -13,25 +8,5 @@
   transition: all 0.2s ease;
   z-index: 999;
   backdrop-filter: blur(5px);
-}
-.leafGradient {
-  background-color: #1d291e;
-  background: linear-gradient(90deg, #303d31 0%, rgba(48, 61, 49, 0.5) 100%);
-}
-.windGradient {
-  background-color: #2b192e;
-  background: linear-gradient(90deg, #3b303d 0%, rgba(59, 48, 61, 0.5) 100%);
-}
-.sunGradient {
-  background-color: #2c2b1d;
-  background: linear-gradient(90deg, #3d3c30 0%, rgba(61, 60, 48, 0.5) 100%);
-}
-.gradient1 {
-  background-color: #1f2124;
-  background: linear-gradient(90deg, #2d3138 0%, #1e2024 100%);
-}
-.gradient2 {
-  background-color: #1f2124;
-  background: linear-gradient(90deg, #2d3138 0vw, #1e2024 100vw);
 }
 /*# sourceMappingURL=variables.css.map */

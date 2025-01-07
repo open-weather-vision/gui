@@ -53,32 +53,34 @@ export default function Page() {
     }, [globals.units])
 
     return (
-        <div className={styles.settings}>
-            <SettingsSection title={t("general")}>
-                <SettingsItem icon={<LanguageIcon />} title={t("language")}>
-                    <Select value={getLanguage()} options={{
-                        "de": t("de"),
-                        "en": t("en")
-                    }} onSelect={(value) => setLanguage(value)}/>
-                </SettingsItem>
-
-                <SettingsItem icon={<ThemeIcon />} title={t("theme")}>
-                    <Select value={globals.theme} options={{
-                            "dark": t("dark"),
-                            "light": t("light")
-                        }} onSelect={(value) => globals.setTheme(value)}/>
-                </SettingsItem>
-            </SettingsSection>
-            <SettingsSection title={t("units")}>
-                {WeatherElementTypes.filter(element => utils.units(element).length > 0).map((element, index) => (
-                    <SettingsItem key={index} icon={utils.iconComponent(element)} title={tWeatherElements(element + "_label")}>
-                        <Select value={globals.units[element]} options={fromOptionsArray(utils.units(element).map(unit => ({label: unit, value: unit})))} onSelect={(value) => globals.setUnitType(element, value)}/>
+        <div className={styles.container}>
+            <div className={styles.settings}>
+                <SettingsSection title={t("general")}>
+                    <SettingsItem icon={<LanguageIcon />} title={t("language")}>
+                        <Select value={getLanguage()} options={{
+                            "de": t("de"),
+                            "en": t("en")
+                        }} onSelect={(value) => setLanguage(value)}/>
                     </SettingsItem>
-                ))}
-            </SettingsSection>
-            <SettingsSection title={t("notifications")}>
-                
-            </SettingsSection>
+
+                    <SettingsItem icon={<ThemeIcon />} title={t("theme")}>
+                        <Select value={globals.theme} options={{
+                                "dark": t("dark"),
+                                "light": t("light")
+                            }} onSelect={(value) => globals.setTheme(value)}/>
+                    </SettingsItem>
+                </SettingsSection>
+                <SettingsSection title={t("units")}>
+                    {WeatherElementTypes.filter(element => utils.units(element).length > 0).map((element, index) => (
+                        <SettingsItem key={index} icon={utils.iconComponent(element)} title={tWeatherElements(element + "_label")}>
+                            <Select value={globals.units[element]} options={fromOptionsArray(utils.units(element).map(unit => ({label: unit, value: unit})))} onSelect={(value) => globals.setUnitType(element, value)}/>
+                        </SettingsItem>
+                    ))}
+                </SettingsSection>
+                <SettingsSection title={t("notifications")}>
+                    
+                </SettingsSection>
+            </div>
         </div>
     );
 }

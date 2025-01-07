@@ -27,7 +27,7 @@
         font-size: 1rem;
         font-weight: 500;
         color: var(--color2);
-        max-width: min(25rem, 100% - 3rem);
+        max-width: min(25rem, 100% - 6rem);
         overflow: hidden;
 
         .icon{
@@ -46,9 +46,10 @@
             padding: 1.2rem 1.5rem;
             gap: 1rem;
             box-sizing: border-box;
-            background-color: var(--backgroundColorRedDark);
+            background-color: var(--popupHeaderBackground);
             color: var(--colorRed2);
-            border: var(--connectionStatusBarBorderWidth) solid var(--borderColor2);
+            border: 1px solid var(--popupHeaderBorder);
+            border-radius: .5rem .5rem 0 0;
 
             .loginIcon{
                 width: 35px;

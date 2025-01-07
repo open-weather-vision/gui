@@ -2,7 +2,7 @@ import styles from "./AdminLogin.module.css";
 import { ReactComponent as LoginIcon } from "../../img/icons/login.svg";
 import Button from "../button/Button";
 import useGlobalContext from "../../utils/useGlobalContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-multi-lang";
 
 import { ReactComponent as BackIcon } from "../../img/icons/back.svg";
@@ -17,6 +17,14 @@ export default function AdminLogin(props: AdminLoginProps) {
     const [password, setPassword] = useState("");
     const [loginState, setLoginState] = useState<"idle" | "logging-in" | "failed" | "success">("idle");
     const t = useTranslation("login");
+
+    useEffect(() => {
+        if(!globals.isAdmin){
+            setLoginState("idle");
+            setUsername("");
+            setPassword("");
+        }
+    }, [globals.isAdmin]);
 
     function handleUsernameChange(event: React.ChangeEvent<HTMLInputElement>){
         setUsername(event.target.value);
