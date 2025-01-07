@@ -1,5 +1,5 @@
 .blackOverlay {
-  background-color: black;
+  background-color: var(--themeColor);
   position: fixed;
   top: 0;
   left: 0;

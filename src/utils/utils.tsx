@@ -164,30 +164,56 @@ const flagComponents = {
 
 
 export class Utils {
-	valueToColor(value: number | null, elementType?: WeatherElementType) {
+	valueToColor(value: number | null,  theme: "dark" | "light", elementType?: WeatherElementType,) {
 		if(value === null) return "rgb(145, 145, 145)";
-		if (
-			elementType === "temperature" ||
-			elementType === "perceived-temperature"
-		) {
-			if (value < -40) return "rgb(239, 127, 255)";
-			if (value < -30) return "rgb(155, 127, 255)";
-			if (value < -20) return "rgb(127, 159, 255)";
-			if (value < -10) return "rgb(127, 189, 255)";
-			if (value < 0) return "rgb(127, 213, 255)";
-			if (value < 5) return "rgb(127, 255, 189)";
-			if (value < 10) return "rgb(131, 255, 127)";
-			if (value < 15) return "rgb(185, 255, 127)";
-			if (value < 20) return "rgb(255, 253, 127)";
-			if (value < 25) return "rgb(255, 187, 127)";
-			if (value < 30) return "rgb(255, 163, 127)";
-			if (value < 40) return "rgb(255, 127, 127)";
-			return "rgb(255, 127, 145)";
-		}
-		if (elementType === "pressure") {
-			if (value < 995) return "rgb(127, 213, 255)";
-			if (value < 1010) return "rgb(234, 234, 234)";
-			return "rgb(255, 145, 127)";
+		if(theme === "dark"){
+			if (
+				elementType === "temperature" ||
+				elementType === "perceived-temperature"
+			) {
+				if (value < -40) return "rgb(239, 127, 255)";
+				if (value < -30) return "rgb(155, 127, 255)";
+				if (value < -20) return "rgb(127, 159, 255)";
+				if (value < -10) return "rgb(127, 189, 255)";
+				if (value < 0) return "rgb(127, 213, 255)";
+				if (value < 5) return "rgb(127, 255, 189)";
+				if (value < 10) return "rgb(131, 255, 127)";
+				if (value < 15) return "rgb(185, 255, 127)";
+				if (value < 20) return "rgb(255, 253, 127)";
+				if (value < 25) return "rgb(255, 187, 127)";
+				if (value < 30) return "rgb(255, 163, 127)";
+				if (value < 40) return "rgb(255, 127, 127)";
+				return "rgb(255, 127, 145)";
+			}
+			if (elementType === "pressure") {
+				if (value < 995) return "rgb(127, 213, 255)";
+				if (value < 1010) return "rgb(234, 234, 234)";
+				return "rgb(255, 145, 127)";
+			}
+		}else{
+			if (
+				elementType === "temperature" ||
+				elementType === "perceived-temperature"
+			) {
+				if (value < -40) return "rgb(225, 0, 255)";
+				if (value < -30) return "rgb(55, 0, 255)";
+				if (value < -20) return "rgb(0, 64, 255)";
+				if (value < -10) return "rgb(0, 123, 255)";
+				if (value < 0) return "rgb(0, 148, 223)";
+				if (value < 5) return "rgb(0, 168, 81)";
+				if (value < 10) return "rgb(7, 204, 0)";
+				if (value < 15) return "rgb(104, 201, 25)";
+				if (value < 20) return "rgb(255, 187, 0)";
+				if (value < 25) return "rgb(255, 119, 0)";
+				if (value < 30) return "rgb(209, 59, 0)";
+				if (value < 40) return "rgb(180, 0, 0)";
+				return "rgb(145, 0, 0)";
+			}
+			if (elementType === "pressure") {
+				if (value < 995) return "rgb(0, 77, 219)";
+				if (value < 1010) return "rgb(146, 146, 146)";
+				return "rgb(212, 28, 0)";
+			}
 		}
 		return undefined;
 	}

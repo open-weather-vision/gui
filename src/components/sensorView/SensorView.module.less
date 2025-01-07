@@ -4,12 +4,10 @@
     position: relative;
     box-sizing: border-box;
     padding: 1rem;
-    border: 1px solid @borderColor2;
-    background-color: @backgroundColor2;
+    border: 1px solid var(--borderColor2);
+    background-color: var(--backgroundColor2);
     border-radius: 0.5rem;
-    /*.gradient2();*/
-    /*box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);*/
-    color: white;
+    color: var(--color2);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -22,8 +20,10 @@
     &.weather-state {
         flex-basis: 100%;
         overflow: hidden;
+        background-color: var(--weatherStateBackground);
 
         .backgroundImage {
+            
             width: 100%;
             height: 100%;
             background-size: cover;
@@ -31,7 +31,7 @@
             top: 0;
             left: 0;
             border-radius: 0.5rem;
-            opacity: 0.3;
+            opacity: var(--weatherStateBackgroundOpacity);
         }
 
         .sensorData {
@@ -88,10 +88,9 @@
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    background-color: @backgroundColor2;
-                    /*.gradient1();*/
-                    color: @color1;
-                    border: 1px solid @borderColor2;
+                    background-color: var(--backgroundColor2);
+                    color: var(--color1);
+                    border: 1px solid var(--borderColor2);
                     border-radius: 5rem;
 
                     svg {
@@ -125,14 +124,12 @@
                     text-align: center;
                     font-weight: 600;
 
-                    background-color: fade(@backgroundColor2, 50%);
+                    background-color: var(--backgroundColor2);
                     opacity: 1;
-                    backdrop-filter: blur(10px);
-                    /*.gradient2();*/
+                    border: 1px solid var(--borderColor2);
                     border-radius: 0.5rem;
                     padding: 1rem 0rem;
                     box-sizing: border-box;
-                    /*box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);*/
 
                     .time {
                         opacity: 0.8;
@@ -141,14 +138,26 @@
 
                     .temperature {
                         font-family: "Roboto Mono", monospace;
+                        padding: .2rem;
+                        width: 3rem;
+                        border-radius: .2rem .2rem 0 0 ;
+                        background-color: rgb(255, 220, 220);
+                        color: red;
+                        border: 1px solid red;
                     }
 
                     .precipation {
-                        color: lightblue;
+                        color: var(--rainColor);
+                        padding: .2rem;
+                        width: 3rem;
+                        border-radius: 0 0 .2rem .2rem;
+                        background-color: var(--rainBackgroundColor);
                         font-family: "Roboto Mono", monospace;
+                        border: 1px solid var(--rainBorderColor);
+                        border-top: 0;
 
                         &.zeroPrecipation {
-                            color: rgba(255, 255, 255, 0.233);
+                            filter: grayscale(1) opacity(.3);
                         }
                     }
 
@@ -180,14 +189,14 @@
     &.shower-precipation,
     &.precipation-probability {
         .sensorData .value {
-            color: @rainColor;
+            color: var(--rainColor);
         }
 
-        background: @rainBackgroundColor;
-        border-color: @rainBorderColor;
+        background: var(--rainBackgroundColor);
+        border-color: var(--rainBorderColor);
 
         &:focus{
-            border: 1px solid lighten(@rainBorderColor, 20%)
+            border: 1px solid var(--rainBorderColorLighten)
         }
         /*.rainGradient();*/
     }
@@ -198,14 +207,14 @@
     &.soil-moisture,
     &.soil-ph {
         .sensorData .value {
-            color: @leafColor;
+            color: var(--leafColor);
         }
 
-        background: @leafBackgroundColor;
-        border-color: @leafBorderColor;
+        background: var(--leafBackgroundColor);
+        border-color: var(--leafBorderColor);
 
         &:focus{
-            border: 1px solid lighten(@leafBorderColor, 20%)
+            border: 1px solid var(--leafBorderColorLighten)
         }
 
         /*.leafGradient();*/
@@ -215,11 +224,11 @@
     &.wind-direction,
     &.wind-gust {
         .sensorData .value {
-            color: @windColor;
+            color: var(--windColor);
         }
 
-        background: @windBackgroundColor;
-        border-color: @windBorderColor;
+        background: var(--windBackgroundColor);
+        border-color: var(--windBorderColor);
 
         /*.windGradient();*/
     }
@@ -233,14 +242,14 @@
     &.uv,
     &.sunshine {
         .sensorData .value {
-            color: @sunColor;
+            color: var(--sunColor);
         }
 
-        background: @sunBackgroundColor;
-        border-color: @sunBorderColor;
+        background: var(--sunBackgroundColor);
+        border-color: var(--sunBorderColor);
 
         &:focus{
-            border: 1px solid lighten(@sunBorderColor, 20%)
+            border: 1px solid var(--sunBorderColorLighten)
         }
 
         /*.sunGradient();*/
@@ -253,7 +262,7 @@
     }
 
     &:focus{
-        border: 1px solid lighten(@borderColor2, 20%)
+        border: 1px solid var(--borderColor2Lighten);
     }
     
 
@@ -264,7 +273,7 @@
         bottom: 0px;
         left: 0px;
         right: 0px;
-        background: rgba(31, 36, 45, 0.777);
+        background: var(--sensorViewOverlayColor);
         backdrop-filter: blur(5px);
         border-radius: 0.5rem;
         box-sizing: border-box;
@@ -310,9 +319,12 @@
             &.compass {
                 height: 9rem;
                 width: 9rem;
+                color: var(--windCompassDirection);
+                fill: var(--windCompassBackground);
             }
 
             &.arrow {
+                color: var(--windCompassArrow);
                 position: absolute;
                 width: 3rem;
                 transition: all 0.3s ease-in-out;
@@ -323,10 +335,8 @@
     
 
     &.disconnected{
-        opacity: .5 !important;
-        pointer-events: none;
+        opacity: 1;
         cursor: not-allowed;
-        filter: contrast(.8)
     }
 
     .sensorData {
@@ -338,7 +348,7 @@
         align-items: baseline;
 
         .value {
-            color: @accentColor;
+            color: var(--accentColor);
         }
 
         .disconnectedView{
@@ -349,12 +359,12 @@
             
 
             .disconnectedIcon{
-                color: lighten(@borderColorRed, 20%);
-                fill: lighten(@borderColorRed, 20%);
+                color: var(--sensorDisconnectedColor);
+                fill: var(--sensorDisconnectedColor);
                 width: 24px;
             }
 
-            color: lighten(@borderColorRed, 20%);
+            color: var(--sensorDisconnectedColor);
             font-size: 1.5rem;
         }
 
@@ -382,8 +392,8 @@
 
         .location {
             padding: 0.3rem;
-            background: @accentColorDark;
-            color: @accentColor;
+            background: var(--accentColorDark);
+            color: var(--accentColor);
             font-size: 0.6rem;
             border-radius: 0.2rem;
             margin-left: auto;

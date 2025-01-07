@@ -1,6 +1,5 @@
-/* Global variables */
 .overlay {
-  background-color: rgba(33, 42, 60, 0.67);
+  background-color: var(--overlayColor);
   position: fixed;
   top: 0;
   left: 0;
@@ -12,8 +11,8 @@
 }
 /* The bottom or top navigation menu */
 .nav {
-  background-color: #111214;
-  color: #fff;
+  background-color: var(--backgroundColor2);
+  color: var(--color2);
   width: 100%;
   margin: 0;
   padding: 0;
@@ -23,19 +22,18 @@
   bottom: 0;
   user-select: none;
   z-index: 100;
-  border-top: 1px solid #343c41;
+  border-top: 1px solid var(--borderColor2);
   /*box-shadow: 0px -1px 5px 0px rgba(0, 0, 0, 0.5);*/
 }
 @media screen and (min-width: 1000px) {
   .nav {
-    background-color: #111214;
     bottom: initial;
     position: fixed;
     top: 0;
     padding: 1rem;
     box-sizing: border-box;
-    border-bottom: 1px solid #343c41;
-    box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid var(--borderColor2);
+    box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.1);
   }
 }
 .nav ul {
@@ -57,8 +55,8 @@
   }
 }
 .nav ul li {
-  background-color: #202225;
-  border-right: 1px solid #32353a;
+  background-color: var(--backgroundColor3);
+  border-right: 1px solid var(--borderColor3);
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -70,7 +68,7 @@
   padding: 0.75rem 0;
   box-sizing: border-box;
   text-overflow: ellipsis;
-  color: #fff;
+  color: var(--color2);
 }
 .nav ul li.logo {
   display: none;
@@ -79,7 +77,7 @@
   padding-left: 0;
   border: unset;
   border-radius: 0;
-  border-right: 1px solid #343c41;
+  border-right: 1px solid var(--borderColor2);
   margin-left: 1rem;
   margin-right: 1rem;
   background-color: transparent;
@@ -112,33 +110,37 @@
   background-color: unset;
 }
 .nav ul li.active {
-  color: #96c7ff;
+  color: var(--accentColor);
+  background-color: var(--backgroundColor2Hover);
 }
 .nav ul li.active svg {
-  fill: #96c7ff;
+  fill: var(--accentColor);
 }
 @media screen and (min-width: 1000px) {
   .nav ul li {
-    background-color: #202225;
+    background-color: var(--backgroundColor3);
     border-radius: 0.6rem;
     flex-direction: row;
-    border: 1px solid #32353a;
-    color: #fff;
+    border: 1px solid var(--borderColor3);
+    color: var(--color3);
     padding: 1rem 2rem;
   }
   .nav ul li.active {
-    background-color: #1d2a5e;
-    border-color: #2e4992;
-    color: #fff;
+    background-color: var(--topNavBackground);
+    border-color: var(--topNavBorder);
+    color: var(--topNavColor);
+  }
+  .nav ul li.active svg {
+    fill: var(--topNavColor);
   }
   .nav ul li.active:hover {
-    background-color: #1d2a5e;
-    border-color: #2e4992;
-    color: #fff;
+    background-color: var(--topNavBackground);
+    border-color: var(--topNavBorder);
+    color: var(--topNavColor);
   }
   .nav ul li:hover {
-    background-color: #34363d;
-    color: #fff;
+    background-color: var(--backgroundColor3Hover);
+    color: var(--color3);
   }
 }
 .nav ul li .label {
@@ -163,10 +165,10 @@
   }
 }
 .nav ul li.menuButton {
-  background-color: #162049;
-  color: #fff;
-  border-top: 1px solid #2e4992;
-  border-left: 1px solid #2e4992;
+  background-color: var(--backgroundColor1);
+  color: var(--color1);
+  border-top: 1px solid var(--borderColor1);
+  border-left: 1px solid var(--borderColor1);
   position: relative;
   left: -1px;
   top: -1px;
@@ -176,7 +178,7 @@
 @media screen and (min-width: 1000px) {
   .nav ul li.menuButton {
     margin-left: auto;
-    border-color: #23376d;
+    border-color: var(--borderColor1);
     padding: 1.25rem;
     width: auto;
     height: auto;
@@ -187,8 +189,8 @@
 }
 /* The side navigation menu */
 .sideNav {
-  background-color: #111214;
-  color: #fff;
+  background-color: var(--backgroundColor2);
+  color: var(--color2);
   max-width: 100%;
   width: 25rem;
   margin: 0;
@@ -204,23 +206,24 @@
   transition: all 0.2s ease;
   user-select: none;
   /*box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.3);*/
-  border-left: 1px solid #343c41;
+  border-left: 1px solid var(--borderColor2);
   display: flex;
   flex-direction: column;
 }
 .sideNav .topArea {
-  background-color: #111214;
+  background-color: var(--backgroundColor2);
+  color: var(--color2);
   border-color: transparent;
   display: flex;
   flex-direction: row;
   align-items: center;
   padding: 2rem;
-  border-bottom: 1px solid #343c41;
+  border-bottom: 1px solid var(--borderColor2);
 }
 .sideNav .topArea .icon,
 .sideNav .topArea .icon svg,
 .sideNav .topArea .icon img {
-  color: #96c7ff;
+  color: var(--accentColor);
   width: 30px;
   height: 30px;
 }
@@ -241,8 +244,8 @@
 }
 .sideNav .topArea .action {
   padding: 1rem;
-  background-color: #202225;
-  border: 1px solid #32353a;
+  background-color: var(--backgroundColor3);
+  border: 1px solid var(--borderColor3);
   border-radius: 0.5rem;
   cursor: pointer;
   margin-left: 0.5rem;
@@ -251,8 +254,8 @@
 }
 .sideNav .topArea .action svg,
 .sideNav .topArea .action img {
-  fill: #fff;
-  stroke: #fff;
+  fill: var(--color3);
+  stroke: var(--color3);
   height: 16px;
   width: 16px;
 }
@@ -260,13 +263,14 @@
   margin-left: auto;
 }
 .sideNav .topArea .action:hover {
-  background-color: #34363d;
+  background-color: var(--backgroundColor3Hover);
 }
 .sideNav .settings {
   border-bottom: none;
-  border-top: 1px solid #343c41;
+  border-top: 1px solid var(--borderColor2);
+  color: var(--color2);
   margin-top: auto;
-  background-color: #111214;
+  background-color: var(--backgroundColor2);
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -279,13 +283,13 @@
   font-size: 0.9rem;
 }
 .sideNav .settings svg {
-  color: #fff;
+  color: var(--color2);
   width: 18px;
   height: 18px;
 }
 .sideNav .settings:hover,
 .sideNav .settings.active:hover {
-  background-color: #24262b;
+  background-color: var(--backgroundColor2Hover);
 }
 .sideNav ul {
   padding: 1rem;
@@ -309,9 +313,9 @@
   font-weight: 600;
   padding: 1.4rem 1.8rem;
   box-sizing: border-box;
-  border: 1px solid #32353a;
+  border: 1px solid var(--borderColor3);
   border-radius: 0.75rem;
-  background-color: #202225;
+  background-color: var(--backgroundColor3);
 }
 .sideNav ul li svg {
   width: 20px;
@@ -322,27 +326,28 @@
   margin-left: 1.4rem;
 }
 .sideNav ul li.active {
-  background-color: #162049;
-  border-color: #2e4992;
+  background-color: var(--backgroundColor1);
+  border-color: var(--borderColor1);
+  color: var(--color1);
 }
 .sideNav ul li.active svg {
-  color: #96c7ff;
+  color: var(--color1);
 }
 @media (pointer: fine) {
   .sideNav ul li:hover:not(.active) {
-    background-color: #34363d;
+    background-color: var(--backgroundColor3Hover);
   }
 }
 .sideNav ul .menuButton {
-  background-color: #111214;
-  color: #fff;
+  background-color: var(--backgroundColor2);
+  color: var(--color2);
 }
 .sideNav.closed {
   transform: translate(100%);
   opacity: 0;
 }
 .overlay {
-  background-color: rgba(33, 42, 60, 0.67);
+  background-color: var(--overlayColor);
   position: fixed;
   top: 0;
   left: 0;

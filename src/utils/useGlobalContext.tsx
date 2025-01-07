@@ -80,6 +80,10 @@ export function GlobalContextProvider(props: {children: React.ReactNode}) {
     const [theme, setTheme] = useState<"dark"|"light">("dark");
     const [units, setUnits] = useState<UnitConfiguration>(defaultUnitConfiguration);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        document.documentElement.setAttribute("data-theme", theme);
+      }, [theme]);
     
     return <globalContext.Provider value={
             {

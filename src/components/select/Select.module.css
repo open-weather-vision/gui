@@ -1,6 +1,5 @@
-/* Global variables */
 .overlay {
-  background-color: rgba(33, 42, 60, 0.67);
+  background-color: var(--overlayColor);
   position: fixed;
   top: 0;
   left: 0;
@@ -15,9 +14,9 @@
 }
 .selection {
   padding: 0.6rem 1rem;
-  background-color: #202225;
-  border: 1px solid #32353a;
-  color: #fff;
+  background-color: var(--backgroundColor3);
+  border: 1px solid var(--borderColor3);
+  color: var(--color3);
   border-radius: 0.5rem;
   font-weight: 500;
   cursor: pointer;
@@ -32,9 +31,9 @@
   pointer-events: all;
 }
 .options {
-  background-color: #202225;
-  border: 1px solid #32353a;
-  color: #fff;
+  background-color: var(--backgroundColor3);
+  border: 1px solid var(--borderColor3);
+  color: var(--color3);
   border-radius: 0.5rem;
   font-weight: 500;
   cursor: pointer;
@@ -57,13 +56,13 @@
 }
 .options .option {
   padding: 0.7rem 2rem;
-  border-bottom: 1px solid #32353a;
+  border-bottom: 1px solid var(--borderColor3);
   display: flex;
   align-items: center;
   justify-content: center;
   justify-items: center;
 }
 .options .option.selected {
-  background-color: #34363d;
+  background-color: var(--backgroundColor3Hover);
 }
 /*# sourceMappingURL=Select.module.css.map */

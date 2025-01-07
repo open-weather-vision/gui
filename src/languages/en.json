@@ -125,6 +125,6 @@
 		"idle": "Reconnect",
 		"switch-station": "Switch station",
 		"disconnected-message": "The weather station is currently not reachable. Please check the connection and try again.",
-		"troubleshooting": "Trouble shoot"
+		"trouble-shoot": "Trouble shoot"
 	}
 }

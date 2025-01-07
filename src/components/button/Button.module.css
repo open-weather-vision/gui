@@ -1,6 +1,5 @@
-/* Global variables */
 .overlay {
-  background-color: rgba(33, 42, 60, 0.67);
+  background-color: var(--overlayColor);
   position: fixed;
   top: 0;
   left: 0;
@@ -12,9 +11,9 @@
 }
 .button {
   padding: 0.6rem 1rem;
-  background-color: #202225;
-  border: 1px solid #32353a;
-  color: #fff;
+  background-color: var(--backgroundColor3);
+  border: 1px solid var(--borderColor3);
+  color: var(--color3);
   border-radius: 0.5rem;
   font-weight: 500;
   cursor: pointer;
@@ -23,51 +22,82 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  opacity: 1;
 }
 .button svg {
-  fill: #fff;
-  color: #fff;
-  stroke: #fff;
+  fill: var(--color3);
+  color: var(--color3);
+  stroke: var(--color3);
   transition: all 0.2s;
 }
 .button.color-1 {
-  background-color: #162049;
-  border: 1px solid #2e4992;
-  color: #fff;
+  background-color: var(--backgroundColor1);
+  border: 1px solid var(--borderColor1);
+  color: var(--color1);
+}
+.button.color-1 svg {
+  fill: var(--color1);
+  color: var(--color1);
+  stroke: var(--color1);
 }
 .button.color-1:hover:not(:disabled) {
-  background-color: #233372;
+  background-color: var(--backgroundColor1Hover);
 }
 .button.color-2 {
-  background-color: #111214;
-  border: 1px solid #343c41;
-  color: #fff;
+  background-color: var(--backgroundColor2);
+  border: 1px solid var(--borderColor2);
+  color: var(--color2);
+}
+.button.color-2 svg {
+  fill: var(--color2);
+  color: var(--color2);
+  stroke: var(--color2);
 }
 .button.color-2:hover:not(:disabled) {
-  background-color: #24262b;
+  background-color: var(--backgroundColor2Hover);
 }
 .button.color-3 {
-  background-color: #202225;
-  border: 1px solid #32353a;
-  color: #fff;
+  background-color: var(--backgroundColor3);
+  border: 1px solid var(--borderColor3);
+  color: var(--color3);
+}
+.button.color-3 svg {
+  fill: var(--color3);
+  color: var(--color3);
+  stroke: var(--color3);
 }
 .button.color-3:hover:not(:disabled) {
-  background-color: #34363d;
+  background-color: var(--backgroundColor3Hover);
 }
 .button.red {
-  background-color: #792727;
-  border: 1px solid #c23e3e;
-  color: #fff;
+  background-color: var(--backgroundColorRed);
+  border: 1px solid var(--borderColorRed);
+  color: var(--colorRed);
+}
+.button.red svg {
+  fill: var(--colorRed);
+  color: var(--colorRed);
+  stroke: var(--colorRed);
 }
 .button.green {
-  background-color: #238023;
-  border: 1px solid #3ec23e;
-  color: #fff;
+  background-color: var(--backgroundColorGreen);
+  border: 1px solid var(--borderColorGreen);
+  color: var(--colorGreen);
+}
+.button.green svg {
+  fill: var(--colorGreen);
+  color: var(--colorGreen);
+  stroke: var(--colorGreen);
 }
 .button.yellow {
-  background-color: #806723;
-  border: 1px solid #c29f3e;
-  color: #fff;
+  background-color: var(--backgroundColorYellow);
+  border: 1px solid var(--borderColorYellow);
+  color: var(--colorYellow);
+}
+.button.yellow svg {
+  fill: var(--colorYellow);
+  color: var(--colorYellow);
+  stroke: var(--colorYellow);
 }
 .button.notClickable {
   pointer-events: none;
@@ -106,13 +136,8 @@
   font-size: 1.2rem;
 }
 .button:disabled {
-  background-color: #111214;
-  color: #40444b;
-  border-color: #40444b;
-  cursor: not-allowed;
-}
-.button:disabled svg {
-  opacity: 0.5;
+  opacity: 0;
+  display: none;
 }
 .button.fadeInOutInfinitely {
   animation: fadeOutIn 2s infinite;

@@ -2,8 +2,8 @@
 
 /* The bottom or top navigation menu */
 .nav {
-	background-color: @backgroundColor2;
-	color: @color2;
+	background-color: var(--backgroundColor2);
+	color: var(--color2);
 	width: 100%;
 	margin: 0;
 	padding: 0;
@@ -13,17 +13,16 @@
 	bottom: 0;
 	user-select: none;
 	z-index: 100;
-	border-top: 1px solid @borderColor2;
+	border-top: 1px solid var(--borderColor2);
 	/*box-shadow: 0px -1px 5px 0px rgba(0, 0, 0, 0.5);*/
 	@media screen and (min-width: 1000px) {
-		background-color: @backgroundColor2;
 		bottom: initial;
 		position: fixed;
 		top: 0;
 		padding: 1rem;
 		box-sizing: border-box;
-		border-bottom: 1px solid @borderColor2;
-		box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.3);
+		border-bottom: 1px solid var(--borderColor2);
+		box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.1);
 	}
 
 	ul {
@@ -45,8 +44,8 @@
 		}
 
 		li {
-			background-color: @backgroundColor3;
-			border-right: 1px solid @borderColor3;
+			background-color: var(--backgroundColor3);
+			border-right: 1px solid var(--borderColor3);
 			cursor: pointer;
 			display: flex;
 			flex-direction: column;
@@ -58,7 +57,7 @@
 			padding: 0.75rem 0;
 			box-sizing: border-box;
 			text-overflow: ellipsis;
-			color: @color2;
+			color: var(--color2);
 
 			
 
@@ -73,7 +72,7 @@
 				padding-left: 0;
 				border: unset;
 				border-radius: 0;
-				border-right: 1px solid @borderColor2;
+				border-right: 1px solid var(--borderColor2);
 				margin-left: 1rem;
 				margin-right: 1rem;
 				background-color: transparent;
@@ -106,36 +105,40 @@
 			
 
 			&.active {
-				color: @accentColor;
+				color: var(--accentColor);
+				background-color: var(--backgroundColor2Hover);
 
 				svg{
-					fill: @accentColor;
+					fill: var(--accentColor);
 				}
 			}
 
 			@media screen and (min-width: 1000px) {
-				background-color: @backgroundColor3;
+				background-color: var(--backgroundColor3);
 				border-radius: .6rem;
 				flex-direction: row;
-				border: 1px solid @borderColor3;
-				color: @color3;
+				border: 1px solid var(--borderColor3);
+				color: var(--color3);
 				padding: 1rem 2rem;
 
 				&.active {
-					background-color: @backgroundColor1Active;
-					border-color: @borderColor1;
-					color: @color1;
+					background-color: var(--topNavBackground);
+					border-color: var(--topNavBorder);
+					color: var(--topNavColor);
+					svg{
+						fill: var(--topNavColor);
+					}
 
 					&:hover {
-						background-color: @backgroundColor1Active;
-						border-color: @borderColor1;
-						color: @color1;
+						background-color: var(--topNavBackground);
+						border-color: var(--topNavBorder);
+						color: var(--topNavColor);
 					}
 				}
 
 				&:hover {
-					background-color: @backgroundColor3Hover;
-					color: @color3;
+					background-color: var(--backgroundColor3Hover);
+					color: var(--color3);
 				}
 			}
 
@@ -161,10 +164,10 @@
 			}
 
 			&.menuButton{
-				background-color: @backgroundColor1;
-				color: @color1;
-				border-top: 1px solid @borderColor1;
-				border-left: 1px solid @borderColor1;
+				background-color: var(--backgroundColor1);
+				color: var(--color1);
+				border-top: 1px solid var(--borderColor1);
+				border-left: 1px solid var(--borderColor1);
 				position: relative;
 				left: -1px;
 				top: -1px;
@@ -173,7 +176,7 @@
 
 				@media screen and (min-width: 1000px) {
 					margin-left: auto;
-					border-color: @borderColor1Decent;
+					border-color: var(--borderColor1);
 					padding: 1.25rem;
 					width: auto;
 					height: auto;
@@ -188,8 +191,8 @@
 }
 /* The side navigation menu */
 .sideNav {
-	background-color: @backgroundColor2;
-	color: @color2;
+	background-color: var(--backgroundColor2);
+	color: var(--color2);
 	max-width: 100%;
 	width: 25rem;
 	margin: 0;
@@ -206,22 +209,23 @@
 	transition: all 0.2s ease;
 	user-select: none;
 	/*box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.3);*/
-	border-left: 1px solid @borderColor2;
+	border-left: 1px solid var(--borderColor2);
 	display: flex;
 	flex-direction: column;
 
 	.topArea {
-		background-color: @backgroundColor2;
+		background-color: var(--backgroundColor2);
+		color: var(--color2);
 		border-color: transparent;
 		display: flex;
 		flex-direction: row;
 		align-items: center;
 		padding: 2rem;
-		border-bottom: 1px solid @borderColor2;
+		border-bottom: 1px solid var(--borderColor2);
 
 
 		.icon, .icon svg, .icon img {
-			color: @accentColor;
+			color: var(--accentColor);
 			width: 30px;
 			height: 30px;
 		}
@@ -246,8 +250,8 @@
 
 		.action {
 			padding: 1rem;
-			background-color: @backgroundColor3;
-			border: 1px solid @borderColor3;
+			background-color: var(--backgroundColor3);
+			border: 1px solid var(--borderColor3);
 			border-radius: .5rem;
 			cursor: pointer;
 			margin-left: .5rem;
@@ -255,8 +259,8 @@
 			align-items: center;
 
 			svg, img{
-				fill: @color3;
-				stroke: @color3;
+				fill: var(--color3);
+				stroke: var(--color3);
 				height: 16px;
 				width: 16px;
 			}
@@ -267,7 +271,7 @@
 		}
 
 		.action:hover {	
-			background-color: @backgroundColor3Hover;
+			background-color: var(--backgroundColor3Hover);
 		}
 	}
 
@@ -275,9 +279,10 @@
 
 	.settings {
 		border-bottom: none;
-		border-top: 1px solid @borderColor2;
+		border-top: 1px solid var(--borderColor2);
+		color: var(--color2);
 		margin-top: auto;
-		background-color: @backgroundColor2;
+		background-color: var(--backgroundColor2);
 		display: flex;
 		flex-direction: row;
 		align-items: center;
@@ -291,13 +296,13 @@
 		}
 
 		svg {
-			color: @color2;
+			color: var(--color2);
 			width: 18px;
 			height: 18px;
 		}
 
 		&:hover, &.active:hover  {
-			background-color: @backgroundColor2Hover;
+			background-color: var(--backgroundColor2Hover);
 		}
 	}
 
@@ -323,9 +328,9 @@
 			font-weight: 600;
 			padding: 1.4rem 1.8rem;
 			box-sizing: border-box;
-			border: 1px solid @borderColor3;
+			border: 1px solid var(--borderColor3);
 			border-radius: .75rem;
-			background-color: @backgroundColor3;
+			background-color: var(--backgroundColor3);
 
 			svg {
 				width: 20px;
@@ -338,24 +343,25 @@
 			}
 
 			&.active {
-				background-color: @backgroundColor1;
-				border-color: @borderColor1;
+				background-color: var(--backgroundColor1);
+				border-color: var(--borderColor1);
+				color: var(--color1);
 
 				svg {
-					color: @accentColor;
+					color: var(--color1);
 				}
 			}
 
 			@media (pointer: fine) {
 				&:hover:not(.active) {
-					background-color: @backgroundColor3Hover;
+					background-color: var(--backgroundColor3Hover);
 				}
 			}
 		}
 
 		.menuButton {
-			background-color: @backgroundColor2;
-			color: @color2;
+			background-color: var(--backgroundColor2);
+			color: var(--color2);
 		}
 	}
 }
@@ -368,7 +374,7 @@
 }
 
 .overlay {
-	background-color: @overlayColor;
+	background-color: var(--overlayColor);
 	position: fixed;
 	top: 0;
 	left: 0;

@@ -1,6 +1,5 @@
-/* Global variables */
 .overlay {
-  background-color: rgba(33, 42, 60, 0.67);
+  background-color: var(--overlayColor);
   position: fixed;
   top: 0;
   left: 0;
@@ -23,8 +22,9 @@
   align-items: center;
   align-content: center;
   justify-content: center;
-  background-color: #162049;
-  border: 1px solid #2e4992;
+  background-color: var(--backgroundColor1);
+  color: var(--color1);
+  border: 1px solid var(--borderColor1);
   cursor: pointer;
   box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.3);
   font-weight: 600;

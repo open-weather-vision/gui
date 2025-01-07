@@ -114,4 +114,225 @@ h6 {
 ::-webkit-scrollbar-track {
   background-color: rgba(0, 0, 0, 0);
 }
+[data-theme="dark"] {
+  --themeColor: black;
+  --backgroundColor0: #000;
+  --topNavBackground: var(--backgroundColor1Active);
+  --topNavColor: var(--color1);
+  --topNavBorder: var(--borderColor1);
+  --disconnectedHeaderBackground: var(--backgroundColorRedDark);
+  --disconnectedHeaderBorder: var(--borderColor2);
+  --disconnectedIconColor: var(--borderColorRedLighten);
+  --sensorDisconnectedColor: var(--borderColorRedLighten);
+  /* Color 1 (Special blue accent items) */
+  --backgroundColor1: #162049;
+  --borderColor1: #2e4992;
+  --borderColor1Decent: #23376d;
+  --backgroundColor1Hover: #233372;
+  --backgroundColor1Active: #1d2a5e;
+  --color1: #fff;
+  /* Color 2 (Normal items) */
+  --backgroundColor2: #111214;
+  --backgroundColor2Hover: #24262b;
+  --backgroundColor2Active: #1f2124;
+  --color2: #fff;
+  --borderColor2: #343c41;
+  --borderColor2Lighten: #4a555c;
+  --lightBackgroundColor2: #17262e;
+  /* Color 3 (Highlighted items) */
+  --backgroundColor3: #202225;
+  --backgroundColor3Hover: #34363d;
+  --backgroundColor3Active: var(--accentColor);
+  --borderColor3Active: var(--accentColor);
+  --borderColor3Lighten: #aaaaaa;
+  --color3: #fff;
+  --color3Active: #000;
+  --borderColor3: #32353a;
+  /* Color 4 */
+  --backgroundColor4: #1f2124;
+  /* Color packages */
+  /* Yellow */
+  --backgroundColorYellow: #806723;
+  --borderColorYellow: #c29f3e;
+  --colorYellow: #fff;
+  /* Green */
+  --backgroundColorGreen: #238023;
+  --borderColorGreen: #3ec23e;
+  --colorGreen: #fff;
+  /* Red */
+  --backgroundColorRedDark: #140505;
+  --backgroundColorRed: #792727;
+  --borderColorRed: #c23e3e;
+  --borderColorRedLighten: #ff8585;
+  --colorRed: #fff;
+  --colorRed2: #fff;
+  /* Blue */
+  --backgroundColorBlue: #233372;
+  --borderColorBlue: #2f4496;
+  --colorBlue: #fff;
+  --weatherStateBackground: #4d4d4d;
+  --weatherStateBackgroundOpacity: 0.3;
+  /* Colors for special sensor views */
+  --rainColor: #b5c9ff;
+  --rainBackgroundColor: #162049;
+  --rainBorderColor: #2e4992;
+  --rainBorderColorLighten: #3c5bb1;
+  --leafColor: #a4ff79;
+  --leafBackgroundColor: #1d291e;
+  --leafBorderColor: #314733;
+  --leafBorderColorLighten: #537956;
+  --windColor: #dab8df;
+  --windBackgroundColor: #2b192e;
+  --windBorderColor: #4c2b50;
+  --windBorderColorLighten: #854d8b;
+  --windCompassDirection: #ffffff;
+  --windCompassArrow: #ffffff;
+  --windCompassBackground: #291228;
+  --sunColor: #ffd28d;
+  --sunBackgroundColor: #2c2b1d;
+  --sunBorderColor: #4e4c33;
+  --sunBorderColorLighten: #646242;
+  --accentColorDark: #344a64;
+  --accentColor: #96c7ff;
+  --overlayColor: rgba(33, 42, 60, 0.67);
+  --sensorViewOverlayColor: rgba(31, 36, 45, 0.777);
+}
+[data-theme="light"] {
+  --backgroundColor0: url("./img/pattern-2.svg");
+  /* Heller Hintergrund */
+  --topNavBackground: var(--backgroundColor1);
+  --topNavColor: var(--color1);
+  --topNavBorder: var(--borderColor1);
+  --disconnectedHeaderBackground: var(--backgroundColor1);
+  --disconnectedHeaderBorder: var(--borderColor1);
+  --disconnectedIconColor: var(--borderColor1);
+  --sensorDisconnectedColor: #888888;
+  /* Color 1 (Special blue accent items) */
+  --backgroundColor1: #0066b9;
+  /* Helles Blau für den Hintergrund */
+  --borderColor1: #47b5ff;
+  /* Dunkleres Blau für Ränder */
+  --borderColor1Decent: #4758b3;
+  /* Helles Blau für Ränder */
+  --backgroundColor1Hover: #103e64;
+  /* Etwas helleres Blau bei Hover */
+  --backgroundColor1Active: #fff;
+  /* Helles Blau für Active */
+  --color1: white;
+  /* Schwarzer Text für den Kontrast */
+  /* Color 2 (Normal items) */
+  --backgroundColor2: #ffffff;
+  /* Sehr heller Grau-Hintergrund */
+  --backgroundColor2Hover: #ffffff;
+  /* Heller Grau-Hover */
+  --backgroundColor2Active: #ccd1d6;
+  /* Noch helleres Grau für Active */
+  --color2: #2e2e2e;
+  /* Schwarzer Text */
+  --borderColor2: #d0d5d9;
+  /* Helle Ränder */
+  --borderColor2Lighten: #c4c4c4;
+  /* Etwas helleres Blau für Rand */
+  --lightBackgroundColor2: #e6eff9;
+  /* Helles Grau für bestimmte Elemente */
+  /* Color 3 (Highlighted items) */
+  --backgroundColor3: #f7f7f7;
+  /* Sehr heller Grauton für Hervorhebungen */
+  --backgroundColor3Hover: #f7f7f7;
+  /* Etwas dunklerer Hover-Hintergrund */
+  --backgroundColor3Active: var(--accentColor);
+  /* Verwendung der Akzentfarbe */
+  --borderColor3Active: var(--accentColor);
+  /* Verwendung der Akzentfarbe für aktive Ränder */
+  --borderColor3Lighten: #777777;
+  --color3: #000;
+  /* Schwarzer Text */
+  --color3Active: #fff;
+  /* Weißer Text bei Aktivierung */
+  --borderColor3: #c8d1e2;
+  /* Helle, graue Ränder */
+  /* Color 4 */
+  --backgroundColor4: #f1f3f4;
+  /* Sehr heller Hintergrund für sekundäre Bereiche */
+  /* Color packages */
+  /* Yellow */
+  --backgroundColorYellow: #ffdd00;
+  /* Helles Gelb */
+  --borderColorYellow: #d6b137;
+  /* Gelb für den Rand */
+  --colorYellow: #000;
+  /* Schwarzer Text auf Gelb */
+  /* Green */
+  --backgroundColorGreen: #53db53;
+  /* Helles Grün */
+  --borderColorGreen: #24ad24;
+  /* Helle grüne Ränder */
+  --colorGreen: #000;
+  /* Schwarzer Text auf Grün */
+  /* Red */
+  --backgroundColorRedDark: #f03d3d;
+  /* Helles Rot */
+  --backgroundColorRed: #ff7474;
+  /* Helleres Rot */
+  --borderColorRed: #811616;
+  /* Helle Ränder */
+  --borderColorRedLighten: #ffc6c6;
+  /* Helleres Rot für Rand */
+  --colorRed: black;
+  /* Schwarzer Text auf Rot */
+  --colorRed2: white;
+  /* Blue */
+  --backgroundColorBlue: #b4c7f7;
+  /* Helles Blau */
+  --borderColorBlue: #96b7ff;
+  /* Helle blaue Ränder */
+  --colorBlue: #000;
+  /* Schwarzer Text auf Blau */
+  --weatherStateBackground: #ffffff;
+  --weatherStateBackgroundOpacity: 0.2;
+  /* Colors for special sensor views */
+  --rainColor: #015dd4;
+  /* Helles Regen-Blau */
+  --rainBackgroundColor: #f0f8ff;
+  /* Helles Blau für Hintergrund */
+  --rainBorderColor: #cddbff;
+  /* Helle Ränder */
+  --rainBorderColorLighten: #c4c4c4;
+  /* Helle Ränder */
+  --leafColor: #009742;
+  /* Helles Blattgrün */
+  --leafBackgroundColor: #d1f0d3;
+  /* Helleres Grün für den Hintergrund */
+  --leafBorderColor: #8ace93;
+  /* Grüner Rand */
+  --leafBorderColorLighten: #c4c4c4;
+  /* Hellerer Grünton für Rand */
+  --windColor: #7a0074;
+  /* Helles Violett für Wind */
+  --windBackgroundColor: #f1e2ec;
+  /* Helleres Violett für Hintergrund */
+  --windBorderColor: #ddc1d4;
+  /* Helle Violett-Ränder */
+  --windBorderColorLighten: #c4a6c0;
+  /* Helleres Violett für Rand */
+  --windCompassDirection: #4e123b;
+  --windCompassArrow: #3c124d;
+  --windCompassBackground: #ffffff;
+  --sunColor: #ac6700;
+  /* Helles Sonnen-Gelb */
+  --sunBackgroundColor: #f1e2c3;
+  /* Helleres Gelb für den Hintergrund */
+  --sunBorderColor: #d1bc85;
+  /* Helle Ränder */
+  --sunBorderColorLighten: #c4c4c4;
+  /* Noch helleres Gelb für Rand */
+  --accentColorDark: #c3dbec;
+  /* Helle Akzentfarbe */
+  --accentColor: #0066b9;
+  /* Helles Blau für Akzentfarbe */
+  --overlayColor: rgba(33, 42, 60, 0.67);
+  /* Der Overlay-Effekt bleibt gleich */
+  --sensorViewOverlayColor: rgba(242, 246, 255, 0.8);
+  --themeColor: white;
+}
 /*# sourceMappingURL=index.css.map */

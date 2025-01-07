@@ -125,6 +125,6 @@
 		"idle": "Erneut verbinden",
 		"switch-station": "Wetterstation wechseln",
 		"disconnected-message": "Die Wetterstation ist derzeit nicht erreichbar. Bitte überprüfen Sie die Verbindung und versuchen Sie es erneut.",
-		"troubleshooting": "Fehlersuche"
+		"trouble-shoot": "Fehlersuche"
 	}
 }

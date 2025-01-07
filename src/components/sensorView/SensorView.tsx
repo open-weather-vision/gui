@@ -132,8 +132,15 @@ function WeatherState({
 							<div
 								className={styles.temperature}
 								style={{
-									color: utils.valueToColor(
+									color: globals.theme === "light" ? "white" : "black",
+									background: utils.valueToColor(
 										item.temperature,
+										globals.theme,
+										"temperature"
+									),
+									borderColor: utils.valueToColor(
+										item.temperature,
+										globals.theme,
 										"temperature"
 									),
 								}}
@@ -193,6 +200,7 @@ export default function SensorView(props: SensorViewProps) {
 							style={{
 								color: utils.valueToColor(
 									props.value,
+									globals.theme,
 									props.elementType
 								),
 							}}
