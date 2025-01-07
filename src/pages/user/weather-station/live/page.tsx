@@ -1,8 +1,8 @@
 import styles from "./page.module.css";
-import SensorView from "../../../components/sensorView/SensorView";
-import SensorGrid from "../../../components/sensorGrid/SensorGrid";
+import SensorView from "../../../../components/sensorView/SensorView";
+import SensorGrid from "../../../../components/sensorGrid/SensorGrid";
 import { useEffect, useState } from "react";
-import ConnectionStatusBar from "../../../components/connectionStatusBar/ConnectionStatusBar";
+import ConnectionStatusBar from "../../../../components/connectionStatusBar/ConnectionStatusBar";
 
 export default function Page() {
     const [windDir, setWindDir] = useState(90);

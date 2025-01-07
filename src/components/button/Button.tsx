@@ -14,11 +14,12 @@ export type ButtonProps = {
     scaleUpOnce?: boolean;
     fadeInOutInfinitely?: boolean;
     disabled?: boolean;
+    style?: React.CSSProperties;
 };
 
 export default function Button(props: ButtonProps) {
     return (
-        <button disabled={props.disabled} className={`${props.className} ${styles.button} ${styles[`text-${props.textSize ?? "medium"}`]} ${props.notClickable ? styles.notClickable : ""} ${props.hideIcon ? styles.hideIcon : ""} ${styles[props.color ?? "color-1"]} ${styles[`icon-${props.iconSize ?? "small"}`]} ${props.wiggleOnce ? styles.wiggleOnce : ""} ${props.fadeInOutInfinitely ? styles.fadeInOutInfinitely : ""} ${props.scaleUpOnce ? styles.scaleUpOnce : ""}`} onClick={props.onClick}>
+        <button style={props.style} disabled={props.disabled} className={`${props.className} ${styles.button} ${styles[`text-${props.textSize ?? "medium"}`]} ${props.notClickable ? styles.notClickable : ""} ${props.hideIcon ? styles.hideIcon : ""} ${styles[props.color ?? "color-1"]} ${styles[`icon-${props.iconSize ?? "small"}`]} ${props.wiggleOnce ? styles.wiggleOnce : ""} ${props.fadeInOutInfinitely ? styles.fadeInOutInfinitely : ""} ${props.scaleUpOnce ? styles.scaleUpOnce : ""}`} onClick={props.onClick}>
             {props.icon}
             <div className={styles.text}>{props.text}</div>
         </button>

@@ -4,11 +4,11 @@ import { useEffect, useState } from "react";
 import IntervalSelector, {
 	Interval,
 	date,
-} from "../../../components/intervalSelector/IntervalSelector";
-import utils from "../../../utils/utils";
+} from "../../../../components/intervalSelector/IntervalSelector";
+import utils from "../../../../utils/utils";
 import { ReactComponent as Icon } from "../../../img/temperature.svg";
-import Graph from "../../../components/graph/Graph";
-import { Limits } from "../../../components/graph/Limits";
+import Graph from "../../../../components/graph/Graph";
+import { Limits } from "../../../../components/graph/Limits";
 
 function intervalToTimeSteps(interval: Interval) {
 	switch (interval.type) {

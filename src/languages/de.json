@@ -45,6 +45,10 @@
 		"dark": "dunkel",
 		"notifications": "Benachrichtigungen"
 	},
+	"switch-station": {
+		"title": "Wähle deine Station",
+		"edit-stations": "Stationen verwalten"
+	},
 	"sensor-view": {
 		"inside": "Innen",
 		"outside": "Außen",

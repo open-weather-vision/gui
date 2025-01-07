@@ -1,5 +1,7 @@
 
 
+@popupZIndex: 1000;
+
 // Mixins
 .overlay {
     background-color: var(--overlayColor);
@@ -9,6 +11,6 @@
 	width: 100%;
 	height: 100%;
 	transition: all 0.2s ease;
-	z-index: 999;
+	z-index: @popupZIndex;
 	backdrop-filter: blur(5px);
 }

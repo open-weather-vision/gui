@@ -9,9 +9,9 @@ export default function Page() {
     useEffect(() =>{
         if(globals.applicationState === "configured"){
             if(globals.selectedWeatherStation){
-                navigate("/weather-station/live");
+                navigate("/user/weather-station/live");
             }else{
-                navigate("/weather-station/");
+                navigate("/user/weather-station/live");
             }
         }else{
             navigate("/admin");

@@ -14,10 +14,9 @@ import styles from "./layout.module.css";
 
 import de from "../languages/de.json";
 import en from "../languages/en.json";
-
-
+import utils from "../utils/utils";
 setTranslations({ de, en });
-setDefaultLanguage("de");
+setDefaultLanguage("en");
 
 function WrappedLayout(){
     const globals = useGlobalContext();

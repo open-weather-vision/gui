@@ -1,0 +1,1 @@
+export type WeatherStationConnectionState = "connected" | "connecting" | "disconnected";

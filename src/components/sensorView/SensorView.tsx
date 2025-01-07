@@ -171,12 +171,12 @@ export default function SensorView(props: SensorViewProps) {
 
 	function goToGraph(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
 		event.preventDefault()
-		navigate(`/weather-station/graphs#${props.sensorId}`);
+		navigate(`/user/weather-station/graphs#${props.sensorId}`);
 	}
 
 	function goToExtremes(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
 		event.preventDefault()
-		navigate(`/weather-station/extremes#${props.sensorId}`);
+		navigate(`/user/weather-station/extremes#${props.sensorId}`);
 	}
 
 	function content() {

@@ -2,8 +2,17 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import WeatherElementType from "../types/WeatherElementType";
+import { getLanguage, setLanguage, setTranslations } from "react-multi-lang";
+import utils from "./utils";
+
+
+
 
 export type UnitConfiguration = { [Property in WeatherElementType]: string };
+
+export type SupportedLanguage = "de" | "en";
+export const SupportedLanguages: SupportedLanguage[] = ["de", "en"];
+
 
 export const defaultUnitConfiguration: UnitConfiguration = {
     "temperature": "°C",
@@ -49,6 +58,8 @@ export type GlobalContext = {
     login: (username: string, password: string, delay?: number) => Promise<boolean>,
     logout: (delay?: number) => void,
     navigateOverBlackOverlay: (path: string) => void,
+    language: SupportedLanguage,
+    setLanguage: (language: SupportedLanguage) => void,
     units: UnitConfiguration
     setUnitType: (type: WeatherElementType, unit: string) => void
 }
@@ -56,7 +67,7 @@ export type GlobalContext = {
 const globalContext = createContext<GlobalContext | undefined>(undefined);
 
 export function GlobalContextProvider(props: {children: React.ReactNode}) {
-    const [cookies, setCookie, removeCookie] = useCookies(["api-session-token", "username", "theme"]);
+    const [cookies, setCookie, removeCookie] = useCookies(["api-session-token", "username", "theme", "language"]);
 
     //const [isAdmin, setIsAdmin] = useState(cookies["api-session-token"] && cookies.username);
     //const [apiSessionToken, setApiSessionToken] = useState<string | undefined>(cookies["api-session-token"]);
@@ -79,10 +90,16 @@ export function GlobalContextProvider(props: {children: React.ReactNode}) {
         //setCookie("theme", theme);
       }, [cookies.theme]);
 
-      useEffect(() => {
+    useEffect(() => {
         if(cookies.theme === undefined){
             const prefersDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
             setCookie("theme", prefersDarkMode ? "dark" : "light");
+        }
+        if(!cookies.language){
+            setCookie("language", utils.getDefaultLanguage());
+            setLanguage(utils.getDefaultLanguage());
+        }else if(getLanguage() !== cookies.language){
+            setLanguage(cookies.language);
         }
       }, [cookies]);
     
@@ -103,6 +120,11 @@ export function GlobalContextProvider(props: {children: React.ReactNode}) {
                 username: cookies.username,
                 blackOverlay,
                 theme: cookies.theme,
+                language: cookies.language,
+                setLanguage: (language) => {
+                    setCookie("language", language);
+                    setLanguage(language);
+                },
                 setTheme: (theme) => setCookie("theme", theme),
                 navigateOverBlackOverlay: async (path: string) => {
                     setBlackOverlay(true);

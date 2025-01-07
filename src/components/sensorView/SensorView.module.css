@@ -6,7 +6,7 @@
   width: 100%;
   height: 100%;
   transition: all 0.2s ease;
-  z-index: 999;
+  z-index: 1000;
   backdrop-filter: blur(5px);
 }
 .sensorView {
@@ -97,13 +97,14 @@
   align-items: center;
   justify-content: center;
   background-color: var(--backgroundColor2);
-  color: var(--color1);
+  color: var(--color2);
   border: 1px solid var(--borderColor2);
   border-radius: 5rem;
 }
 .sensorView.weather-state .sensorData .scrollableForecast .forecastArrow svg {
   width: 2rem;
   height: 2rem;
+  color: var(--color2);
   margin: 0;
   padding: 0;
 }

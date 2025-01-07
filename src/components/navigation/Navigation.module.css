@@ -6,9 +6,10 @@
   width: 100%;
   height: 100%;
   transition: all 0.2s ease;
-  z-index: 999;
+  z-index: 1000;
   backdrop-filter: blur(5px);
 }
+/* z-Index 100 = Navigation */
 /* The bottom or top navigation menu */
 .nav {
   background-color: var(--backgroundColor2);
@@ -201,7 +202,7 @@
   top: 0;
   right: 0;
   height: 100%;
-  z-index: 1000;
+  z-index: 200;
   opacity: 1;
   transition: all 0.2s ease;
   user-select: none;
@@ -354,7 +355,7 @@
   width: 100%;
   height: 100%;
   transition: all 0.2s ease;
-  z-index: 999;
+  z-index: 200;
   backdrop-filter: blur(5px);
 }
 .overlay.closed {

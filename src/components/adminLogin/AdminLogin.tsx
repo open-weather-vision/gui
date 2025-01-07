@@ -79,7 +79,7 @@ export default function AdminLogin(props: AdminLoginProps) {
                             loginState === "failed" ? t("failed") :
                             t("success")
                         } />
-                        <Button icon={<BackIcon/>} text={t("return")} onClick={() => globals.navigateOverBlackOverlay("/weather-station/live")} />
+                        <Button icon={<BackIcon/>} text={t("return")} onClick={() => globals.navigateOverBlackOverlay("/user/weather-station/live")} />
                     </div>
                 </div>
             </div>

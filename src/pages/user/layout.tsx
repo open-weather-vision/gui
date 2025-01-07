@@ -19,49 +19,21 @@ import { ReactComponent as AdminIcon} from "../../img/icons/admin-login.svg";
 
 import useGlobalContext from "../../utils/useGlobalContext";
 import { useTranslation } from "react-multi-lang";
+import WeatherStationsPopup from "../../components/weatherStations/WeatherStationsPopup";
 
 function WrappedLayout(){
-	const { navigate, hideMain } = useSmoothNavigation();
+	const { navigate, hideMain, showSwitchStationPopup, setShowSwitchStationPopup } = useSmoothNavigation();
 	const location = useLocation();
-
-	useEffect(() => {
-		console.log(hideMain)
-	}, [hideMain]);
 
 	const globals = useGlobalContext();
 	const t = useTranslation("menu");
-
-	const [connectionState, setConnectionState] = useState<"connected" | "disconnected" | "connecting">("connected");
-
-	useEffect(() => {
-		setTimeout(() => {
-			setConnectionState("disconnected");
-		}, 1000);
-	}, []);
-
-	async function reconnect(){
-		setConnectionState("connecting");
-		// wait for 500ms
-		await new Promise((resolve) => setTimeout(resolve, 500));
-
-		const success = Math.random() > 0.5;
-
-		setTimeout(() => {
-			if(success){
-				setConnectionState("connected");
-			} else {
-				setConnectionState("disconnected");
-			}
-		}, 1000);
-		return success;
-	}
 
 
 	return <div className={styles.container}>
 		<UserMain hidden={hideMain}>
 			<Outlet />
-			<ConnectionStatusBar showStatusBar={location.pathname === "/weather-station/live"} reconnectFunction={reconnect} state={connectionState} latestUpdate={new Date()} />
 		</UserMain>
+		<WeatherStationsPopup visible={showSwitchStationPopup} />
 		
 		<Navigation logo={<Logo />} title={globals.applicationName} 
 		topSection={{
@@ -70,7 +42,8 @@ function WrappedLayout(){
 				subheading: globals.selectedWeatherStation!.elevation + "m",
 				actionFields: [
 					{
-						icon: <SwitchIcon />
+						icon: <SwitchIcon />,
+						onClick: () => setShowSwitchStationPopup(true)
 					},
 					{
 						icon: <AdminIcon />,
@@ -82,37 +55,37 @@ function WrappedLayout(){
 				{
 					icon: <LiveIcon/>,	
 					label: t("live"),
-					link: "/weather-station/live",
+					link: "/user/weather-station/live",
 				},
 				{
 					icon: <ForecastIcon />,
 					label: t("forecast"),
-					link: "/weather-station/forecast",
+					link: "/user/weather-station/forecast",
 				},
 				{
 					icon: <GraphsIcon />,
 					label: t("graphs"),
-					link: "/weather-station/graphs",
+					link: "/user/weather-station/graphs",
 				},
 				{
 					icon: <ExtremesIcon />,
 					label: t("extremes"),
-					link: "/weather-station/extremes",
+					link: "/user/weather-station/extremes",
 				},
 				{
 					icon: <ClimateIcon />,
 					label: t("climate"),
-					link: "/weather-station/climate",
+					link: "/user/weather-station/climate",
 				},
 				{
 					icon: <ClimateIcon />,
 					label: "Tests",
-					link: "/weather-station/tests",
+					link: "/user/weather-station/tests",
 				},
 			]} settingsEntry={{
 				icon: <SettingsIcon />,
 				label: t("settings"),
-				link: "/weather-station/settings",
+				link: "/user/settings",
 			}}
 		/>
 	</div>

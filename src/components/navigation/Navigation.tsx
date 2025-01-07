@@ -25,6 +25,7 @@ export type NavigationProps = {
 		actionFields: {
 			icon: JSX.Element,
 			onClick?: () => void,
+			link?: string
 		}[]
 	}
 };
@@ -66,9 +67,15 @@ export default function Navigation(props: NavigationProps) {
 						<div className={styles.heading}>{props.topSection.heading}</div>
 						<div className={styles.subheading}>{props.topSection.subheading}</div>
 					</div>
-					{props.topSection.actionFields.map((action, index) => <div className={`${styles.action} ${index === 0 ? styles.first : ""}`} onClick={action.onClick}>
-						{action.icon}
-					</div>)}
+					{props.topSection.actionFields.map((action, index) => {
+						let onClick = action.onClick;
+						if(!onClick && action.link){
+							onClick = () => handleClick(action.link!);
+						}	
+						return <div className={`${styles.action} ${index === 0 ? styles.first : ""}`} onClick={onClick}>
+							{action.icon}
+						</div>;
+					})}
 				</div>
 				}
 				<ul>

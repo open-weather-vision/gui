@@ -38,10 +38,10 @@ function WrappedLayout(){
 				icon: <AccountIcon />,
 				actionFields: [
 					{ icon: <LogoutIcon/>, onClick: () => {
-						globals.logout(100);
-						globals.navigateOverBlackOverlay("/weather-station/live")
+						globals.logout(500);
+						globals.navigateOverBlackOverlay("/user/weather-station/live")
 					}},
-					{ icon: <HomeIcon/>, onClick: () => globals.navigateOverBlackOverlay("/weather-station/live")}
+					{ icon: <HomeIcon/>, onClick: () => globals.navigateOverBlackOverlay("/user/weather-station/live")}
 				]
 			}}
 		/>

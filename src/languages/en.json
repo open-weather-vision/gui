@@ -45,6 +45,10 @@
 		"dark": "dark",
 		"notifications": "Notifications"
 	},
+	"switch-station": {
+		"title": "Choose your station",
+		"edit-stations": "Edit stations"
+	},
 	"sensor-view": {
 		"inside": "Inside",
 		"outside": "Outside",

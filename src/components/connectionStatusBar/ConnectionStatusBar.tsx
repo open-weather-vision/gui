@@ -11,18 +11,22 @@ import { ReactComponent as Troubleshoot } from "../../img/icons/tool.svg";
 import Button from "../button/Button";
 import useGlobalContext from "../../utils/useGlobalContext";
 import { useTranslation } from "react-multi-lang";
+import { WeatherStationConnectionState } from "../../types/ConnectionState";
+import useSmoothNavigation from "../../utils/useSmoothNavigation";
 
 export type ConnectionStatusBarProps = {
-    state: "connected" | "disconnected" | "connecting";
+    state: WeatherStationConnectionState;
     latestUpdate: Date;
     reconnectFunction: () => Promise<boolean>;
-    showStatusBar?: boolean
+    showStatusBar?: boolean;
+    showPopup?: boolean;
 };
 
 export default function ConnectionStatusBar(props: ConnectionStatusBarProps) {
     const [retryState, setRetryState] = useState<"idle" | "retrying" | "failed" | "success">("idle");
     const globals = useGlobalContext();
     const t = useTranslation("connection-state");
+    const { navigate, setShowSwitchStationPopup } = useSmoothNavigation(); 
     useEffect(() => {
         console.log("Weather station connection status updated to: ", props.state);
     }, [props.state]);
@@ -53,7 +57,7 @@ export default function ConnectionStatusBar(props: ConnectionStatusBarProps) {
                     <AnimatedTextChange text={props.latestUpdate.toLocaleTimeString()} />
                 </div>
             </div>
-            <div className={`${styles.disconnectedPopup} ${props.state === "connected" ? styles.hidden : ""}`}>
+            <div className={`${styles.disconnectedPopup} ${props.state === "connected" || !props.showPopup ? styles.hidden : ""}`}>
                 <div className={styles.popupContent}>
                     <div className={styles.popupHeader}>
                         <DisconnectedIcon className={styles.disconnectedIcon} />
@@ -73,7 +77,7 @@ export default function ConnectionStatusBar(props: ConnectionStatusBarProps) {
                             retryState === "success" ? "green" : "yellow"
                         } icon={<RetryIcon />} text={t(retryState)} hideIcon={retryState !== "idle"} onClick={reconnect}
                             notClickable={retryState !== "idle"} />
-                        <Button color="color-3" iconSize="medium" className={`${styles.switchStationButton}`} text={t("switch-station")} icon={<SwitchStationIcon/>} />
+                        <Button color="color-3" iconSize="medium" className={`${styles.switchStationButton}`} text={t("switch-station")} icon={<SwitchStationIcon/>} onClick={() => setShowSwitchStationPopup(true)} />
                         {
                             globals.isAdmin && <Button color="color-3" iconSize="medium" className={`${styles.switchStationButton}`} text={t("trouble-shoot")} icon={<Troubleshoot/>} />
                         }

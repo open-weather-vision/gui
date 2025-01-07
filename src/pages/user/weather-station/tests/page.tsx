@@ -1,5 +1,5 @@
-import Button from "../../../components/button/Button";
-import {ReactComponent as Icon} from "../../../img/icons/cloudiness.svg";
+import Button from "../../../../components/button/Button";
+import {ReactComponent as Icon} from "../../../../img/icons/cloudiness.svg";
 
 export default function Page(){
     return <>

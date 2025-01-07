@@ -50,6 +50,7 @@ import { ReactComponent as DeComponent } from "../img/languages/de.svg";
 import { ReactComponent as EnComponent } from "../img/languages/en.svg";
 import NoIcon, {ReactComponent as NoIconComponent} from "../img/icons/no.svg";
 import React from "react";
+import { SupportedLanguage, SupportedLanguages } from "./useGlobalContext";
 
 const weatherStateComponents = {
 	"null": NoIconComponent,
@@ -238,6 +239,15 @@ export class Utils {
 
 	flagComponent(language: keyof typeof flagComponents): React.ReactElement {
 		return React.createElement(flagComponents[language]);
+	}
+
+	getDefaultLanguage(): SupportedLanguage{
+		const userLanguage = navigator.language;
+		if(SupportedLanguages.includes(userLanguage as SupportedLanguage)){
+			return userLanguage as SupportedLanguage;
+		}else{
+			return "en";
+		}
 	}
 
 	units(element?: WeatherElementType): string[] {
