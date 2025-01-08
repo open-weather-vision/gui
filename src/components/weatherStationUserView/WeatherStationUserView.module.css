@@ -85,7 +85,7 @@
   z-index: 99;
   position: absolute;
   top: -1px;
-  left: -111%;
+  left: -105%;
   border-radius: 100%;
   border: 1px solid var(--backgroundColorGreen);
   animation: scaleUpAndFadeOut 2s ease-out infinite;
