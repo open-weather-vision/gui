@@ -19,6 +19,7 @@ export default function Page() {
     return (
         <SensorGrid>
             <SensorView
+                order={1}
                 value={75}
                 elementType="weather-state"
                 precision={0}
@@ -152,50 +153,159 @@ export default function Page() {
                 ]}
             />
             <SensorView
+                order={2}
                 value={null}
                 elementType="temperature"
                 precision={1}
                 sensorId={"tempOut"}
                 location="outside"
-				hasExtremes
-				hasGraph
+                hasExtremes
+                hasGraph
             />
             <SensorView
+                order={3}
                 value={temperature}
                 elementType="temperature"
                 precision={1}
                 sensorId={"tempIn"}
                 location="inside"
-				hasExtremes
-				hasGraph
+                hasExtremes
+                hasGraph
             />
-            <SensorView value={1025.9} elementType="pressure" precision={1} sensorId={"press"} />
-            <SensorView value={15} elementType="precipation" precision={1} sensorId={"precip15min"} />
+            <SensorView
+                order={4}
+                value={1025.9}
+                elementType="pressure"
+                precision={1}
+                sensorId={"press"}
+            />
+            <SensorView
+                order={5}
+                value={15}
+                elementType="precipation"
+                precision={1}
+                sensorId={"precip15min"}
+            />
 
-            <SensorView value={1.3} elementType="precipation-rate" precision={1} />
-            <SensorView value={55} elementType="precipation-probability" precision={0} />
+            <SensorView
+                order={6}
+                value={1.3}
+                elementType="precipation-rate"
+                precision={1}
+            />
+            <SensorView
+                order={7}
+                value={55}
+                elementType="precipation-probability"
+                precision={0}
+            />
 
-            <SensorView value={windDir} elementType="wind-direction" precision={0} />
-            <SensorView value={15} elementType="wind-speed" precision={0} />
-            <SensorView value={30} elementType="wind-gust" precision={0} />
+            <SensorView
+                order={8}
+                value={windDir}
+                elementType="wind-direction"
+                precision={0}
+            />
+            <SensorView
+                order={9}
+                value={15}
+                elementType="wind-speed"
+                precision={0}
+            />
+            <SensorView
+                order={10}
+                value={30}
+                elementType="wind-gust"
+                precision={0}
+            />
 
-            <SensorView value={50} elementType="humidity" precision={0} />
-            <SensorView value={51} elementType="cloudiness" precision={0} />
-            <SensorView value={5} elementType="visibility" precision={0} />
-            <SensorView value={0} elementType="snow-height" precision={0} />
-            <SensorView value={21} elementType="perceived-temperature" precision={1} />
-            <SensorView value={21} elementType="wind-chill" precision={1} />
-            <SensorView value={5} elementType="evaporation" precision={1} />
+            <SensorView
+                order={11}
+                value={50}
+                elementType="humidity"
+                precision={0}
+            />
+            <SensorView
+                order={12}
+                value={51}
+                elementType="cloudiness"
+                precision={0}
+            />
+            <SensorView
+                order={13}
+                value={5}
+                elementType="visibility"
+                precision={0}
+            />
+            <SensorView
+                order={14}
+                value={0}
+                elementType="snow-height"
+                precision={0}
+            />
+            <SensorView
+                order={15}
+                value={21}
+                elementType="perceived-temperature"
+                precision={1}
+            />
+            <SensorView
+                order={16}
+                value={21}
+                elementType="wind-chill"
+                precision={1}
+            />
+            <SensorView
+                order={17}
+                value={5}
+                elementType="evaporation"
+                precision={1}
+            />
 
-            <SensorView value={10} elementType="soil-ph" precision={0} />
-            <SensorView value={123} elementType="soil-moisture" precision={0} />
-            <SensorView value={20.3} elementType="soil-temperature" precision={1} />
-            <SensorView value={15} elementType="leaf-wetness" precision={1} />
+            <SensorView
+                order={18}
+                value={10}
+                elementType="soil-ph"
+                precision={0}
+            />
+            <SensorView
+                order={19}
+                value={123}
+                elementType="soil-moisture"
+                precision={0}
+            />
+            <SensorView
+                order={20}
+                value={20.3}
+                elementType="soil-temperature"
+                precision={1}
+            />
+            <SensorView
+                order={21}
+                value={15}
+                elementType="leaf-wetness"
+                precision={1}
+            />
 
-            <SensorView value={20} elementType="leaf-temperature" precision={1} />
-            <SensorView value={1023} elementType="solar-radiation" precision={0} />
-            <SensorView value={10} elementType="uv" precision={0} />
-            <SensorView value={10} elementType="sunshine" precision={0} />
+            <SensorView
+                order={22}
+                value={20}
+                elementType="leaf-temperature"
+                precision={1}
+            />
+            <SensorView
+                order={23}
+                value={1023}
+                elementType="solar-radiation"
+                precision={0}
+            />
+            <SensorView order={24} value={10} elementType="uv" precision={0} />
+            <SensorView
+                order={25}
+                value={10}
+                elementType="sunshine"
+                precision={0}
+            />
         </SensorGrid>
     );
 }

@@ -46,7 +46,7 @@
   justify-content: center;
   position: absolute;
   top: 3rem;
-  overflow: scroll;
+  overflow: auto;
   max-height: 10rem;
   z-index: 99;
   opacity: 0;
@@ -64,6 +64,7 @@
   align-items: center;
   justify-content: center;
   justify-items: center;
+  margin: 0;
 }
 .options .option.selected {
   background-color: var(--backgroundColor3Hover);

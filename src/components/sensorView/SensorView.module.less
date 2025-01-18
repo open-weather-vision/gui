@@ -1,5 +1,11 @@
 @import "../../variables.less";
 
+.dropPoint {
+    position: relative;
+    max-width: 0.1rem;
+    background-color: rebeccapurple;
+}
+
 .sensorView {
     position: relative;
     box-sizing: border-box;
@@ -12,10 +18,34 @@
     flex-direction: column;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.2s ease-in-out, filter 0.0s;
+    transition: all 0.2s ease-in-out, filter 0s;
     user-select: none;
     min-width: 18rem !important;
-    
+    flex: 1 1 0;
+    width: 0;
+
+    &::after {
+        --width: 0.2rem;
+        --sensor-grid-gap: 1rem;
+        content: "";
+        display: block;
+        width: var(--width);
+        height: 100%;
+        background-color: var(--color2);
+        border-radius: 1rem;
+        position: absolute;
+        left: calc(100% + - 0.3 * var(--width) + 0.5 * var(--sensor-grid-gap));
+        transition: all 0.4s;
+        opacity: 0;
+    }
+
+    &.dragTarget::after {
+        opacity: 1;
+    }
+
+    &.dragged {
+        border: 1px solid var(--accentColor) !important;
+    }
 
     &.weather-state {
         flex-basis: 100%;
@@ -23,7 +53,6 @@
         background-color: var(--weatherStateBackground);
 
         .backgroundImage {
-            
             width: 100%;
             height: 100%;
             background-size: cover;
@@ -138,9 +167,9 @@
 
                     .temperature {
                         font-family: "Roboto Mono", monospace;
-                        padding: .2rem;
+                        padding: 0.2rem;
                         width: 3rem;
-                        border-radius: .2rem .2rem 0 0 ;
+                        border-radius: 0.2rem 0.2rem 0 0;
                         background-color: rgb(255, 220, 220);
                         color: red;
                         border: 1px solid red;
@@ -148,16 +177,16 @@
 
                     .precipation {
                         color: var(--rainColor);
-                        padding: .2rem;
+                        padding: 0.2rem;
                         width: 3rem;
-                        border-radius: 0 0 .2rem .2rem;
+                        border-radius: 0 0 0.2rem 0.2rem;
                         background-color: var(--rainBackgroundColor);
                         font-family: "Roboto Mono", monospace;
                         border: 1px solid var(--rainBorderColor);
                         border-top: 0;
 
                         &.zeroPrecipation {
-                            filter: grayscale(1) opacity(.3);
+                            filter: grayscale(1) opacity(0.3);
                         }
                     }
 
@@ -195,8 +224,8 @@
         background: var(--rainBackgroundColor);
         border-color: var(--rainBorderColor);
 
-        &:focus{
-            border: 1px solid var(--rainBorderColorLighten)
+        &:focus:not(.dragged) {
+            border: 1px solid var(--rainBorderColorLighten);
         }
         /*.rainGradient();*/
     }
@@ -213,8 +242,8 @@
         background: var(--leafBackgroundColor);
         border-color: var(--leafBorderColor);
 
-        &:focus{
-            border: 1px solid var(--leafBorderColorLighten)
+        &:focus:not(.dragged) {
+            border: 1px solid var(--leafBorderColorLighten);
         }
 
         /*.leafGradient();*/
@@ -230,8 +259,8 @@
         background: var(--windBackgroundColor);
         border-color: var(--windBorderColor);
 
-        &:focus{
-            border: 1px solid var(--windBorderColorLighten)
+        &:focus:not(.dragged) {
+            border: 1px solid var(--windBorderColorLighten);
         }
     }
 
@@ -250,23 +279,24 @@
         background: var(--sunBackgroundColor);
         border-color: var(--sunBorderColor);
 
-        &:focus{
-            border: 1px solid var(--sunBorderColorLighten)
+        &:focus:not(.dragged) {
+            border: 1px solid var(--sunBorderColorLighten);
         }
 
         /*.sunGradient();*/
     }
 
-    &:focus .details, .details:focus-within, .details:active{
+    &:focus:not(.dragged) .details,
+    .details:focus-within,
+    .details:active {
         visibility: visible;
         pointer-events: all;
         opacity: 1;
     }
 
-    &:focus{
+    &:focus:not(.dragged) {
         border: 1px solid var(--borderColor2Lighten);
     }
-    
 
     .details {
         position: absolute;
@@ -294,10 +324,10 @@
             margin-top: auto;
             display: flex;
             flex-direction: row;
-            gap: .5rem;
+            gap: 0.5rem;
         }
 
-        .description{
+        .description {
             margin: 0;
             height: 2rem;
             text-overflow: ellipsis;
@@ -334,9 +364,7 @@
         }
     }
 
-    
-
-    &.disconnected{
+    &.disconnected {
         opacity: 1;
         cursor: not-allowed;
     }
@@ -353,14 +381,13 @@
             color: var(--accentColor);
         }
 
-        .disconnectedView{
+        .disconnectedView {
             display: flex;
             align-items: center;
             gap: 1rem;
-            margin-bottom: .5rem;
-            
+            margin-bottom: 0.5rem;
 
-            .disconnectedIcon{
+            .disconnectedIcon {
                 color: var(--sensorDisconnectedColor);
                 fill: var(--sensorDisconnectedColor);
                 width: 24px;

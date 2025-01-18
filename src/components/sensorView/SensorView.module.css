@@ -10,6 +10,11 @@
   backdrop-filter: blur(5px);
   overflow: hidden;
 }
+.dropPoint {
+  position: relative;
+  max-width: 0.1rem;
+  background-color: rebeccapurple;
+}
 .sensorView {
   position: relative;
   box-sizing: border-box;
@@ -25,6 +30,28 @@
   transition: all 0.2s ease-in-out, filter 0s;
   user-select: none;
   min-width: 18rem !important;
+  flex: 1 1 0;
+  width: 0;
+}
+.sensorView::after {
+  --width: 0.2rem;
+  --sensor-grid-gap: 1rem;
+  content: "";
+  display: block;
+  width: var(--width);
+  height: 100%;
+  background-color: var(--color2);
+  border-radius: 1rem;
+  position: absolute;
+  left: calc(100% - 0.3 * var(--width) + 0.5 * var(--sensor-grid-gap));
+  transition: all 0.4s;
+  opacity: 0;
+}
+.sensorView.dragTarget::after {
+  opacity: 1;
+}
+.sensorView.dragged {
+  border: 1px solid var(--accentColor) !important;
 }
 .sensorView.weather-state {
   flex-basis: 100%;
@@ -185,10 +212,10 @@
 .sensorView.precipation-probability .sensorData .value {
   color: var(--rainColor);
 }
-.sensorView.precipation:focus,
-.sensorView.precipation-rate:focus,
-.sensorView.shower-precipation:focus,
-.sensorView.precipation-probability:focus {
+.sensorView.precipation:focus:not(.dragged),
+.sensorView.precipation-rate:focus:not(.dragged),
+.sensorView.shower-precipation:focus:not(.dragged),
+.sensorView.precipation-probability:focus:not(.dragged) {
   border: 1px solid var(--rainBorderColorLighten);
 }
 .sensorView.leaf-temperature,
@@ -207,11 +234,11 @@
 .sensorView.soil-ph .sensorData .value {
   color: var(--leafColor);
 }
-.sensorView.leaf-temperature:focus,
-.sensorView.leaf-wetness:focus,
-.sensorView.soil-temperature:focus,
-.sensorView.soil-moisture:focus,
-.sensorView.soil-ph:focus {
+.sensorView.leaf-temperature:focus:not(.dragged),
+.sensorView.leaf-wetness:focus:not(.dragged),
+.sensorView.soil-temperature:focus:not(.dragged),
+.sensorView.soil-moisture:focus:not(.dragged),
+.sensorView.soil-ph:focus:not(.dragged) {
   border: 1px solid var(--leafBorderColorLighten);
 }
 .sensorView.wind-speed,
@@ -225,9 +252,9 @@
 .sensorView.wind-gust .sensorData .value {
   color: var(--windColor);
 }
-.sensorView.wind-speed:focus,
-.sensorView.wind-direction:focus,
-.sensorView.wind-gust:focus {
+.sensorView.wind-speed:focus:not(.dragged),
+.sensorView.wind-direction:focus:not(.dragged),
+.sensorView.wind-gust:focus:not(.dragged) {
   border: 1px solid var(--windBorderColorLighten);
 }
 .sensorView.wind-direction {
@@ -246,19 +273,19 @@
 .sensorView.sunshine .sensorData .value {
   color: var(--sunColor);
 }
-.sensorView.solar-radiation:focus,
-.sensorView.uv:focus,
-.sensorView.sunshine:focus {
+.sensorView.solar-radiation:focus:not(.dragged),
+.sensorView.uv:focus:not(.dragged),
+.sensorView.sunshine:focus:not(.dragged) {
   border: 1px solid var(--sunBorderColorLighten);
 }
-.sensorView:focus .details,
+.sensorView:focus:not(.dragged) .details,
 .sensorView .details:focus-within,
 .sensorView .details:active {
   visibility: visible;
   pointer-events: all;
   opacity: 1;
 }
-.sensorView:focus {
+.sensorView:focus:not(.dragged) {
   border: 1px solid var(--borderColor2Lighten);
 }
 .sensorView .details {

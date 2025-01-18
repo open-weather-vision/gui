@@ -61,6 +61,10 @@ const routes: RouteObject[] = [
                                 "element": React.createElement(require('./pages/user/weather-station/graphs/page').default)
                             },
                             {
+                                "path": "graphs-old",
+                                "element": React.createElement(require('./pages/user/weather-station/graphs-old/page').default)
+                            },
+                            {
                                 "path": "live",
                                 "element": React.createElement(require('./pages/user/weather-station/live/page').default)
                             },
