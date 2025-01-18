@@ -17,6 +17,12 @@
 .chartContainer {
   background-color: var(--backgroundColor2);
   color: var(--color2);
+  padding: 0.2rem;
+}
+@media screen and (min-width: 500px) {
+  .chartContainer {
+    padding: 1rem;
+  }
 }
 .xAxis,
 .yAxis {

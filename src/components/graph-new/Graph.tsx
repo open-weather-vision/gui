@@ -145,10 +145,10 @@ export default function Graph({ sensor, interval }: GraphProps) {
         // Declare the chart dimensions and margins.
         const width = chartContainerRef.current!.offsetWidth;
         const height = Math.min(width, Math.min(500, window.innerHeight * 0.6));
-        const marginTop = 20;
-        const marginRight = 40;
-        const marginBottom = 30;
-        const marginLeft = 40;
+        const marginTop = width > 500 ? 20 : 10;
+        const marginRight = width > 500 ? 50 : 20;
+        const marginBottom = width > 500 ? 30 : 30;
+        const marginLeft = width > 500 ? 40 : 40;
 
         // Declare the x (horizontal position) scale.
         const begin = beginOfInterval(interval.date, interval.type);
@@ -209,28 +209,44 @@ export default function Graph({ sensor, interval }: GraphProps) {
                 formatter = new Intl.DateTimeFormat(globals.language, {
                     month: width > 900 ? "long" : "short",
                 });
-                xAxis.ticks(12);
+                xAxis.ticks(
+                    width > 700 ? 12 : width > 500 ? 9 : width > 300 ? 6 : 3
+                );
                 break;
             case "month":
                 formatter = new Intl.DateTimeFormat(globals.language, {
                     day: "numeric",
                     month: "numeric",
                 });
-                xAxis.ticks(30);
+                const days = daysInMonth(
+                    interval.date.getMonth() + 1,
+                    interval.date.getFullYear()
+                );
+                xAxis.ticks(
+                    width > 1400
+                        ? days
+                        : width > 1000
+                        ? Math.round(days / 2)
+                        : width > 700
+                        ? Math.round(days / 3)
+                        : Math.round(days / 4)
+                );
                 break;
             case "week":
                 formatter = new Intl.DateTimeFormat(globals.language, {
                     day: "numeric",
                     weekday: "short",
                 });
-                xAxis.ticks(7);
+                xAxis.ticks(width > 450 ? 7 : 3);
                 break;
             case "day":
             default:
                 formatter = new Intl.DateTimeFormat(globals.language, {
                     hour: "2-digit",
                 });
-                xAxis.ticks(width > 1400 ? 24 : width > 800 ? 9 : 6);
+                xAxis.ticks(
+                    width > 1400 ? 24 : width > 800 ? 9 : width > 300 ? 3 : 2
+                );
         }
         xAxis.tickFormat((d) => formatter.format(d as any));
         xAxis.tickSize(12);
