@@ -5,6 +5,7 @@
 	"main": "src/electron.js",
 	"homepage": ".",
 	"dependencies": {
+		"@cascadia-code/scroll-to-hash-element": "^2.0.3",
 		"@icongo/wi": "^1.2.0",
 		"@testing-library/jest-dom": "^5.17.0",
 		"@testing-library/react": "^13.4.0",

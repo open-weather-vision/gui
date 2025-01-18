@@ -56,7 +56,7 @@
 }
 .intervalSelector .type {
   background-color: rgba(0, 0, 0, 0.35);
-  color: #7aa7ff;
+  color: rgba(255, 255, 255, 0.8);
   width: 8rem;
 }
 .intervalSelector .date {

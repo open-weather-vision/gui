@@ -169,8 +169,6 @@ export default function Page() {
                 precision={1}
                 sensorId={"tempIn"}
                 location="inside"
-                hasExtremes
-                hasGraph
             />
             <SensorView
                 order={4}
@@ -184,7 +182,9 @@ export default function Page() {
                 value={15}
                 elementType="precipation"
                 precision={1}
-                sensorId={"precip15min"}
+                sensorId={"precipation"}
+                hasExtremes
+                hasGraph
             />
 
             <SensorView
@@ -224,6 +224,9 @@ export default function Page() {
                 value={50}
                 elementType="humidity"
                 precision={0}
+                sensorId="humOut"
+                hasExtremes
+                hasGraph
             />
             <SensorView
                 order={12}

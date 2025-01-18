@@ -3,6 +3,7 @@ import { useTranslation } from "react-multi-lang";
 import styles from "./IntervalSelector.module.css";
 import { ReactComponent as LeftArrow } from "../../img/icons/arrow-left-2.svg";
 import { ReactComponent as RightArrow } from "../../img/icons/arrow-right-2.svg";
+import Select from "../select/Select";
 
 function weekNumber(date: Date) {
     // Copy date so don't modify original

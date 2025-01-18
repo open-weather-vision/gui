@@ -77,9 +77,11 @@ function WindDirectionCompass({ direction }: { direction: number }) {
 function WeatherState({
     weatherState,
     forecast,
+    setIsDraggable,
 }: {
     weatherState: number | null;
     forecast?: ForecastItem[];
+    setIsDraggable: (value: boolean) => void;
 }) {
     const ref = useRef();
     const { events } = useScrollOnDrag(ref);
@@ -93,6 +95,7 @@ function WeatherState({
                 className={`${styles.now} ${showForecast && styles.hidden}`}
                 onClick={() => {
                     setShowForecast(true);
+                    setIsDraggable(false);
                     setTimeout(() => setScroll(true), 300);
                 }}
             >
@@ -113,6 +116,7 @@ function WeatherState({
                     className={styles.forecastArrow}
                     onClick={() => {
                         setScroll(false);
+                        setIsDraggable(true);
                         setShowForecast(false);
                     }}
                 >
@@ -183,6 +187,7 @@ export default function SensorView(props: SensorViewProps) {
     const globals = useGlobalContext();
     const [isDragTarget, setIsDragTarget] = useState(false);
     const [isDragged, setIsDragged] = useState(false);
+    const [isDraggable, setIsDraggable] = useState(true);
 
     function goToGraph(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
         event.preventDefault();
@@ -204,6 +209,7 @@ export default function SensorView(props: SensorViewProps) {
                 return (
                     <WeatherState
                         weatherState={props.value}
+                        setIsDraggable={setIsDraggable}
                         forecast={
                             "forecast" in props ? props.forecast : undefined
                         }
@@ -260,7 +266,7 @@ export default function SensorView(props: SensorViewProps) {
                 const div = event.target as HTMLDivElement;
                 div.focus({ preventScroll: true });
             }}
-            draggable={true}
+            draggable={isDraggable}
             onDrop={(event) => {
                 const droppedSensorId = event.dataTransfer.getData("sensorId");
                 const targetSensorId = props.sensorId ?? "";

@@ -83,15 +83,16 @@ async function loadPoints(
     let secondsPerPoint: number;
     switch (interval) {
         case "day":
-            pointCount = 10;
+            pointCount = 24 * 2;
             secondsPerPoint = 86400 / pointCount;
             break;
         case "week":
-            pointCount = 100;
+            pointCount = 7 * 24;
             secondsPerPoint = (7 * 60 * 60 * 24) / pointCount;
             break;
         case "month":
-            pointCount = 100;
+            pointCount =
+                daysInMonth(begin.getMonth() + 1, begin.getFullYear()) * 6;
             secondsPerPoint =
                 (daysInMonth(begin.getMonth() + 1, begin.getFullYear()) *
                     60 *
@@ -100,7 +101,7 @@ async function loadPoints(
                 pointCount;
             break;
         case "year":
-            pointCount = 100;
+            pointCount = 365;
             secondsPerPoint = (365 * 60 * 60 * 24) / pointCount;
             break;
     }
@@ -110,7 +111,10 @@ async function loadPoints(
     for (let i = 0; i <= pointCount; i++) {
         result[i] = {
             time,
-            value: -2.5 + Math.random() * 5 + valueBefore,
+            value: Math.max(
+                -20,
+                Math.min(40, -2.5 + Math.random() * 5 + valueBefore)
+            ),
         };
         valueBefore = result[i].value;
 
@@ -157,8 +161,8 @@ export default function Graph({ sensor, interval }: GraphProps) {
         // Declare the y (vertical position) scale.
         const values = data.map((data) => data.value);
         const extent = d3.extent(values) as [number, number];
-        extent[0] -= (extent[1] - extent[0]) * 0.1;
-        extent[1] += (extent[1] - extent[0]) * 0.1;
+        extent[0] = Math.floor(extent[0] - (extent[1] - extent[0]) * 0.1);
+        extent[1] = Math.ceil(extent[1] + (extent[1] - extent[0]) * 0.1);
         const y = d3
             .scaleLinear()
             .domain(extent)
@@ -171,48 +175,83 @@ export default function Graph({ sensor, interval }: GraphProps) {
             .attr("width", width)
             .attr("height", height);
 
+        // Append graphs
+        const defs = svg.append("defs");
+
+        const gradient = defs
+            .append("linearGradient")
+            .attr("id", `colorGradient-${sensor.sensorId}`)
+            .attr("x1", "0%")
+            .attr("y1", "0%")
+            .attr("x2", "100%")
+            .attr("y2", "0%");
+
+        for (let i = 0; i < data.length; i += Math.round(data.length / 10)) {
+            gradient
+                .append("stop")
+                .attr("offset", `${(i * 100) / (data.length - 1)}%`)
+                .attr(
+                    "stop-color",
+                    utils.valueToColor(
+                        data[i].value,
+                        globals.theme,
+                        sensor.elementType
+                    )
+                )
+                .attr("stop-opacity", 1);
+        }
+
         // Add the x-axis.
-        let xAxis;
+        let xAxis = d3.axisBottom(x);
         let formatter: Intl.DateTimeFormat;
         switch (interval.type) {
             case "year":
                 formatter = new Intl.DateTimeFormat(globals.language, {
                     month: width > 900 ? "long" : "short",
                 });
-                xAxis = d3.axisBottom(x).ticks(12);
+                xAxis.ticks(12);
                 break;
             case "month":
                 formatter = new Intl.DateTimeFormat(globals.language, {
                     day: "numeric",
                     month: "numeric",
                 });
-                xAxis = d3.axisBottom(x).ticks(30);
+                xAxis.ticks(30);
                 break;
             case "week":
                 formatter = new Intl.DateTimeFormat(globals.language, {
                     day: "numeric",
                     weekday: "short",
                 });
-                xAxis = d3.axisBottom(x).ticks(7);
+                xAxis.ticks(7);
                 break;
             case "day":
             default:
                 formatter = new Intl.DateTimeFormat(globals.language, {
                     hour: "2-digit",
                 });
-                xAxis = d3
-                    .axisBottom(x)
-                    .ticks(width > 1400 ? 24 : width > 800 ? 9 : 6);
+                xAxis.ticks(width > 1400 ? 24 : width > 800 ? 9 : 6);
         }
         xAxis.tickFormat((d) => formatter.format(d as any));
+        xAxis.tickSize(12);
         svg.append("g")
             .attr("transform", `translate(0,${height - marginBottom})`)
+            .attr("class", styles.xAxis)
             .call(xAxis);
 
         // Add the y-axis.
         svg.append("g")
             .attr("transform", `translate(${marginLeft},0)`)
-            .call(d3.axisLeft(y));
+            .attr("class", styles.yAxis)
+            .call(
+                d3
+                    .axisLeft(y)
+                    .tickSize(12)
+                    .tickValues(
+                        y.ticks().filter((tick) => Number.isInteger(tick))
+                    )
+                    .tickFormat(d3.format("d"))
+            );
 
         // Add the curve.
         const line = d3
@@ -230,18 +269,45 @@ export default function Graph({ sensor, interval }: GraphProps) {
             )
             .curve(d3.curveNatural);
 
-        svg.append("path")
-            .datum(data)
-            .attr("fill", "var(--accentColor)")
-            .attr("stroke", "var(--color2)")
-            .attr("stroke-width", 1.5)
-            .attr("stroke-linejoin", "round")
-            .attr("stroke-linecap", "round")
-            .attr("d", area);
+        if (sensor.elementType === "precipation") {
+            svg.selectAll("mybar")
+                .data(data)
+                .enter()
+                .append("rect")
+                .attr("x", function (d: GraphData) {
+                    return x(d.time);
+                })
+                .attr("y", function (d: GraphData) {
+                    return y(d.value);
+                })
+                .attr("width", (0.5 * width) / data.length)
+                .attr("height", function (d) {
+                    return height - y(d.value);
+                })
+                .attr("transform", `translate(0,${-marginBottom})`)
+                .attr(
+                    "fill",
+                    utils.valueToColor(
+                        undefined,
+                        globals.theme,
+                        sensor.elementType
+                    )
+                );
+        } else {
+            svg.append("path")
+                .datum(data)
+                .attr("fill", `url(#colorGradient-${sensor.sensorId})`)
+                .attr("stroke", "var(--color2)")
+                .attr("stroke-width", 1.5)
+                .attr("stroke-linejoin", "round")
+                .attr("stroke-linecap", "round")
+                .attr("class", styles.line)
+                .attr("d", area);
+        }
     }, [data, size]);
 
     return (
-        <div className={styles.chart}>
+        <div className={styles.chart} id={sensor.sensorId}>
             <div className={styles.header}>
                 {utils.iconComponent(sensor.elementType)}
                 {t(`${sensor.elementType}_label`)}
