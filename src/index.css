@@ -229,7 +229,7 @@ h6 {
   /* Noch helleres Grau für Active */
   --color2: #2e2e2e;
   /* Schwarzer Text */
-  --borderColor2: #d0d5d9;
+  --borderColor2: #adb3b8;
   /* Helle Ränder */
   --borderColor2Lighten: #c4c4c4;
   /* Etwas helleres Blau für Rand */
@@ -295,7 +295,7 @@ h6 {
   /* Helles Regen-Blau */
   --rainBackgroundColor: #f0f8ff;
   /* Helles Blau für Hintergrund */
-  --rainBorderColor: #abcfeb;
+  --rainBorderColor: #85acca;
   /* Helle Ränder */
   --rainBorderColorLighten: #abcfeb;
   /* Helle Ränder */
@@ -303,7 +303,7 @@ h6 {
   /* Helles Blattgrün */
   --leafBackgroundColor: #d1f0d3;
   /* Helleres Grün für den Hintergrund */
-  --leafBorderColor: #8ace93;
+  --leafBorderColor: #69b373;
   /* Grüner Rand */
   --leafBorderColorLighten: #8ace93;
   /* Hellerer Grünton für Rand */
@@ -311,7 +311,7 @@ h6 {
   /* Helles Violett für Wind */
   --windBackgroundColor: #f1e2ec;
   /* Helleres Violett für Hintergrund */
-  --windBorderColor: #ddc1d4;
+  --windBorderColor: #bb91ae;
   /* Helle Violett-Ränder */
   --windBorderColorLighten: #c4a6c0;
   /* Helleres Violett für Rand */

@@ -26,7 +26,6 @@
   background-color: var(--backgroundColor1);
   color: var(--color1);
   border: 1px solid var(--borderColor1);
-  cursor: pointer;
   box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.3);
   font-weight: 600;
 }
@@ -48,6 +47,7 @@
   width: 3.5rem;
   padding: 0;
   overflow: visible;
+  cursor: pointer;
 }
 .intervalSelector .leftArrowContainer.disabled,
 .intervalSelector .rightArrowContainer.disabled {
@@ -58,6 +58,39 @@
   background-color: rgba(0, 0, 0, 0.35);
   color: rgba(255, 255, 255, 0.8);
   width: 8rem;
+  position: relative;
+  overflow: visible;
+  cursor: pointer;
+}
+.intervalSelector .type .typeSelection {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  top: 100%;
+  background-color: var(--backgroundColor3);
+  border: 1px solid var(--borderColor3);
+  border-radius: 0 0 0.5rem 0.5rem;
+  width: 100%;
+  box-sizing: border-box;
+  height: fit-content;
+  opacity: 0;
+  pointer-events: none;
+  padding: 0;
+  color: var(--color3);
+}
+.intervalSelector .type .typeSelection.open {
+  opacity: 1;
+  pointer-events: all;
+}
+.intervalSelector .type .typeSelection .item {
+  padding: 1rem;
+  width: 100%;
+}
+.intervalSelector .type .typeSelection .item:hover,
+.intervalSelector .type .typeSelection .item:active {
+  background-color: var(--backgroundColor3Hover);
 }
 .intervalSelector .date {
   background-color: rgba(0, 0, 0, 0.2);

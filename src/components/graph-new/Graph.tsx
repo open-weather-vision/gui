@@ -3,7 +3,7 @@ import styles from "./Graph.module.css";
 import { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
 import { useWindowSize } from "@uidotdev/usehooks";
-import { IntervalType } from "../intervalSelector/IntervalSelector";
+import { Interval, IntervalType } from "../intervalSelector/IntervalSelector";
 import useGlobalContext from "../../utils/useGlobalContext";
 import WeatherElementType from "../../types/WeatherElementType";
 import { useTranslation } from "react-multi-lang";
@@ -21,54 +21,9 @@ export type SensorDescription = {
 };
 
 export type GraphProps = {
-    interval: {
-        type: IntervalType;
-        date: Date;
-    };
+    interval: Interval;
     sensor: SensorDescription;
 };
-
-function beginOfInterval(date: Date, interval: IntervalType) {
-    const result = new Date(date);
-    switch (interval) {
-        case "day":
-            break;
-        case "week":
-            const weekDay = result.getDay();
-            result.setDate(result.getDate() - weekDay + 1);
-            break;
-        case "month":
-            result.setDate(1);
-            result.setMonth(result.getMonth());
-            break;
-        case "year":
-            result.setDate(1);
-            result.setMonth(0);
-            break;
-    }
-    console.log(result);
-    return result;
-}
-
-function endOfInterval(date: Date, interval: IntervalType): Date {
-    const result = new Date(date);
-    switch (interval) {
-        case "day":
-            result.setDate(result.getDate() + 1);
-            break;
-        case "week":
-            result.setDate(result.getDate() + 7);
-            break;
-        case "month":
-            result.setMonth(result.getMonth() + 1);
-            result.setDate(result.getDate() - 1);
-            break;
-        case "year":
-            result.setFullYear(result.getFullYear() + 1);
-            break;
-    }
-    return result;
-}
 
 function daysInMonth(month: number, year: number) {
     return new Date(year, month, 0).getDate() - 1;
@@ -120,6 +75,7 @@ async function loadPoints(
 
         time = new Date(time);
         time.setSeconds(time.getSeconds() + secondsPerPoint);
+        if (time > new Date()) break;
     }
     return result;
 }
@@ -133,8 +89,9 @@ export default function Graph({ sensor, interval }: GraphProps) {
     const t = useTranslation("sensor-view");
 
     async function load() {
-        const begin = beginOfInterval(interval.date, interval.type);
-        setData(await loadPoints(sensor.sensorId!, begin, interval.type));
+        setData(
+            await loadPoints(sensor.sensorId!, interval.begin, interval.type)
+        );
     }
 
     useEffect(() => {
@@ -151,11 +108,9 @@ export default function Graph({ sensor, interval }: GraphProps) {
         const marginLeft = width > 500 ? 40 : 40;
 
         // Declare the x (horizontal position) scale.
-        const begin = beginOfInterval(interval.date, interval.type);
-        const end = endOfInterval(begin, interval.type);
         const x = d3
             .scaleTime()
-            .domain([begin, end])
+            .domain([interval.begin, interval.end])
             .range([marginLeft, width - marginRight]);
 
         // Declare the y (vertical position) scale.
@@ -186,7 +141,11 @@ export default function Graph({ sensor, interval }: GraphProps) {
             .attr("x2", "100%")
             .attr("y2", "0%");
 
-        for (let i = 0; i < data.length; i += Math.round(data.length / 10)) {
+        for (
+            let i = 0;
+            i < data.length;
+            i += Math.max(1, Math.round(data.length / 10))
+        ) {
             gradient
                 .append("stop")
                 .attr("offset", `${(i * 100) / (data.length - 1)}%`)
@@ -269,23 +228,15 @@ export default function Graph({ sensor, interval }: GraphProps) {
                     .tickFormat(d3.format("d"))
             );
 
-        // Add the curve.
-        const line = d3
-            .line(
-                (d: GraphData) => x(d.time),
-                (d: GraphData) => y(d.value)
-            )
-            .curve(d3.curveNatural);
-
-        const area = d3
-            .area(
-                (d: GraphData) => x(d.time),
-                (d: GraphData) => y(d.value),
-                (d: GraphData) => y(extent[0])
-            )
-            .curve(d3.curveNatural);
+        // Add the curve
 
         if (sensor.elementType === "precipation") {
+            if (data.length === 0) return;
+            const lengthFactor =
+                (data[data.length - 1].time.getTime() -
+                    interval.begin.getTime()) /
+                (interval.end.getTime() - interval.begin.getTime());
+            const barWidth = (0.5 * width) / (data.length / lengthFactor);
             svg.selectAll("mybar")
                 .data(data)
                 .enter()
@@ -296,11 +247,24 @@ export default function Graph({ sensor, interval }: GraphProps) {
                 .attr("y", function (d: GraphData) {
                     return y(d.value);
                 })
-                .attr("width", (0.5 * width) / data.length)
+                .attr("width", function (d, index) {
+                    if (
+                        index === 0 ||
+                        (lengthFactor === 1 && index === data.length - 1)
+                    ) {
+                        return 0.5 * barWidth;
+                    }
+                    return barWidth;
+                })
                 .attr("height", function (d) {
                     return height - y(d.value);
                 })
-                .attr("transform", `translate(0,${-marginBottom})`)
+                .attr("transform", function (d, index) {
+                    if (index === 0) {
+                        return `translate(${0},${-marginBottom})`;
+                    }
+                    return `translate(${-0.5 * barWidth},${-marginBottom})`;
+                })
                 .attr(
                     "fill",
                     utils.valueToColor(
@@ -318,7 +282,16 @@ export default function Graph({ sensor, interval }: GraphProps) {
                 .attr("stroke-linejoin", "round")
                 .attr("stroke-linecap", "round")
                 .attr("class", styles.line)
-                .attr("d", area);
+                .attr(
+                    "d",
+                    d3
+                        .area(
+                            (d: GraphData) => x(d.time),
+                            (d: GraphData) => y(d.value),
+                            (d: GraphData) => y(extent[0])
+                        )
+                        .curve(d3.curveNatural)
+                );
         }
     }, [data, size]);
 
