@@ -1,111 +1,117 @@
 @import "../../variables.less";
 
-.button{
-    padding: .6rem 1rem;
+.button {
+    padding: 0.6rem 1rem;
     background-color: var(--backgroundColor3);
     border: 1px solid var(--borderColor3);
     color: var(--color3);
-    border-radius: .5rem;
+    border-radius: 0.5rem;
     font-weight: 500;
     cursor: pointer;
-    transition: all .2s;
+    transition: all 0.2s;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: .5rem;
+    gap: 0.5rem;
     opacity: 1;
 
-
-    svg{
+    svg {
         fill: var(--color3);
         color: var(--color3);
-        transition: all .2s;
+        transition: all 0.2s;
     }
 
-    &.color-1{
+    &.color-1 {
         background-color: var(--backgroundColor1);
         border: 1px solid var(--borderColor1);
         color: var(--color1);
 
-        svg{
+        svg {
             fill: var(--color1);
             color: var(--color1);
         }
-        
-        &:hover:not(:disabled){
-            background-color: var(--backgroundColor1Hover);
+
+        @media (hover) {
+            &:hover:not(:disabled) {
+                background-color: var(--backgroundColor1Hover);
+            }
         }
     }
 
-    &.color-2{
+    &.color-2 {
         background-color: var(--backgroundColor2);
         border: 1px solid var(--borderColor2);
         color: var(--color2);
 
-        svg{
+        svg {
             fill: var(--color2);
             color: var(--color2);
         }
 
-        &:hover:not(:disabled){
-            background-color: var(--backgroundColor2Hover);
+        @media (hover) {
+            &:hover:not(:disabled) {
+                background-color: var(--backgroundColor2Hover);
+            }
         }
     }
 
-    &.color-3{
+    &.color-3 {
         background-color: var(--backgroundColor3);
         border: 1px solid var(--borderColor3);
         color: var(--color3);
 
-        svg{
+        svg {
             fill: var(--color3);
             color: var(--color3);
         }
 
-        &:hover:not(:disabled){
-            background-color: var(--backgroundColor3Hover);
+        @media (hover) {
+            &:hover:not(:disabled) {
+                background-color: var(--backgroundColor3Hover);
+            }
         }
     }
 
-    &.red{
+    &.red {
         background-color: var(--backgroundColorRed);
         border: 1px solid var(--borderColorRed);
         color: var(--colorRed);
 
-        svg{
+        svg {
             fill: var(--colorRed);
             color: var(--colorRed);
         }
     }
 
-    &.green{
+    &.green {
         background-color: var(--backgroundColorGreen);
         border: 1px solid var(--borderColorGreen);
         color: var(--colorGreen);
 
-        svg{
+        svg {
             fill: var(--colorGreen);
             color: var(--colorGreen);
         }
     }
 
-    &.yellow{
+    &.yellow {
         background-color: var(--backgroundColorYellow);
         border: 1px solid var(--borderColorYellow);
         color: var(--colorYellow);
 
-        svg{
+        svg {
             fill: var(--colorYellow);
             color: var(--colorYellow);
         }
     }
 
-    &.notClickable{
+    &.notClickable {
         pointer-events: none;
     }
 
-    &.hideIcon{
-        svg, img{
+    &.hideIcon {
+        svg,
+        img {
             width: 0px !important;
             height: 0px !important;
             opacity: 0;
@@ -114,45 +120,48 @@
         gap: 0;
     }
 
-    &.icon-small{
-        svg, img{
+    &.icon-small {
+        svg,
+        img {
             width: 14px;
             height: 14px;
         }
     }
 
-    &.icon-medium{
-        svg, img{
+    &.icon-medium {
+        svg,
+        img {
             width: 16px;
             height: 16px;
         }
     }
 
-    &.icon-large{
-        svg, img{
+    &.icon-large {
+        svg,
+        img {
             width: 18px;
             height: 18px;
         }
     }
 
-    &.text-small{
-        font-size: .8rem
+    &.text-small {
+        font-size: 0.8rem;
     }
 
-    &.text-medium{
-        font-size: .9rem;
+    &.text-medium {
+        font-size: 0.9rem;
     }
 
-    &.text-large{
-        font-size: 1.2rem
+    &.text-large {
+        font-size: 1.2rem;
     }
 
-    &:disabled{
+    &:disabled {
         opacity: 0;
         display: none;
     }
 
-    &.fadeInOutInfinitely{
+    &.fadeInOutInfinitely {
         animation: fadeOutIn 2s infinite;
     }
 
@@ -168,8 +177,8 @@
         }
     }
 
-    &.wiggleOnce{
-        animation: wiggle .5s 1;
+    &.wiggleOnce {
+        animation: wiggle 0.5s 1;
     }
 
     @keyframes wiggle {
@@ -190,8 +199,8 @@
         }
     }
 
-    &.scaleUpOnce{
-        animation: scaleUp .5s 1 ease-in-out;
+    &.scaleUpOnce {
+        animation: scaleUp 0.5s 1 ease-in-out;
     }
 
     @keyframes scaleUp {

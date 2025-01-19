@@ -264,12 +264,14 @@ function getRgb(color: string) {
     };
 }
 
+export type RGBColor = `rgb(${number}, ${number}, ${number})`;
+
 export class Utils {
     colorInterpolate(
-        colorA: `rgb(${number}, ${number}, ${number})`,
-        colorB: `rgb(${number}, ${number}, ${number})`,
+        colorA: RGBColor,
+        colorB: RGBColor,
         factor: number
-    ): `rgb(${number}, ${number}, ${number})` {
+    ): RGBColor {
         const rgbA = getRgb(colorA),
             rgbB = getRgb(colorB);
         const colorVal = (prop: "r" | "g" | "b") =>
@@ -281,14 +283,15 @@ export class Utils {
         value: number | null | undefined,
         theme: "dark" | "light",
         elementType?: WeatherElementType
-    ): string {
-        let nullColor = "rgb(145, 145, 145)";
-        let fallbackColor = "var(--accentColor)";
+    ): RGBColor {
+        let nullColor: RGBColor = "rgb(145, 145, 145)";
+        let fallbackColor: RGBColor;
         let predefinedColors: {
             value: number;
-            color: `rgb(${number}, ${number}, ${number})`;
+            color: RGBColor;
         }[] = [];
         if (theme === "dark") {
+            fallbackColor = "rgb(150, 199, 255)";
             switch (elementType) {
                 case "temperature":
                 case "perceived-temperature":
@@ -320,29 +323,30 @@ export class Utils {
                 case "precipation":
                 case "precipation-probability":
                 case "precipation-rate":
-                    fallbackColor = "rgb(104, 164, 255)";
+                    fallbackColor = "rgb(104, 187, 255)";
                     break;
                 case "wind-chill":
                 case "wind-direction":
                 case "wind-gust":
                 case "wind-speed":
-                    fallbackColor = "var(--windColor)";
+                    fallbackColor = "rgb(218, 184, 223)";
                     break;
                 case "solar-radiation":
                 case "uv":
                 case "sunshine":
-                    fallbackColor = "var(--sunColor)";
+                    fallbackColor = "rgb(255, 210, 141)";
                     break;
                 case "leaf-temperature":
                 case "soil-moisture":
                 case "soil-temperature":
                 case "leaf-wetness":
                 case "soil-ph":
-                    fallbackColor = "var(--leafColor)";
+                    fallbackColor = "rgb(164, 255, 121)";
                     break;
                 default:
             }
         } else {
+            fallbackColor = "rgb(0, 102, 185)";
             switch (elementType) {
                 case "temperature":
                 case "perceived-temperature":
@@ -380,19 +384,19 @@ export class Utils {
                 case "wind-direction":
                 case "wind-gust":
                 case "wind-speed":
-                    fallbackColor = "var(--windColor)";
+                    fallbackColor = "rgb(122, 0, 116)";
                     break;
                 case "solar-radiation":
                 case "uv":
                 case "sunshine":
-                    fallbackColor = "var(--sunColor)";
+                    fallbackColor = "rgb(172, 103, 0)";
                     break;
                 case "leaf-temperature":
                 case "soil-moisture":
                 case "soil-temperature":
                 case "leaf-wetness":
                 case "soil-ph":
-                    fallbackColor = "var(--leafColor)";
+                    fallbackColor = "rgb(0, 151, 66)";
                     break;
                 default:
             }

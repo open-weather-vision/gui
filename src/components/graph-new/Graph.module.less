@@ -5,6 +5,7 @@
     color: var(--color2);
     margin-top: 1rem;
     overflow: hidden;
+    user-select: none;
 }
 
 .header {
@@ -14,12 +15,102 @@
     display: flex;
     align-items: center;
     gap: 1rem;
+
+    .title {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        flex-grow: 1;
+        text-wrap-mode: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        flex-wrap: nowrap;
+
+        span {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            flex-wrap: nowrap;
+        }
+
+        svg {
+            min-width: 1rem;
+            min-height: 1rem;
+            max-width: 1rem;
+            max-height: 1rem;
+        }
+    }
+
+    .sensors {
+        display: flex;
+        flex-direction: row;
+        gap: 0.2rem;
+        margin-left: auto;
+        max-width: 40%;
+        overflow: scroll;
+        flex-wrap: nowrap;
+        flex-shrink: 1;
+
+        .sensorIndexButton {
+            background-color: var(--backgroundColor4);
+            min-width: 1.75rem;
+            min-height: 1.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.5rem;
+            border: 1px solid var(--borderColor4);
+            color: var(--color4);
+            cursor: pointer;
+
+            @media (hover) {
+                &:hover,
+                &:hover.selected {
+                    background-color: var(--backgroundColor2);
+                    border-color: var(--borderColor2);
+                    color: var(--color2);
+                }
+            }
+
+            &.selected {
+                background-color: var(--backgroundColor1);
+                border-color: var(--borderColor1);
+                color: var(--color1);
+            }
+        }
+    }
 }
 
 .chartContainer {
     background-color: var(--backgroundColor2);
     color: var(--color2);
     padding: 0.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    width: 100%;
+    min-height: min(500px, 60vh, 100vw);
+    position: relative;
+
+    .graph {
+        opacity: 1;
+        position: absolute;
+
+        &.hidden {
+            opacity: 0.3;
+        }
+    }
+
+    .loader {
+        transition: all 0.5s;
+        opacity: 1;
+
+        &.hidden {
+            opacity: 0;
+        }
+    }
 
     @media screen and (min-width: 500px) {
         padding: 1rem;

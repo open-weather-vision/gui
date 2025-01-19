@@ -1,0 +1,146 @@
+@import "../../variables.less";
+
+.extremeView {
+    box-sizing: border-box;
+    border: 1px solid var(--borderColor2);
+    background-color: var(--backgroundColor2);
+    border-radius: 0.5rem;
+    color: var(--color2);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+    align-content: stretch;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out, filter 0s;
+    user-select: none;
+    min-width: 20rem !important;
+    max-width: 40rem;
+    flex: 1 1 0;
+    overflow: hidden;
+    height: 8rem;
+    flex-wrap: nowrap;
+
+    &.precipation-rate {
+        background-color: var(--rainMaxBackgroundColor);
+        border-color: var(--rainMaxBorderColor);
+        color: var(--rainMaxColor);
+    }
+
+    &.temperature.max {
+        background-color: var(--temperatureMaxBackgroundColor);
+        border-color: var(--temperatureMaxBorderColor);
+        color: var(--temperatureMaxColor);
+    }
+
+    &.temperature.min {
+        background-color: var(--temperatureMinBackgroundColor);
+        border-color: var(--temperatureMinBorderColor);
+        color: var(--temperatureMinColor);
+    }
+
+    .left {
+        padding: 0rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        box-sizing: border-box;
+        flex-grow: 1;
+        flex-basis: auto;
+        flex-shrink: 1;
+
+        .data {
+            display: flex;
+            flex-direction: row;
+            padding: 0rem;
+            box-sizing: border-box;
+            align-items: last baseline;
+            flex-grow: 1;
+            padding-left: 1.25rem;
+
+            .value {
+                font-size: 2.5rem;
+                font-weight: 600;
+            }
+
+            .unit {
+                font-size: 1.5rem;
+                margin-left: 0.5rem;
+                font-weight: 400;
+                transition: all 0.3s ease-in-out;
+            }
+        }
+        .label {
+            font-size: 0.8rem;
+            box-sizing: border-box;
+            font-weight: 600;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            text-wrap-mode: nowrap;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+
+            .element {
+                overflow: hidden;
+                flex-wrap: nowrap;
+                text-wrap-mode: nowrap;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                position: absolute;
+                left: 3rem;
+                max-width: calc(80% - 2rem);
+            }
+        }
+    }
+
+    .right {
+        background-color: var(--backgroundColor4);
+        display: flex;
+        flex-direction: column;
+        border-left: 1px solid var(--borderColor4);
+        min-width: 10rem;
+        flex-grow: 0;
+        flex-shrink: 0;
+        font-weight: 300;
+        font-size: 0.8rem;
+
+        .top {
+            padding: 1rem;
+            border-bottom: 1px solid var(--borderColor4);
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.25rem;
+
+            .time {
+                font-weight: 600;
+            }
+        }
+
+        .bottom {
+            padding: 1rem;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .rankIcon {
+                width: 1rem;
+                margin-right: 0.5rem;
+            }
+
+            .rank {
+                font-weight: 600;
+            }
+        }
+    }
+}

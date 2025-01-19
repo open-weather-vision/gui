@@ -65,12 +65,14 @@
   cursor: pointer;
   transition: all 0.2s;
 }
-.popup .header .closeIcon:hover {
-  margin-left: auto;
-  width: 1.5rem;
-  height: 1.5rem;
-  cursor: pointer;
-  transform: scale(1.1);
+@media (hover) {
+  .popup .header .closeIcon:hover {
+    margin-left: auto;
+    width: 1.5rem;
+    height: 1.5rem;
+    cursor: pointer;
+    transform: scale(1.1);
+  }
 }
 .popup .content {
   width: 50rem;

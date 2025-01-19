@@ -3,8 +3,6 @@ import { useTranslation } from "react-multi-lang";
 import styles from "./IntervalSelector.module.css";
 import { ReactComponent as LeftArrow } from "../../img/icons/arrow-left-2.svg";
 import { ReactComponent as RightArrow } from "../../img/icons/arrow-right-2.svg";
-import Select from "../select/Select";
-import { useSearchParams } from "react-router-dom";
 
 function weekNumber(date: Date) {
     // Copy date so don't modify original
@@ -59,17 +57,22 @@ export function date(year?: number, month?: number, day?: number) {
     return date;
 }
 
-export type IntervalType = "day" | "week" | "month" | "year";
-export const IntervalTypes: IntervalType[] = ["day", "week", "month", "year"];
+export type GraphIntervalType = "day" | "week" | "month" | "year";
+export const GraphIntervalTypes: GraphIntervalType[] = [
+    "day",
+    "week",
+    "month",
+    "year",
+];
 
-export type Interval = {
-    type: IntervalType;
+export type GraphInterval = {
+    type: GraphIntervalType;
     date: Date;
     begin: Date;
     end: Date;
 };
 
-function beginOfInterval(date: Date, interval: IntervalType) {
+function beginOfGraphInterval(date: Date, interval: GraphIntervalType) {
     const result = new Date(date);
     switch (interval) {
         case "day":
@@ -90,7 +93,7 @@ function beginOfInterval(date: Date, interval: IntervalType) {
     return result;
 }
 
-function endOfInterval(date: Date, interval: IntervalType): Date {
+function endOfGraphInterval(date: Date, interval: GraphIntervalType): Date {
     const result = new Date(date);
     switch (interval) {
         case "day":
@@ -110,20 +113,27 @@ function endOfInterval(date: Date, interval: IntervalType): Date {
     return result;
 }
 
-export function IntervalFromDate(date: Date, type: IntervalType): Interval {
-    const begin = beginOfInterval(date, type);
-    const end = endOfInterval(begin, type);
+export function GraphIntervalFromDate(
+    d: Date,
+    type: GraphIntervalType
+): GraphInterval {
+    let begin = beginOfGraphInterval(d, type);
+    if (begin > new Date()) {
+        d = date();
+        begin = beginOfGraphInterval(d, type);
+    }
+    const end = endOfGraphInterval(begin, type);
     return {
         begin,
         end,
-        date,
+        date: d,
         type,
     };
 }
 
 export default function IntervalSelector(props: {
-    interval: Interval;
-    setInterval: React.Dispatch<SetStateAction<Interval>>;
+    interval: GraphInterval;
+    setInterval: React.Dispatch<SetStateAction<GraphInterval>>;
 }) {
     const t = useTranslation("interval");
     const [isIntervalTypeOpen, setIntervalTypeOpen] = useState(false);
@@ -158,22 +168,22 @@ export default function IntervalSelector(props: {
         return result;
     }
 
-    function selectInterval(type: IntervalType) {
+    function selectInterval(type: GraphIntervalType) {
         setIntervalTypeOpen(false);
         switchToInterval(type);
     }
 
-    function switchToInterval(type: IntervalType) {
+    function switchToInterval(type: GraphIntervalType) {
         let currentDate = props.interval.date;
         let begin, end;
         switch (type) {
             case "day":
-                begin = beginOfInterval(currentDate, "day");
+                begin = beginOfGraphInterval(currentDate, "day");
                 if (begin > date()) {
                     currentDate = date();
-                    begin = beginOfInterval(date(), "day");
+                    begin = beginOfGraphInterval(date(), "day");
                 }
-                end = endOfInterval(begin, "day");
+                end = endOfGraphInterval(begin, "day");
                 props.setInterval({
                     date: currentDate,
                     type: "day",
@@ -182,12 +192,12 @@ export default function IntervalSelector(props: {
                 });
                 break;
             case "week":
-                begin = beginOfInterval(currentDate, "week");
+                begin = beginOfGraphInterval(currentDate, "week");
                 if (begin > date()) {
                     currentDate = date();
-                    begin = beginOfInterval(date(), "week");
+                    begin = beginOfGraphInterval(date(), "week");
                 }
-                end = endOfInterval(begin, "week");
+                end = endOfGraphInterval(begin, "week");
                 props.setInterval({
                     date: currentDate,
                     type: "week",
@@ -196,12 +206,12 @@ export default function IntervalSelector(props: {
                 });
                 break;
             case "month":
-                begin = beginOfInterval(currentDate, "month");
+                begin = beginOfGraphInterval(currentDate, "month");
                 if (begin > date()) {
                     currentDate = date();
-                    begin = beginOfInterval(date(), "month");
+                    begin = beginOfGraphInterval(date(), "month");
                 }
-                end = endOfInterval(begin, "month");
+                end = endOfGraphInterval(begin, "month");
                 props.setInterval({
                     date: currentDate,
                     type: "month",
@@ -210,12 +220,12 @@ export default function IntervalSelector(props: {
                 });
                 break;
             case "year":
-                begin = beginOfInterval(currentDate, "year");
+                begin = beginOfGraphInterval(currentDate, "year");
                 if (begin > date()) {
                     currentDate = date();
-                    begin = beginOfInterval(date(), "year");
+                    begin = beginOfGraphInterval(date(), "year");
                 }
-                end = endOfInterval(begin, "year");
+                end = endOfGraphInterval(begin, "year");
                 props.setInterval({
                     date: currentDate,
                     type: "year",
@@ -232,23 +242,23 @@ export default function IntervalSelector(props: {
         switch (props.interval.type) {
             case "day":
                 currentDate.setDate(currentDate.getDate() - 1);
-                begin = beginOfInterval(currentDate, "day");
-                end = endOfInterval(begin, "day");
+                begin = beginOfGraphInterval(currentDate, "day");
+                end = endOfGraphInterval(begin, "day");
                 break;
             case "week":
                 currentDate.setDate(currentDate.getDate() - 7);
-                begin = beginOfInterval(currentDate, "week");
-                end = endOfInterval(begin, "week");
+                begin = beginOfGraphInterval(currentDate, "week");
+                end = endOfGraphInterval(begin, "week");
                 break;
             case "month":
                 currentDate.setMonth(currentDate.getMonth() - 1);
-                begin = beginOfInterval(currentDate, "month");
-                end = endOfInterval(begin, "month");
+                begin = beginOfGraphInterval(currentDate, "month");
+                end = endOfGraphInterval(begin, "month");
                 break;
             case "year":
                 currentDate.setFullYear(currentDate.getFullYear() - 1);
-                begin = beginOfInterval(currentDate, "year");
-                end = endOfInterval(begin, "year");
+                begin = beginOfGraphInterval(currentDate, "year");
+                end = endOfGraphInterval(begin, "year");
                 break;
         }
         props.setInterval({ ...props.interval, begin, end, date: currentDate });
@@ -260,23 +270,23 @@ export default function IntervalSelector(props: {
         switch (props.interval.type) {
             case "day":
                 currentDate.setDate(currentDate.getDate() + 1);
-                begin = beginOfInterval(currentDate, "day");
-                end = endOfInterval(begin, "day");
+                begin = beginOfGraphInterval(currentDate, "day");
+                end = endOfGraphInterval(begin, "day");
                 break;
             case "week":
                 currentDate.setDate(currentDate.getDate() + 7);
-                begin = beginOfInterval(currentDate, "week");
-                end = endOfInterval(begin, "week");
+                begin = beginOfGraphInterval(currentDate, "week");
+                end = endOfGraphInterval(begin, "week");
                 break;
             case "month":
                 currentDate.setMonth(currentDate.getMonth() + 1);
-                begin = beginOfInterval(currentDate, "month");
-                end = endOfInterval(begin, "month");
+                begin = beginOfGraphInterval(currentDate, "month");
+                end = endOfGraphInterval(begin, "month");
                 break;
             case "year":
                 currentDate.setFullYear(currentDate.getFullYear() + 1);
-                begin = beginOfInterval(currentDate, "year");
-                end = endOfInterval(begin, "year");
+                begin = beginOfGraphInterval(currentDate, "year");
+                end = endOfGraphInterval(begin, "year");
                 break;
         }
         props.setInterval({ ...props.interval, begin, end, date: currentDate });
@@ -317,7 +327,7 @@ export default function IntervalSelector(props: {
                         isIntervalTypeOpen && styles.open
                     }`}
                 >
-                    {IntervalTypes.filter(
+                    {GraphIntervalTypes.filter(
                         (type) => type != props.interval.type
                     ).map((interval) => {
                         return (

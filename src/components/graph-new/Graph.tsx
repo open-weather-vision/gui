@@ -3,11 +3,17 @@ import styles from "./Graph.module.css";
 import { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
 import { useWindowSize } from "@uidotdev/usehooks";
-import { Interval, IntervalType } from "../intervalSelector/IntervalSelector";
+import {
+    GraphInterval,
+    GraphIntervalType,
+} from "../intervalSelector/IntervalSelector";
 import useGlobalContext from "../../utils/useGlobalContext";
-import WeatherElementType from "../../types/WeatherElementType";
+import WeatherElementType, {
+    WeatherElementTypes,
+} from "../../types/WeatherElementType";
 import { useTranslation } from "react-multi-lang";
 import utils from "../../utils/utils";
+import BarLoader from "react-spinners/BarLoader";
 
 export type GraphData = {
     time: Date;
@@ -15,14 +21,14 @@ export type GraphData = {
 };
 
 export type SensorDescription = {
-    sensorId?: string;
-    elementType: WeatherElementType;
+    sensorId: string;
     location?: "inside" | "outside";
 };
 
 export type GraphProps = {
-    interval: Interval;
-    sensor: SensorDescription;
+    interval: GraphInterval;
+    elementType: ChartSupportedWeatherElementType;
+    sensors: SensorDescription[];
 };
 
 function daysInMonth(month: number, year: number) {
@@ -32,71 +38,139 @@ function daysInMonth(month: number, year: number) {
 async function loadPoints(
     sensorId: string,
     begin: Date,
-    interval: IntervalType
-): Promise<GraphData[]> {
-    let pointCount: number;
-    let secondsPerPoint: number;
-    switch (interval) {
-        case "day":
-            pointCount = 24 * 2;
-            secondsPerPoint = 86400 / pointCount;
-            break;
-        case "week":
-            pointCount = 7 * 24;
-            secondsPerPoint = (7 * 60 * 60 * 24) / pointCount;
-            break;
-        case "month":
-            pointCount =
-                daysInMonth(begin.getMonth() + 1, begin.getFullYear()) * 6;
-            secondsPerPoint =
-                (daysInMonth(begin.getMonth() + 1, begin.getFullYear()) *
-                    60 *
-                    60 *
-                    24) /
-                pointCount;
-            break;
-        case "year":
-            pointCount = 365;
-            secondsPerPoint = (365 * 60 * 60 * 24) / pointCount;
-            break;
-    }
-    const result: GraphData[] = [];
-    let time = new Date(begin);
-    let valueBefore = 0;
-    for (let i = 0; i <= pointCount; i++) {
-        result[i] = {
-            time,
-            value: Math.max(
-                -20,
-                Math.min(40, -2.5 + Math.random() * 5 + valueBefore)
-            ),
-        };
-        valueBefore = result[i].value;
+    interval: GraphIntervalType,
+    signal: AbortSignal
+): Promise<GraphData[] | null> {
+    try {
+        let pointCount: number;
+        let secondsPerPoint: number;
 
-        time = new Date(time);
-        time.setSeconds(time.getSeconds() + secondsPerPoint);
-        if (time > new Date()) break;
+        const promise = new Promise<void>((resolve, reject) => {
+            setTimeout(resolve, 500);
+        });
+        signal.throwIfAborted();
+        await promise;
+        signal.throwIfAborted();
+
+        switch (interval) {
+            case "day":
+                pointCount = 24 * 2;
+                secondsPerPoint = 86400 / pointCount;
+                break;
+            case "week":
+                pointCount = 7 * 24;
+                secondsPerPoint = (7 * 60 * 60 * 24) / pointCount;
+                break;
+            case "month":
+                pointCount =
+                    daysInMonth(begin.getMonth() + 1, begin.getFullYear()) * 6;
+                secondsPerPoint =
+                    (daysInMonth(begin.getMonth() + 1, begin.getFullYear()) *
+                        60 *
+                        60 *
+                        24) /
+                    pointCount;
+                break;
+            case "year":
+                pointCount = 365;
+                secondsPerPoint = (365 * 60 * 60 * 24) / pointCount;
+                break;
+        }
+        const result: GraphData[] = [];
+        let time = new Date(begin);
+        let valueBefore = 0;
+        for (let i = 0; i <= pointCount; i++) {
+            result[i] = {
+                time,
+                value: Math.max(
+                    -20,
+                    Math.min(40, -2.5 + Math.random() * 5 + valueBefore)
+                ),
+            };
+            valueBefore = result[i].value;
+
+            time = new Date(time);
+            time.setSeconds(time.getSeconds() + secondsPerPoint);
+            if (time > new Date()) break;
+        }
+        return result;
+    } catch (err) {
+        return null;
     }
-    return result;
 }
 
-export default function Graph({ sensor, interval }: GraphProps) {
+export type ChartSupportedWeatherElementType = Exclude<
+    WeatherElementType,
+    "weather-state"
+>;
+
+const chartTypes: {
+    [Property in ChartSupportedWeatherElementType]: "bar" | "area" | "special";
+} = {
+    cloudiness: "area",
+    evaporation: "bar",
+    "leaf-temperature": "area",
+    "leaf-wetness": "area",
+    "perceived-temperature": "area",
+    "precipation-probability": "area",
+    "precipation-rate": "bar",
+    "snow-height": "area",
+    "soil-moisture": "area",
+    "soil-ph": "area",
+    "soil-temperature": "area",
+    "solar-radiation": "area",
+    "wind-chill": "area",
+    "wind-direction": "special",
+    "wind-gust": "area",
+    "wind-speed": "area",
+    humidity: "area",
+    precipation: "bar",
+    pressure: "area",
+    sunshine: "bar",
+    temperature: "area",
+    uv: "bar",
+    visibility: "area",
+};
+
+export default function Graph({ sensors, interval, elementType }: GraphProps) {
     const svgRef = useRef<SVGSVGElement>(null);
     const chartContainerRef = useRef<HTMLDivElement>(null);
     const size = useWindowSize();
     const globals = useGlobalContext();
     const [data, setData] = useState<GraphData[]>([]);
+    const [sensorIndex, setSensorIndex] = useState(0);
+    const [loading, setLoading] = useState(true);
     const t = useTranslation("sensor-view");
+    const [abortControllers, setAbortControllers] = useState<AbortController[]>(
+        []
+    );
 
     async function load() {
-        setData(
-            await loadPoints(sensor.sensorId!, interval.begin, interval.type)
+        setAbortControllers((prev) =>
+            prev.filter((controller) => {
+                controller.abort();
+                return false;
+            })
         );
+
+        const ac = new AbortController();
+        setAbortControllers((prev) => [...prev, ac]);
+        const points = await loadPoints(
+            sensors[sensorIndex].sensorId!,
+            interval.begin,
+            interval.type,
+            ac.signal
+        );
+        if (points) setData(points);
+        else {
+            console.log("Aborted!");
+        }
     }
 
     useEffect(() => {
+        setLoading(true);
         load();
-    }, [interval]);
+    }, [interval, sensorIndex]);
 
     useEffect(() => {
         // Declare the chart dimensions and margins.
@@ -130,23 +204,24 @@ export default function Graph({ sensor, interval }: GraphProps) {
             .attr("width", width)
             .attr("height", height);
 
-        // Append graphs
+        if (data.length === 0) return;
+
+        // Append gradient
         const defs = svg.append("defs");
 
-        const gradient = defs
+        const fillGradient = defs
             .append("linearGradient")
-            .attr("id", `colorGradient-${sensor.sensorId}`)
+            .attr("id", `fillGradient-${sensors[sensorIndex].sensorId}`)
             .attr("x1", "0%")
             .attr("y1", "0%")
             .attr("x2", "100%")
             .attr("y2", "0%");
-
         for (
             let i = 0;
             i < data.length;
-            i += Math.max(1, Math.round(data.length / 10))
+            i += Math.max(1, Math.round(data.length / 100))
         ) {
-            gradient
+            fillGradient
                 .append("stop")
                 .attr("offset", `${(i * 100) / (data.length - 1)}%`)
                 .attr(
@@ -154,7 +229,38 @@ export default function Graph({ sensor, interval }: GraphProps) {
                     utils.valueToColor(
                         data[i].value,
                         globals.theme,
-                        sensor.elementType
+                        elementType
+                    )
+                )
+                .attr("stop-opacity", globals.theme === "dark" ? 0.7 : 0.6);
+        }
+        const strokeGradient = defs
+            .append("linearGradient")
+            .attr("id", `strokeGradient-${sensors[sensorIndex].sensorId}`)
+            .attr("x1", "0%")
+            .attr("y1", "0%")
+            .attr("x2", "100%")
+            .attr("y2", "0%");
+        for (
+            let i = 0;
+            i < data.length;
+            i += Math.max(1, Math.round(data.length / 100))
+        ) {
+            strokeGradient
+                .append("stop")
+                .attr("offset", `${(i * 100) / (data.length - 1)}%`)
+                .attr(
+                    "stop-color",
+                    utils.colorInterpolate(
+                        utils.valueToColor(
+                            data[i].value,
+                            globals.theme,
+                            elementType
+                        ),
+                        globals.theme === "dark"
+                            ? "rgb(255, 255, 255)"
+                            : "rgb(0, 0, 0)",
+                        globals.theme === "dark" ? 0.3 : 0.2
                     )
                 )
                 .attr("stop-opacity", 1);
@@ -215,22 +321,46 @@ export default function Graph({ sensor, interval }: GraphProps) {
             .call(xAxis);
 
         // Add the y-axis.
+        const yAxis = d3
+            .axisLeft(y)
+            .tickSize(12)
+            .tickValues(y.ticks().filter((tick) => Number.isInteger(tick)))
+            .tickFormat(d3.format("d"));
         svg.append("g")
             .attr("transform", `translate(${marginLeft},0)`)
+            .attr("opacity", "1")
+            .attr("width", 12)
             .attr("class", styles.yAxis)
-            .call(
-                d3
-                    .axisLeft(y)
-                    .tickSize(12)
-                    .tickValues(
-                        y.ticks().filter((tick) => Number.isInteger(tick))
-                    )
-                    .tickFormat(d3.format("d"))
-            );
+            .call(yAxis);
 
-        // Add the curve
+        // Graph background
+        svg.append("rect")
+            .attr("width", width - marginLeft - marginRight)
+            .attr("height", height - marginTop - marginBottom)
+            .attr("transform", `translate(${marginLeft},${marginTop})`)
+            .attr("fill", "var(--backgroundColor3)");
 
-        if (sensor.elementType === "precipation") {
+        // Grid
+        const xGrid = xAxis
+            .tickFormat(() => "")
+            .tickSize(height - marginBottom - marginTop);
+        svg.append("g")
+            .attr("class", styles.xGrid)
+            .attr("transform", `translate(${-1},${marginTop})`)
+            .attr("opacity", ".2")
+            .call(xGrid);
+
+        const yGrid = yAxis
+            .tickFormat(() => "")
+            .tickSizeInner(-width + marginLeft + marginRight);
+        svg.append("g")
+            .attr("class", styles.yGrid)
+            .attr("transform", `translate(${marginLeft},${0})`)
+            .attr("opacity", ".2")
+            .call(yGrid);
+
+        // Add the area or bar
+        if (chartTypes[elementType] === "bar") {
             if (data.length === 0) return;
             const lengthFactor =
                 (data[data.length - 1].time.getTime() -
@@ -267,17 +397,27 @@ export default function Graph({ sensor, interval }: GraphProps) {
                 })
                 .attr(
                     "fill",
-                    utils.valueToColor(
-                        undefined,
-                        globals.theme,
-                        sensor.elementType
-                    )
-                );
-        } else {
+                    utils.valueToColor(undefined, globals.theme, elementType)
+                )
+                .attr(
+                    "stroke",
+                    `url(#strokeGradient-${sensors[sensorIndex].sensorId})`
+                )
+                .attr("stroke-opacity", 1)
+                .attr("stroke-width", 1.5)
+                .attr("fill-opacity", ".7");
+        } else if (chartTypes[elementType] === "area") {
             svg.append("path")
                 .datum(data)
-                .attr("fill", `url(#colorGradient-${sensor.sensorId})`)
-                .attr("stroke", "var(--color2)")
+                .attr(
+                    "fill",
+                    `url(#fillGradient-${sensors[sensorIndex].sensorId})`
+                )
+                .attr(
+                    "stroke",
+                    `url(#strokeGradient-${sensors[sensorIndex].sensorId})`
+                )
+                .attr("stroke-opacity", 1)
                 .attr("stroke-width", 1.5)
                 .attr("stroke-linejoin", "round")
                 .attr("stroke-linecap", "round")
@@ -293,16 +433,49 @@ export default function Graph({ sensor, interval }: GraphProps) {
                         .curve(d3.curveNatural)
                 );
         }
+        setTimeout(() => setLoading(false), 10);
     }, [data, size]);
 
     return (
-        <div className={styles.chart} id={sensor.sensorId}>
+        <div className={styles.chart}>
+            {sensors.map((sensor) => (
+                <span id={sensor.sensorId} key={sensor.sensorId} hidden></span>
+            ))}
             <div className={styles.header}>
-                {utils.iconComponent(sensor.elementType)}
-                {t(`${sensor.elementType}_label`)}
+                <div className={styles.title}>
+                    {utils.iconComponent(elementType)}
+                    <span>
+                        {t(`${elementType}_label`)}
+                        {` `}({globals.units[elementType]})
+                    </span>
+                </div>
+                {sensors.length > 1 && (
+                    <div className={styles.sensors}>
+                        {sensors.map((sensor, index) => (
+                            <div
+                                className={`${styles.sensorIndexButton} ${
+                                    index === sensorIndex && styles.selected
+                                }`}
+                                onClick={() => setSensorIndex(index)}
+                                key={sensor.sensorId}
+                            >
+                                {index + 1}
+                            </div>
+                        ))}
+                    </div>
+                )}
             </div>
             <div className={styles.chartContainer} ref={chartContainerRef}>
-                <svg ref={svgRef}></svg>
+                <svg
+                    ref={svgRef}
+                    className={`${styles.graph} ${
+                        loading ? styles.hidden : ""
+                    }`}
+                ></svg>
+                <BarLoader
+                    loading={loading}
+                    color={globals.theme === "dark" ? "white" : "black"}
+                />
             </div>
         </div>
     );

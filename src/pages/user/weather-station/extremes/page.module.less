@@ -1,0 +1,127 @@
+.extremes {
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--backgroundColor2);
+    border-radius: 1rem;
+    border: 1px solid var(--borderColor2);
+    color: var(--color2);
+    overflow: auto;
+
+    user-select: none;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    background-color: var(--backgroundColor1);
+    color: var(--color1);
+    padding: 1rem;
+    border-bottom: 1px solid var(--borderColor1);
+    justify-content: space-between;
+    border-radius: 1rem 1rem 0 0;
+
+    .label {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        cursor: pointer;
+
+        .icon {
+            fill: var(--color1);
+            width: 1rem;
+            height: 1rem;
+        }
+    }
+
+    .intervalSelector {
+        display: flex;
+        flex-direction: row;
+    }
+}
+
+.body {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    height: 100%;
+
+    .item {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+        background-color: var(--backgroundColor3);
+        color: var(--color2);
+        flex-grow: 1;
+        height: 100%;
+
+        &:nth-child(2n) {
+            background-color: var(--backgroundColor2);
+
+            .rank {
+                background-color: var(--backgroundColor3) !important;
+                border: 1px solid var(--borderColor3) !important;
+            }
+        }
+
+        .left {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            .rank {
+                font-weight: 300;
+                width: 2rem;
+                height: 2rem;
+                background-color: var(--backgroundColor2);
+                border-radius: 2rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border: 1px solid var(--borderColor2);
+
+                @media screen and (max-width: 600px) {
+                    width: 1.75rem;
+                    height: 1.75rem;
+                }
+            }
+        }
+        .value {
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-left: 1.5rem;
+
+            @media screen and (max-width: 600px) {
+                font-size: 1.4rem;
+
+                .unit {
+                    font-size: 0.8rem;
+                }
+            }
+
+            .unit {
+                margin-left: 0.3rem;
+                font-size: 0.9rem;
+                font-weight: 400;
+            }
+        }
+
+        .time {
+            font-weight: 300;
+            min-width: 10rem;
+            span {
+                font-weight: 600;
+            }
+
+            @media screen and (max-width: 600px) {
+                font-size: 0.9rem;
+                min-width: 9.5rem;
+            }
+        }
+    }
+}

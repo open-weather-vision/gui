@@ -39,8 +39,10 @@
   fill: var(--color1);
   color: var(--color1);
 }
-.button.color-1:hover:not(:disabled) {
-  background-color: var(--backgroundColor1Hover);
+@media (hover) {
+  .button.color-1:hover:not(:disabled) {
+    background-color: var(--backgroundColor1Hover);
+  }
 }
 .button.color-2 {
   background-color: var(--backgroundColor2);
@@ -51,8 +53,10 @@
   fill: var(--color2);
   color: var(--color2);
 }
-.button.color-2:hover:not(:disabled) {
-  background-color: var(--backgroundColor2Hover);
+@media (hover) {
+  .button.color-2:hover:not(:disabled) {
+    background-color: var(--backgroundColor2Hover);
+  }
 }
 .button.color-3 {
   background-color: var(--backgroundColor3);
@@ -63,8 +67,10 @@
   fill: var(--color3);
   color: var(--color3);
 }
-.button.color-3:hover:not(:disabled) {
-  background-color: var(--backgroundColor3Hover);
+@media (hover) {
+  .button.color-3:hover:not(:disabled) {
+    background-color: var(--backgroundColor3Hover);
+  }
 }
 .button.red {
   background-color: var(--backgroundColorRed);

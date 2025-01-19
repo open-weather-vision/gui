@@ -1,12 +1,12 @@
 import { PropsWithChildren } from "react";
 import styles from "./Section.module.css";
 
-export function SectionContainer(props: PropsWithChildren<{}>){
-    return <div className={styles.container}>
-        <div className={styles.innerContainer}>
-            {props.children}
+export function SectionContainer(props: PropsWithChildren<{}>) {
+    return (
+        <div className={styles.container}>
+            <div className={styles.innerContainer}>{props.children}</div>
         </div>
-    </div>
+    );
 }
 
 export default function Section(

@@ -10,44 +10,46 @@ const NavigationContext = createContext<{
     navigate: async (path: string) => {},
     hideMain: false,
     showSwitchStationPopup: false,
-    setShowSwitchStationPopup(value) {
-        
-    },
+    setShowSwitchStationPopup(value) {},
 });
 
-export function NavigationContextProvider(props: {children: React.ReactNode}){
+export function NavigationContextProvider(props: {
+    children: React.ReactNode;
+}) {
     const [hideMain, setHideMain] = useState<boolean>(false);
-    const [showSwitchStationPopup, setShowSwitchStationPopup] = useState<boolean>(false);
+    const [showSwitchStationPopup, setShowSwitchStationPopup] =
+        useState<boolean>(false);
     const navigate = useNavigate();
 
-	async function beforeNavigate() {
-		setHideMain(true);
-		await new Promise((resolve) => {
-			setTimeout(resolve, 150);
-		});
-	}
+    async function beforeNavigate() {
+        setHideMain(true);
+        await new Promise((resolve) => {
+            setTimeout(resolve, 150);
+        });
+        document.getElementsByTagName("main")[0].scrollTo(0, 0);
+    }
 
-	async function afterNavigate() {
-		setTimeout(() => {
-			setHideMain(false);
-		}, 150);
-	}
+    async function afterNavigate() {
+        setTimeout(() => {
+            setHideMain(false);
+        }, 150);
+    }
 
     return (
-            <NavigationContext.Provider
-                value={{
-                    navigate: async (path: string) => {
-                        await beforeNavigate();
-                        navigate(path);
-                        await afterNavigate();
-                    },
-                    hideMain,
-                    showSwitchStationPopup,
-                    setShowSwitchStationPopup
-                }}
-            >
-                {props.children}
-            </NavigationContext.Provider>
+        <NavigationContext.Provider
+            value={{
+                navigate: async (path: string) => {
+                    await beforeNavigate();
+                    navigate(path);
+                    await afterNavigate();
+                },
+                hideMain,
+                showSwitchStationPopup,
+                setShowSwitchStationPopup,
+            }}
+        >
+            {props.children}
+        </NavigationContext.Provider>
     );
 }
 

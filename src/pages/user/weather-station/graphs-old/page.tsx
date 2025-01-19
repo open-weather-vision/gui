@@ -2,8 +2,8 @@ import { Link, useLocation } from "react-router-dom";
 import styles from "./page.module.css";
 import { useEffect, useState } from "react";
 import IntervalSelector, {
-    Interval,
-    IntervalFromDate,
+    GraphInterval,
+    GraphIntervalFromDate,
     date,
 } from "../../../../components/intervalSelector/IntervalSelector";
 import utils from "../../../../utils/utils";
@@ -11,7 +11,7 @@ import { ReactComponent as Icon } from "../../../img/temperature.svg";
 import Graph from "../../../../components/graph/Graph";
 import { Limits } from "../../../../components/graph/Limits";
 
-function intervalToTimeSteps(interval: Interval) {
+function intervalToTimeSteps(interval: GraphInterval) {
     switch (interval.type) {
         case "day":
             return 1000 * 60 * 60 * 4; // 4h
@@ -24,7 +24,7 @@ function intervalToTimeSteps(interval: Interval) {
     }
 }
 
-function dateTimeToLabelX(dateTime: number, interval: Interval) {
+function dateTimeToLabelX(dateTime: number, interval: GraphInterval) {
     switch (interval.type) {
         case "day":
             return new Date().toLocaleTimeString(undefined, {
@@ -47,8 +47,8 @@ function dateTimeToLabelX(dateTime: number, interval: Interval) {
 
 export default function Page() {
     const { hash } = useLocation();
-    const [interval, setInterval] = useState<Interval>(
-        IntervalFromDate(date(), "day")
+    const [interval, setInterval] = useState<GraphInterval>(
+        GraphIntervalFromDate(date(), "day")
     );
 
     useEffect(() => {

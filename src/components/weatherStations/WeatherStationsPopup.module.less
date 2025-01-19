@@ -1,10 +1,10 @@
 @import "../../variables.less";
 
-.addStationButton{
+.addStationButton {
     margin-top: auto;
 }
 
-.popup{
+.popup {
     .overlay();
     display: flex;
     align-items: center;
@@ -14,12 +14,12 @@
     opacity: 0;
     pointer-events: none;
 
-    &.visible{
+    &.visible {
         opacity: 1;
         pointer-events: all;
     }
 
-    .header{
+    .header {
         width: 50rem;
         display: flex;
         flex-direction: row;
@@ -32,33 +32,35 @@
         align-items: center;
         gap: 1.5rem;
 
-        h1{
+        h1 {
             margin: 0;
             font-weight: 500;
             font-size: 1.5rem;
         }
-        .stationIcon{
+        .stationIcon {
             width: 2rem;
             height: 2rem;
         }
-        .closeIcon{
+        .closeIcon {
             margin-left: auto;
             width: 1.5rem;
             height: 1.5rem;
             cursor: pointer;
-            transition: all .2s;
+            transition: all 0.2s;
         }
 
-        .closeIcon:hover{
-            margin-left: auto;
-            width: 1.5rem;
-            height: 1.5rem;
-            cursor: pointer;
-            transform: scale(1.1);
+        @media (hover) {
+            .closeIcon:hover {
+                margin-left: auto;
+                width: 1.5rem;
+                height: 1.5rem;
+                cursor: pointer;
+                transform: scale(1.1);
+            }
         }
     }
 
-    .content{
+    .content {
         width: 50rem;
         display: flex;
         flex-direction: column;

@@ -2,9 +2,9 @@ import { Link, useSearchParams } from "react-router-dom";
 import styles from "./page.module.css";
 import IntervalSelector, {
     date,
-    Interval,
-    IntervalFromDate,
-    IntervalType,
+    GraphInterval,
+    GraphIntervalFromDate,
+    GraphIntervalType,
 } from "../../../../components/intervalSelector/IntervalSelector";
 import { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
@@ -28,8 +28,8 @@ export default function Page() {
             Number.parseInt(searchParams.get("year")!)) ||
         undefined;
     const type = searchParams.get("type") ?? "day";
-    const [interval, setInterval] = useState<Interval>(
-        IntervalFromDate(date(year, month, day), type as IntervalType)
+    const [interval, setInterval] = useState<GraphInterval>(
+        GraphIntervalFromDate(date(year, month, day), type as GraphIntervalType)
     );
 
     useEffect(() => {
@@ -50,24 +50,63 @@ export default function Page() {
             />
             <IntervalSelector interval={interval} setInterval={setInterval} />
             <Graph
-                sensor={{
-                    elementType: "temperature",
-                    sensorId: "tempOut",
-                }}
+                sensors={[
+                    {
+                        sensorId: "tempOut",
+                    },
+                ]}
+                elementType="temperature"
                 interval={interval}
             />
             <Graph
-                sensor={{
-                    elementType: "humidity",
-                    sensorId: "humOut",
-                }}
+                sensors={[
+                    {
+                        sensorId: "humOut",
+                    },
+                ]}
+                elementType="humidity"
                 interval={interval}
             />
             <Graph
-                sensor={{
-                    elementType: "precipation",
-                    sensorId: "precipation",
-                }}
+                sensors={[
+                    {
+                        sensorId: "precipation",
+                    },
+                ]}
+                elementType="precipation"
+                interval={interval}
+            />
+            <Graph
+                sensors={[
+                    {
+                        sensorId: "sunshine",
+                    },
+                ]}
+                elementType="sunshine"
+                interval={interval}
+            />
+            <Graph
+                sensors={[
+                    {
+                        sensorId: "leafTemperature1",
+                    },
+                    {
+                        sensorId: "leafTemperature2",
+                    },
+                    {
+                        sensorId: "leafTemperature3",
+                    },
+                    {
+                        sensorId: "leafTemperature4",
+                    },
+                    {
+                        sensorId: "leafTemperature5",
+                    },
+                    {
+                        sensorId: "leafTemperature6",
+                    },
+                ]}
+                elementType="leaf-temperature"
                 interval={interval}
             />
         </>

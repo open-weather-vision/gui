@@ -107,9 +107,11 @@
 .nav ul li.logo.active {
   color: unset;
 }
-.nav ul li.logo:hover {
-  color: unset;
-  background-color: unset;
+@media (hover) {
+  .nav ul li.logo:hover {
+    color: unset;
+    background-color: unset;
+  }
 }
 .nav ul li.active {
   color: var(--accentColor);
@@ -135,11 +137,15 @@
   .nav ul li.active svg {
     fill: var(--topNavColor);
   }
+}
+@media screen and (min-width: 1000px) and (hover) {
   .nav ul li.active:hover {
     background-color: var(--topNavBackground);
     border-color: var(--topNavBorder);
     color: var(--topNavColor);
   }
+}
+@media screen and (min-width: 1000px) and (hover) {
   .nav ul li:hover {
     background-color: var(--backgroundColor3Hover);
     color: var(--color3);
@@ -264,8 +270,10 @@
 .sideNav .topArea .action.first {
   margin-left: auto;
 }
-.sideNav .topArea .action:hover {
-  background-color: var(--backgroundColor3Hover);
+@media (hover) {
+  .sideNav .topArea .action:hover {
+    background-color: var(--backgroundColor3Hover);
+  }
 }
 .sideNav .settings {
   border-bottom: none;
@@ -289,9 +297,11 @@
   width: 18px;
   height: 18px;
 }
-.sideNav .settings:hover,
-.sideNav .settings.active:hover {
-  background-color: var(--backgroundColor2Hover);
+@media (hover) {
+  .sideNav .settings:hover,
+  .sideNav .settings.active:hover {
+    background-color: var(--backgroundColor2Hover);
+  }
 }
 .sideNav ul {
   padding: 1rem;
@@ -335,7 +345,7 @@
 .sideNav ul li.active svg {
   color: var(--color1);
 }
-@media (pointer: fine) {
+@media (hover) {
   .sideNav ul li:hover:not(.active) {
     background-color: var(--backgroundColor3Hover);
   }

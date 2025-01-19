@@ -149,7 +149,9 @@ h6 {
   --color3Active: #000;
   --borderColor3: #32353a;
   /* Color 4 */
-  --backgroundColor4: #1f2124;
+  --backgroundColor4: #09090a;
+  --borderColor4: #272d31;
+  --color4: #fff;
   /* Color packages */
   /* Yellow */
   --backgroundColorYellow: #806723;
@@ -173,6 +175,15 @@ h6 {
   --weatherStateBackground: #4d4d4d;
   --weatherStateBackgroundOpacity: 0.3;
   /* Colors for special sensor views */
+  --temperatureMaxBackgroundColor: #331616;
+  --temperatureMaxBorderColor: #693636;
+  --temperatureMaxColor: #ffbebe;
+  --temperatureMinBackgroundColor: #162049;
+  --temperatureMinBorderColor: #2e4992;
+  --temperatureMinColor: #c5d5ff;
+  --rainMaxColor: #b5c9ff;
+  --rainMaxBackgroundColor: #162049;
+  --rainMaxBorderColor: #2e4992;
   --rainColor: #b5c9ff;
   --rainBackgroundColor: #162049;
   --rainBorderColor: #2e4992;
@@ -249,11 +260,12 @@ h6 {
   /* Schwarzer Text */
   --color3Active: #fff;
   /* Weißer Text bei Aktivierung */
-  --borderColor3: #c8d1e2;
+  --borderColor3: #dadada;
   /* Helle, graue Ränder */
   /* Color 4 */
-  --backgroundColor4: #f1f3f4;
-  /* Sehr heller Hintergrund für sekundäre Bereiche */
+  --backgroundColor4: #eeeeee;
+  --borderColor4: #cbd0d4;
+  --color4: #2e2e2e;
   /* Color packages */
   /* Yellow */
   --backgroundColorYellow: #ffdd00;
