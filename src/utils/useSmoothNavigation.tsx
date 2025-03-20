@@ -26,11 +26,13 @@ export function NavigationContextProvider(props: {
         await new Promise((resolve) => {
             setTimeout(resolve, 150);
         });
+        document.getElementsByTagName("main")[0].style.overflow = "hidden";
         document.getElementsByTagName("main")[0].scrollTo(0, 0);
     }
 
     async function afterNavigate() {
         setTimeout(() => {
+            document.getElementsByTagName("main")[0].style.overflow = "scroll";
             setHideMain(false);
         }, 150);
     }
