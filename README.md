@@ -1,5 +1,11 @@
 # gui
 
+<hr>
+
+🪄 Moved to [mono repo](https://github.com/open-weather-vision/owvision).
+
+<hr>
+
 This package contains the open-weather-vision graphical user interface. It can be run as frontend application inside a browser or as electron desktop application.
 
 ![](./docs/images/sneakpeak.png)
